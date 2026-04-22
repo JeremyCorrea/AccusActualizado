@@ -28,8 +28,8 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-4 md:px-8 bg-primary text-primary-foreground shadow-md">
-      <div className="text-3xl font-bold tracking-wider">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-4 md:px-8 bg-transparent text-white">
+      <div className="text-3xl font-bold tracking-wider" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
         Accus
       </div>
       

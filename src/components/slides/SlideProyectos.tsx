@@ -1,12 +1,23 @@
+import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import imageData from '@/app/lib/placeholder-images.json';
 
 export default function SlideProyectos() {
+    const { proyectos } = imageData;
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center text-center p-4 pt-20">
-      <div className="max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8">Proyectos</h1>
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center p-4 pt-20">
+      <Image
+        src={proyectos.src}
+        alt="Power lines background"
+        fill
+        className="object-cover"
+        data-ai-hint={proyectos['data-ai-hint']}
+      />
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="relative z-10 max-w-4xl">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white">Proyectos</h1>
         
-        <Card className="shadow-2xl bg-white/50 backdrop-blur-sm">
+        <Card className="shadow-2xl bg-background/80 backdrop-blur-sm text-left">
           <CardHeader>
             <CardTitle className="text-3xl text-primary">Transformadores de corriente</CardTitle>
           </CardHeader>

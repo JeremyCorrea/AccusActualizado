@@ -1,0 +1,32 @@
+{
+  "inicio": {
+    "src": "https://picsum.photos/seed/1/1920/1080",
+    "width": 1920,
+    "height": 1080,
+    "data-ai-hint": "power station"
+  },
+  "servicios": {
+    "src": "https://picsum.photos/seed/2/1920/1080",
+    "width": 1920,
+    "height": 1080,
+    "data-ai-hint": "electrical engineering"
+  },
+  "proyectos": {
+    "src": "https://picsum.photos/seed/3/1920/1080",
+    "width": 1920,
+    "height": 1080,
+    "data-ai-hint": "power lines"
+  },
+  "nosotros": {
+    "src": "https://picsum.photos/seed/4/1920/1080",
+    "width": 1920,
+    "height": 1080,
+    "data-ai-hint": "team engineers"
+  },
+  "contacto": {
+    "src": "https://picsum.photos/seed/5/1920/1080",
+    "width": 1920,
+    "height": 1080,
+    "data-ai-hint": "fiber optics"
+  }
+}

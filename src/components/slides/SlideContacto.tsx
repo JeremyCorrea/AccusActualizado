@@ -1,5 +1,6 @@
 "use client"
 
+import Image from 'next/image';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -19,6 +20,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
+import imageData from '@/app/lib/placeholder-images.json';
+
 
 const formSchema = z.object({
   topic: z.string().min(2, { message: "El tema debe tener al menos 2 caracteres." }),
@@ -50,6 +53,7 @@ export default function SlideContacto() {
       notARobot: false,
     },
   })
+    const { contacto } = imageData;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
@@ -61,8 +65,16 @@ export default function SlideContacto() {
   }
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center justify-center bg-background p-4 pt-24 md:pt-8 overflow-y-auto">
-      <Card className="w-full max-w-4xl shadow-2xl">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center bg-background p-4 pt-24 md:pt-8 overflow-y-auto">
+        <Image
+            src={contacto.src}
+            alt="Fiber optics background"
+            fill
+            className="object-cover"
+            data-ai-hint={contacto['data-ai-hint']}
+        />
+        <div className="absolute inset-0 bg-black/70" />
+      <Card className="relative z-10 w-full max-w-4xl shadow-2xl bg-background/90 backdrop-blur-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl md:text-4xl font-bold">Póngase en contacto con nosotros</CardTitle>
         </CardHeader>
@@ -160,7 +172,7 @@ export default function SlideContacto() {
                     control={form.control}
                     name="privacyPolicy"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-background/50">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
@@ -180,7 +192,7 @@ export default function SlideContacto() {
                     control={form.control}
                     name="notARobot"
                     render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-background/50">
                         <FormControl>
                           <Checkbox
                             checked={field.value}
