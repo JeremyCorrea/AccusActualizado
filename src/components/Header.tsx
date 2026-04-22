@@ -1,15 +1,13 @@
 "use client";
 
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface HeaderProps {
   currentSlide: number;
@@ -25,11 +23,8 @@ const navItems = [
 ];
 
 export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleNavClick = (index: number) => {
     setCurrentSlide(index);
-    setIsMenuOpen(false);
   };
 
   return (
@@ -37,43 +32,27 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
       <div className="text-3xl font-bold tracking-wider">
         Accus
       </div>
-      <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden hover:bg-primary/90">
+      
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="hover:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0">
             <Menu className="h-6 w-6" />
             <span className="sr-only">Abrir menú</span>
           </Button>
-        </SheetTrigger>
-        <div className="hidden md:flex items-center space-x-6">
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="bg-primary text-primary-foreground border-primary-foreground/20 mr-4">
           {navItems.map((item) => (
-            <Button
+            <DropdownMenuItem
               key={item.slideIndex}
-              variant="ghost"
               onClick={() => handleNavClick(item.slideIndex)}
-              className={`text-lg hover:bg-primary/90 ${currentSlide === item.slideIndex ? 'underline' : ''}`}
+              disabled={currentSlide === item.slideIndex}
+              className="cursor-pointer focus:bg-white/10"
             >
               {item.label}
-            </Button>
+            </DropdownMenuItem>
           ))}
-        </div>
-        <SheetContent side="right" className="bg-primary text-primary-foreground border-l-0">
-          <SheetHeader>
-            <SheetTitle className="text-primary-foreground text-2xl">Menú</SheetTitle>
-          </SheetHeader>
-          <nav className="flex flex-col items-start space-y-4 mt-8">
-            {navItems.map((item) => (
-              <Button
-                key={item.slideIndex}
-                variant="ghost"
-                onClick={() => handleNavClick(item.slideIndex)}
-                className={`text-xl w-full justify-start hover:bg-primary/90 ${currentSlide === item.slideIndex ? 'underline' : ''}`}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </nav>
-        </SheetContent>
-      </Sheet>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </header>
   );
 }
