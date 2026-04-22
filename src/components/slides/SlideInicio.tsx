@@ -18,7 +18,7 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         className="absolute inset-0 w-full h-full object-cover"
         poster={inicio.src}
       >
-        <source src="https://videos.pexels.com/video-files/853870/853870-hd_1920_1080_24fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/3254008/3254008-hd_1920_1080_25fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
       <div className="absolute inset-0 bg-black/50" />
