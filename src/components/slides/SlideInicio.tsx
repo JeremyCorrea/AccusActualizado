@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button } from "@/components/ui/button"
 import imageData from '@/app/lib/placeholder-images.json';
 
@@ -10,15 +9,18 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
   const { inicio } = imageData;
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center p-4">
-      <Image
-        src={inicio.src}
-        alt="Power station background"
-        fill
-        className="object-cover"
-        data-ai-hint={inicio['data-ai-hint']}
-        priority
-      />
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center p-4 overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster={inicio.src}
+      >
+        <source src="https://videos.pexels.com/video-files/853870/853870-hd_1920_1080_24fps.mp4" type="video/mp4" />
+        Tu navegador no soporta la etiqueta de video.
+      </video>
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 max-w-4xl">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 animate-fade-in-down">
