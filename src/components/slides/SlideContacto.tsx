@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { ArrowRight, Square } from 'lucide-react';
 
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,7 +19,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/hooks/use-toast"
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import imageData from '@/app/lib/placeholder-images.json';
 
 
@@ -28,7 +27,7 @@ const formSchema = z.object({
   firstName: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
   lastName: z.string().min(2, { message: "El apellido debe tener al menos 2 caracteres." }),
   email: z.string().email({ message: "Por favor, introduce un correo electrónico válido." }),
-  phone: z.string().min(8, { message: "El teléfono debe tener al menos 8 dígitos." }).optional().or(z.literal('')),
+  phone: z.string().min(8, { message: "El teléfono debe tener al menos 8 dígitos." }),
   message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }).max(500),
   privacyPolicy: z.boolean().refine((val) => val === true, {
     message: "Debes aceptar las políticas de privacidad.",
@@ -64,8 +63,10 @@ export default function SlideContacto() {
     form.reset()
   }
 
+  const inputStyles = "bg-transparent border-0 border-b border-white/70 rounded-none px-0 text-base text-white focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-primary transition";
+
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center bg-background p-4 pt-24 md:pt-8 overflow-y-auto">
+    <section className="relative min-h-screen w-full flex items-center justify-start text-white overflow-hidden">
         <Image
             src={contacto.src}
             alt="Fiber optics background"
@@ -74,156 +75,154 @@ export default function SlideContacto() {
             data-ai-hint={contacto['data-ai-hint']}
         />
         <div className="absolute inset-0 bg-black/70" />
-      <Card className="relative z-10 w-full max-w-4xl shadow-2xl bg-background/90 backdrop-blur-sm">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl md:text-4xl font-bold">Póngase en contacto con nosotros</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+        <div className="relative z-10 w-full max-w-xl px-8 md:px-16 py-24 md:py-8">
+            <div className="flex items-center gap-3 mb-8">
+                <Square fill="white" className="w-3 h-3 text-white" />
+                <h1 className="text-3xl md:text-4xl font-bold">Póngase en contacto con nosotros</h1>
+            </div>
+
+            <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
-                  control={form.control}
-                  name="topic"
-                  render={({ field }) => (
+                    control={form.control}
+                    name="topic"
+                    render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tema</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Ej: Consulta de servicio" {...field} />
-                      </FormControl>
-                      <FormMessage />
+                        <FormLabel className="text-white/90 font-light">Tema*</FormLabel>
+                        <FormControl>
+                        <Input {...field} className={inputStyles} />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
                     </FormItem>
-                  )}
+                    )}
+                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-white/90 font-light">Nombre*</FormLabel>
+                            <FormControl>
+                                <Input {...field} className={inputStyles} />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
+                    )}
+                    />
+                    <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-white/90 font-light">Apellido*</FormLabel>
+                            <FormControl>
+                                <Input {...field} className={inputStyles} />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
+                    )}
+                    />
+                </div>
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-white/90 font-light">Correo Electrónico*</FormLabel>
+                            <FormControl>
+                                <Input type="email" {...field} className={inputStyles} />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
+                    )}
                 />
                 <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nombre</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Tu nombre" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel className="text-white/90 font-light">Número de Teléfono*</FormLabel>
+                            <FormControl>
+                                <Input type="tel" {...field} className={inputStyles} />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
+                    )}
                 />
                 <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Apellido</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Tu apellido" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Correo Electrónico</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="tu@correo.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Teléfono (Opcional)</FormLabel>
-                      <FormControl>
-                        <Input type="tel" placeholder="Tu número de teléfono" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="md:col-span-2">
-                  <FormField
                     control={form.control}
                     name="message"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mensaje</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Escribe tu mensaje aquí..."
-                            className="resize-none"
-                            rows={5}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
+                        <FormItem>
+                            <FormLabel className="text-white/90 font-light">Mensaje*</FormLabel>
+                            <FormControl>
+                                <Textarea
+                                    placeholder="Escriba su mensaje"
+                                    className={`${inputStyles} h-20 resize-none placeholder:text-white/60`}
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                        </FormItem>
                     )}
-                  />
+                />
+                
+                <div className="space-y-4 pt-4">
+                    <FormField
+                        control={form.control}
+                        name="privacyPolicy"
+                        render={({ field }) => (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                            <FormControl>
+                            <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                className="h-4 w-4 rounded-none border-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-primary"
+                            />
+                            </FormControl>
+                            <FormLabel className="font-light text-sm text-white/80">
+                            Al seleccionar esta casilla, confirmo que he leído y acepto las politicas de privacidad
+                            </FormLabel>
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="notARobot"
+                        render={({ field }) => (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                            <FormControl>
+                            <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                                className="h-4 w-4 rounded-none border-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-primary"
+                            />
+                            </FormControl>
+                            <FormLabel className="font-light text-sm text-white/80">
+                                No soy un robot
+                            </FormLabel>
+                        </FormItem>
+                        )}
+                    />
                 </div>
-                <div className="md:col-span-2 space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="privacyPolicy"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-background/50">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>
-                            Acepto las políticas de privacidad
-                          </FormLabel>
-                          <FormMessage />
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="notARobot"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-background/50">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>
-                            No soy un robot
-                          </FormLabel>
-                          <FormMessage />
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-              <Button type="submit" className="w-full" size="lg">Enviar</Button>
+                
+                <Button type="submit" size="lg" className="px-10 bg-primary hover:bg-primary/90">
+                    Enviar <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
             </form>
-          </Form>
-        </CardContent>
-        <CardFooter className="flex-col items-center justify-center pt-6">
-            <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-widest">Nuestros Clientes</h3>
-            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-muted-foreground font-medium">
+            </Form>
+        </div>
+
+        <div className="absolute bottom-6 w-full z-10">
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-white/70 font-medium text-sm">
                 <span>FUNDACIÓN AMERICAN FOR INTERNATIONAL DEVELOPMENT</span>
                 <span>AngloAmerican</span>
                 <span>Cbb</span>
                 <span>arauco CELULOSA</span>
             </div>
-        </CardFooter>
-      </Card>
+        </div>
     </section>
   )
 }
