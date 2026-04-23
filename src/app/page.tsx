@@ -7,6 +7,7 @@ import SlideServicios from '@/components/slides/SlideServicios';
 import SlideProyectos from '@/components/slides/SlideProyectos';
 import SlideNosotros from '@/components/slides/SlideNosotros';
 import SlideContacto from '@/components/slides/SlideContacto';
+import FloatingIcons from '@/components/FloatingIcons';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,6 +35,7 @@ export default function Home() {
       <main>
         {renderSlide()}
       </main>
+      {currentSlide !== 4 && <FloatingIcons setCurrentSlide={setCurrentSlide} />}
     </div>
   );
 }
