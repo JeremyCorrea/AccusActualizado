@@ -32,9 +32,6 @@ const formSchema = z.object({
   privacyPolicy: z.boolean().refine((val) => val === true, {
     message: "Debes aceptar las políticas de privacidad.",
   }),
-  notARobot: z.boolean().refine((val) => val === true, {
-    message: "Debes confirmar que no eres un robot.",
-  }),
 })
 
 export default function SlideContacto() {
@@ -49,7 +46,6 @@ export default function SlideContacto() {
       phone: "",
       message: "",
       privacyPolicy: false,
-      notARobot: false,
     },
   })
     const { contacto } = imageData;
@@ -76,7 +72,7 @@ export default function SlideContacto() {
         />
         <div className="absolute inset-0 bg-black/70" />
       
-        <div className="relative z-10 w-full max-w-xl px-8 md:px-16 py-24 md:py-8">
+        <div className="relative z-10 w-full max-w-lg px-8 md:px-16 pt-28 pb-12">
             <div className="flex items-center gap-3 mb-8">
                 <Square fill="white" className="w-3 h-3 text-white" />
                 <h1 className="text-3xl md:text-4xl font-bold">Póngase en contacto con nosotros</h1>
@@ -184,24 +180,6 @@ export default function SlideContacto() {
                             </FormControl>
                             <FormLabel className="font-light text-sm text-white/80">
                             Al seleccionar esta casilla, confirmo que he leído y acepto las politicas de privacidad
-                            </FormLabel>
-                        </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="notARobot"
-                        render={({ field }) => (
-                        <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                            <FormControl>
-                            <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                                className="h-4 w-4 rounded-none border-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-primary"
-                            />
-                            </FormControl>
-                            <FormLabel className="font-light text-sm text-white/80">
-                                No soy un robot
                             </FormLabel>
                         </FormItem>
                         )}
