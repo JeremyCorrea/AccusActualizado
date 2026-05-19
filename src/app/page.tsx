@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import Header from '@/components/Header';
-import SlideInicio from '@/components/slides/SlideInicio';
-import SlideServicios from '@/components/slides/SlideServicios';
-import SlideProyectos from '@/components/slides/SlideProyectos';
-import SlideNosotros from '@/components/slides/SlideNosotros';
-import SlideContacto from '@/components/slides/SlideContacto';
+import SlideInicio from '@/app/user/SlideInicio';
+import SlideServicios from '@/app/user/SlideServicios';
+import SlideProyectos from '@/app/user/SlideProyectos';
+import SlideNosotros from '@/app/user/SlideNosotros';
+import SlideContacto from '@/app/user/SlideContacto';
 import FloatingIcons from '@/components/FloatingIcons';
 
 export default function Home() {
