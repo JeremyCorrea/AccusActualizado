@@ -9,7 +9,7 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
   const { inicio } = imageData;
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center p-4 overflow-hidden">
+    <section className="relative min-h-screen w-full flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 overflow-hidden">
       <video
         autoPlay
         loop
@@ -21,18 +21,20 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         <source src="https://videos.pexels.com/video-files/3254008/3254008-hd_1920_1080_25fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative z-10 max-w-4xl">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 animate-fade-in-down">
+      {/* Overlay oscuro translúcido solicitado rgba(0,0,0,0.45) */}
+      <div className="absolute inset-0 bg-black/45" />
+      
+      <div className="relative z-10 w-full max-w-5xl mt-20 md:mt-0">
+        <h1 className="text-6xl md:text-8xl lg:text-[140px] font-normal text-white mb-4 leading-[1] tracking-tight">
           Impulsamos Futuro
         </h1>
-        <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-2xl text-white mb-12 max-w-2xl font-normal leading-tight opacity-95">
           Expertos en Ingeniería Eléctrica, Construcción, Ensayos eléctricos en la Minería y Fibra Óptica.
         </p>
         <Button 
           size="lg" 
           onClick={() => setCurrentSlide(4)} 
-          className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90"
+          className="text-base md:text-lg px-12 py-8 bg-[#AE1E24] text-white hover:bg-[#AE1E24]/90 rounded-none font-bold uppercase tracking-widest h-auto"
         >
           CONTACTO
         </Button>

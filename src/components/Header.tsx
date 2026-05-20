@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -28,31 +28,43 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-20 px-4 md:px-8 bg-transparent text-white">
-      <div className="text-3xl font-bold tracking-wider" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
-        Accus
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-24 px-6 md:px-16 bg-transparent text-white">
+      <div className="flex items-center gap-4">
+        <div className="text-4xl font-bold tracking-tighter">
+          Accus
+        </div>
+        <div className="hidden md:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-4 py-1 uppercase opacity-80">
+          <span>Ingeniería Eléctrica y Construcción</span>
+          <span>Ensayos Eléctricos en Minería y</span>
+          <span>Fibra Óptica</span>
+        </div>
       </div>
       
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="hover:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0">
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Abrir menú</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-primary text-primary-foreground border-primary-foreground/20 mr-4">
-          {navItems.map((item) => (
-            <DropdownMenuItem
-              key={item.slideIndex}
-              onClick={() => handleNavClick(item.slideIndex)}
-              disabled={currentSlide === item.slideIndex}
-              className="cursor-pointer focus:bg-white/10"
-            >
-              {item.label}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
+          <Search className="h-6 w-6" />
+        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="hover:bg-white/10 focus-visible:ring-0 focus-visible:ring-offset-0 text-white">
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Abrir menú</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="bg-[#AE1E24] text-white border-none w-48 rounded-none mt-4 p-0 shadow-2xl">
+            {navItems.map((item) => (
+              <DropdownMenuItem
+                key={item.slideIndex}
+                onClick={() => handleNavClick(item.slideIndex)}
+                disabled={currentSlide === item.slideIndex}
+                className="cursor-pointer focus:bg-white/10 py-5 px-6 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-b border-white/10 last:border-0 uppercase"
+              >
+                {item.label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </header>
   );
 }
