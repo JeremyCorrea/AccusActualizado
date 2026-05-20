@@ -63,23 +63,23 @@ export default function SlideServicios() {
       {/* Main Content Container */}
       <div className="relative z-10 w-full max-w-7xl px-8 flex flex-col items-center h-full pt-32 pb-16">
         
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs - Estilizados para ser más delgados y elegantes */}
         <nav className="flex items-center justify-center gap-2 mb-12 flex-wrap">
           {services.map((service, index) => (
             <div key={service.id} className="flex items-center">
               <button
                 onClick={() => setActiveTab(index)}
                 className={cn(
-                  "px-5 py-2 text-sm md:text-base font-medium transition-all duration-500 rounded-full border border-transparent",
+                  "px-6 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-500 rounded-full border border-transparent whitespace-nowrap",
                   activeTab === index 
                     ? "bg-[#AE1E24] text-white shadow-lg scale-105" 
-                    : "text-white/70 hover:text-white hover:bg-white/5"
+                    : "text-white/50 hover:text-white hover:bg-white/5"
                 )}
               >
                 {service.label}
               </button>
               {index < services.length - 1 && (
-                <span className="mx-2 text-white/20 hidden md:inline">|</span>
+                <span className="mx-2 text-white/10 hidden md:inline">|</span>
               )}
             </div>
           ))}
@@ -103,11 +103,11 @@ export default function SlideServicios() {
              </div>
           </div>
 
-          {/* Active Service (Scaled for Harmony) */}
+          {/* Active Service (Escala Armoniosa) */}
           <div className="flex flex-col items-center transition-all duration-700 ease-in-out transform scale-100">
              <div className="relative w-64 h-64 md:w-[380px] md:h-[380px] bg-[#AE1E24]/90 p-5 md:p-6 flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <div className="absolute top-4 left-4 w-4 h-4 bg-white" />
-                <span className="absolute top-4 right-8 text-white/90 font-bold text-sm tracking-widest hidden md:block uppercase">
+                <span className="absolute top-4 right-8 text-white/90 font-bold text-[10px] tracking-[0.2em] hidden md:block uppercase">
                   {services[activeTab].shortLabel}
                 </span>
                 <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-[#AE1E24]">
