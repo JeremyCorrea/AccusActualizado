@@ -24,17 +24,17 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
       {/* Overlay oscuro translúcido solicitado rgba(0,0,0,0.45) */}
       <div className="absolute inset-0 bg-black/45" />
       
-      <div className="relative z-10 w-full max-w-5xl mt-20 md:mt-0">
-        <h1 className="text-6xl md:text-8xl lg:text-[140px] font-normal text-white mb-4 leading-[1] tracking-tight">
+      <div className="relative z-10 w-full max-w-4xl mt-20 md:mt-0">
+        <h1 className="text-5xl md:text-7xl lg:text-[110px] font-normal text-white mb-4 leading-[1] tracking-tight">
           Impulsamos Futuro
         </h1>
-        <p className="text-lg md:text-2xl text-white mb-12 max-w-2xl font-normal leading-tight opacity-95">
+        <p className="text-base md:text-xl text-white mb-10 max-w-xl font-normal leading-tight opacity-95">
           Expertos en Ingeniería Eléctrica, Construcción, Ensayos eléctricos en la Minería y Fibra Óptica.
         </p>
         <Button 
           size="lg" 
           onClick={() => setCurrentSlide(4)} 
-          className="text-base md:text-lg px-12 py-8 bg-[#AE1E24] text-white hover:bg-[#AE1E24]/90 rounded-none font-bold uppercase tracking-widest h-auto"
+          className="text-sm md:text-base px-10 py-4 bg-[#AE1E24] text-white hover:bg-[#AE1E24]/90 rounded-none font-bold uppercase tracking-widest h-auto border-none shadow-none"
         >
           CONTACTO
         </Button>
