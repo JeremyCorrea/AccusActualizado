@@ -58,41 +58,41 @@ export default function SlideServicios() {
         className="object-cover"
         data-ai-hint={servicios['data-ai-hint']}
       />
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-black/65" />
 
       {/* Main Content Container */}
       <div className="relative z-10 w-full max-w-7xl px-8 flex flex-col items-center h-full pt-32 pb-16">
         
         {/* Navigation Tabs */}
-        <nav className="flex items-center justify-center gap-4 mb-16 flex-wrap">
+        <nav className="flex items-center justify-center gap-2 mb-12 flex-wrap">
           {services.map((service, index) => (
             <div key={service.id} className="flex items-center">
               <button
                 onClick={() => setActiveTab(index)}
                 className={cn(
-                  "px-6 py-2 text-sm md:text-base font-normal transition-all duration-300 rounded-full border border-transparent",
+                  "px-5 py-2 text-sm md:text-base font-medium transition-all duration-500 rounded-full border border-transparent",
                   activeTab === index 
-                    ? "bg-[#AE1E24] text-white" 
-                    : "text-white hover:text-white/80"
+                    ? "bg-[#AE1E24] text-white shadow-lg scale-105" 
+                    : "text-white/70 hover:text-white hover:bg-white/5"
                 )}
               >
                 {service.label}
               </button>
               {index < services.length - 1 && (
-                <span className="mx-4 text-white/50 hidden md:inline">|</span>
+                <span className="mx-2 text-white/20 hidden md:inline">|</span>
               )}
             </div>
           ))}
         </nav>
 
         {/* Gallery Section */}
-        <div className="flex-grow w-full flex items-center justify-center gap-4 md:gap-12 mb-12">
+        <div className="flex-grow w-full flex items-center justify-center gap-6 md:gap-16 mb-10">
           
           {/* Previous Service (Small) */}
-          <div className="hidden lg:flex flex-col items-center opacity-60 scale-75 transition-all duration-500">
-             <div className="relative w-64 h-64 bg-[#AE1E24]/80 p-4 flex items-center justify-center">
-                <div className="absolute top-3 left-3 w-4 h-4 bg-white" />
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[#AE1E24]">
+          <div className="hidden lg:flex flex-col items-center opacity-40 scale-75 transition-all duration-700 ease-in-out blur-[1px]">
+             <div className="relative w-48 h-48 bg-[#AE1E24]/60 p-3 flex items-center justify-center">
+                <div className="absolute top-2 left-2 w-3 h-3 bg-white/80" />
+                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#AE1E24]">
                   <Image 
                     src={`https://picsum.photos/seed/${services[prevIdx].seed}/400/400`}
                     alt={services[prevIdx].shortLabel}
@@ -103,14 +103,14 @@ export default function SlideServicios() {
              </div>
           </div>
 
-          {/* Active Service (Large) */}
-          <div className="flex flex-col items-center transition-all duration-500 transform scale-100">
-             <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] bg-[#AE1E24]/90 p-6 md:p-8 flex items-center justify-center shadow-2xl">
-                <div className="absolute top-4 left-4 w-5 h-5 bg-white" />
-                <span className="absolute top-4 right-8 text-white font-medium text-lg hidden md:block">
+          {/* Active Service (Scaled for Harmony) */}
+          <div className="flex flex-col items-center transition-all duration-700 ease-in-out transform scale-100">
+             <div className="relative w-64 h-64 md:w-[380px] md:h-[380px] bg-[#AE1E24]/90 p-5 md:p-6 flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <div className="absolute top-4 left-4 w-4 h-4 bg-white" />
+                <span className="absolute top-4 right-8 text-white/90 font-bold text-sm tracking-widest hidden md:block uppercase">
                   {services[activeTab].shortLabel}
                 </span>
-                <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-[#AE1E24]">
+                <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-[#AE1E24]">
                   <Image 
                     src={`https://picsum.photos/seed/${services[activeTab].seed}/600/600`}
                     alt={services[activeTab].shortLabel}
@@ -122,10 +122,10 @@ export default function SlideServicios() {
           </div>
 
           {/* Next Service (Small) */}
-          <div className="hidden lg:flex flex-col items-center opacity-60 scale-75 transition-all duration-500">
-             <div className="relative w-64 h-64 bg-[#AE1E24]/80 p-4 flex items-center justify-center">
-                <div className="absolute top-3 left-3 w-4 h-4 bg-white" />
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[#AE1E24]">
+          <div className="hidden lg:flex flex-col items-center opacity-40 scale-75 transition-all duration-700 ease-in-out blur-[1px]">
+             <div className="relative w-48 h-48 bg-[#AE1E24]/60 p-3 flex items-center justify-center">
+                <div className="absolute top-2 left-2 w-3 h-3 bg-white/80" />
+                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#AE1E24]">
                   <Image 
                     src={`https://picsum.photos/seed/${services[nextIdx].seed}/400/400`}
                     alt={services[nextIdx].shortLabel}
@@ -138,9 +138,9 @@ export default function SlideServicios() {
 
         </div>
 
-        {/* Bottom Description */}
-        <div className="max-w-3xl text-center">
-          <p className="text-white text-base md:text-lg leading-relaxed font-light opacity-90 animate-in fade-in slide-in-from-bottom-2 duration-700">
+        {/* Bottom Description with Animation */}
+        <div key={activeTab} className="max-w-2xl text-center min-h-[100px] flex items-center">
+          <p className="text-white text-base md:text-lg leading-relaxed font-normal opacity-90 animate-in fade-in slide-in-from-bottom-6 duration-1000">
             {services[activeTab].description}
           </p>
         </div>
