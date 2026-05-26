@@ -14,29 +14,31 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
 
   useEffect(() => {
     // Forzamos la reproducción del video una vez que el componente se monta
-    // Esto ayuda a superar restricciones de algunos navegadores
     if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        // Si falla por políticas del navegador, al menos no rompe la página
-        console.log("Auto-play prevented by browser, waiting for user interaction or reload.");
-      });
+      const playVideo = async () => {
+        try {
+          await videoRef.current?.play();
+        } catch (error) {
+          console.log("Auto-play prevented by browser. Retrying on user interaction.");
+        }
+      };
+      playVideo();
     }
   }, []);
 
   return (
     <section className="relative min-h-screen w-full flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 overflow-hidden bg-black">
-      {/* Video de fondo con configuración robusta */}
+      {/* Video de fondo con el enlace externo proporcionado */}
       <video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
         className="absolute inset-0 w-full h-full object-cover opacity-80"
         poster={inicio.src}
       >
-        <source src="/videos/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+        <source src="https://www.pexels.com/download/video/2073129/" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
       
