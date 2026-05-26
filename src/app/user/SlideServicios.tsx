@@ -140,7 +140,7 @@ export default function SlideServicios() {
 
         {/* Bottom Description with Animation */}
         <div key={activeTab} className="max-w-2xl text-center min-h-[100px] flex items-center">
-          <p className="text-white text-base md:text-lg leading-relaxed font-normal opacity-90 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+          <p className="text-white text-base md:text-lg leading-relaxed font-normal drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate-in fade-in slide-in-from-bottom-6 duration-1000">
             {services[activeTab].description}
           </p>
         </div>
