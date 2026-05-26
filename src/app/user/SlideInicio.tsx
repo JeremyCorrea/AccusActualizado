@@ -20,7 +20,7 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         className="absolute inset-0 w-full h-full object-cover"
         poster={inicio.src}
       >
-        {/* Referencia al video local. Asegúrate de que el archivo esté en la carpeta 'public' */}
+        {/* Referencia al video en la carpeta 'public'. Asegúrate de que el archivo esté allí. */}
         <source src="/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
