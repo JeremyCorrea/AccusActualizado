@@ -122,7 +122,7 @@ export default function SlideNosotros() {
               size="lg" 
               className="bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none px-8 py-5 text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-3 transition-transform hover:translate-x-1"
             >
-              CONOZCA A NUESTRO EQUIPO
+              NUESTRO EQUIPO
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
