@@ -34,7 +34,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-24 px-8 md:px-16 lg:px-24 bg-transparent text-white">
-      <div className="flex items-center gap-1 md:gap-2">
+      <div className="flex items-center gap-1 md:gap-2 -ml-1 md:-ml-2 lg:-ml-3">
         <div 
           className="relative h-14 w-40 md:h-20 md:w-40 cursor-pointer transition-transform hover:scale-105"
           onClick={() => handleNavClick(0)}
@@ -43,7 +43,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
             src={logo.src}
             alt="Accus Logo"
             fill
-            className="object-right"
+            className="object-contain object-right"
             priority
             data-ai-hint={logo['data-ai-hint']}
           />
