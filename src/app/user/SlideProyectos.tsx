@@ -54,12 +54,12 @@ export default function SlideProyectos() {
       <div className="absolute inset-0 bg-black/65" />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full h-full max-w-7xl px-8 md:px-16 flex flex-col justify-between pt-32 pb-16">
+      <div className="relative z-10 w-full h-full max-w-6xl px-8 flex flex-col justify-between pt-32 pb-12">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 flex-grow">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 flex-grow">
           
           {/* Left Side: Interactive Map of Chile */}
-          <div className="relative w-24 md:w-32 h-[500px] flex items-center justify-center">
+          <div className="relative w-20 md:w-28 h-[450px] flex items-center justify-center shrink-0">
             {/* Stylized SVG Map of Chile */}
             <svg 
               viewBox="0 0 100 800" 
@@ -108,9 +108,9 @@ export default function SlideProyectos() {
           </div>
 
           {/* Right Side: Project Detail Window */}
-          <div className="relative flex flex-col items-end">
-            {/* Project Header Style - Ajustado para evitar colisión con el Header */}
-            <div className="absolute -top-16 md:-top-20 right-4 md:right-0 text-right z-20 flex flex-col items-end w-full max-w-[400px]">
+          <div className="relative flex flex-col items-center md:items-end">
+            {/* Project Header Style */}
+            <div className="absolute -top-16 md:-top-20 right-0 text-center md:text-right z-20 flex flex-col items-center md:items-end w-full max-w-[400px]">
               <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
                 PROYECTO DESTACADO
               </span>
@@ -120,7 +120,7 @@ export default function SlideProyectos() {
             </div>
 
             {/* Project Image Frame */}
-            <div className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-12 md:mt-8">
+            <div className="relative w-[260px] h-[260px] md:w-[340px] md:h-[340px] lg:w-[380px] lg:h-[380px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-12 md:mt-8">
               <Image
                 key={selectedProject.id}
                 src={selectedProject.image}
@@ -135,7 +135,7 @@ export default function SlideProyectos() {
         </div>
 
         {/* Bottom Description */}
-        <div key={selectedProject.id} className="w-full max-w-4xl mx-auto text-center mt-12 md:mt-8 min-h-[80px] flex items-center">
+        <div key={selectedProject.id} className="w-full max-w-3xl mx-auto text-center mt-12 md:mt-10 min-h-[80px] flex items-center">
           <p className="text-white/80 text-sm md:text-base leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {selectedProject.description}
           </p>
