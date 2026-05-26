@@ -18,23 +18,25 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         className="absolute inset-0 w-full h-full object-cover"
         poster={inicio.src}
       >
-        <source src="https://videos.pexels.com/video-files/3254008/3254008-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        {/* Para cambiar el video, simplemente reemplaza el enlace de 'src' a continuación */}
+        <source src="https://videos.pexels.com/video-files/4492795/4492795-hd_1920_1080_25fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
+      
       {/* Overlay oscuro translúcido solicitado rgba(0,0,0,0.45) */}
       <div className="absolute inset-0 bg-black/45" />
       
-      <div className="relative z-10 w-full max-w-3xl mt-20 md:mt-0">
-        <h1 className="text-5xl md:text-7xl lg:text-[90px] font-normal text-white mb-4 leading-[1] tracking-tight">
+      <div className="relative z-10 w-full max-w-xl mt-20 md:mt-0">
+        <h1 className="text-5xl md:text-7xl lg:text-[80px] font-normal text-white mb-4 leading-[1] tracking-tight">
           Impulsamos Futuro
         </h1>
-        <p className="text-base md:text-lg text-white mb-10 max-w-xl font-normal leading-tight opacity-95">
+        <p className="text-sm md:text-base text-white mb-10 max-w-md font-normal leading-tight opacity-95">
           Expertos en Ingeniería Eléctrica, Construcción, Ensayos eléctricos en la Minería y Fibra Óptica.
         </p>
         <Button 
           size="lg" 
           onClick={() => setCurrentSlide(4)} 
-          className="text-xs md:text-sm px-8 py-2.5 bg-[#AE1E24] text-white hover:bg-[#AE1E24]/90 rounded-none font-bold uppercase tracking-widest h-auto border-none shadow-none"
+          className="text-[10px] md:text-xs px-8 py-2 bg-[#AE1E24] text-white hover:bg-[#AE1E24]/90 rounded-none font-bold uppercase tracking-[0.2em] h-auto border-none shadow-none"
         >
           CONTACTO
         </Button>
