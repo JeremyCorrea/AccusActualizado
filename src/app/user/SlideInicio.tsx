@@ -20,12 +20,10 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         className="absolute inset-0 w-full h-full object-cover"
         poster={inicio.src}
       >
-        {/* Este archivo debe estar en la carpeta 'public/' de la raíz del proyecto */}
-        <source src="/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+        <source src="/videos/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
       
-      {/* Overlay oscuro negro translúcido solicitado rgba(0,0,0,0.45) */}
       <div className="absolute inset-0 bg-black/45" />
       
       <div className="relative z-10 w-full max-w-xl mt-20 md:mt-0">
