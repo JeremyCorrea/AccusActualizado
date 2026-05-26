@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -35,9 +34,9 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-24 px-6 md:px-16 bg-transparent text-white">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-3">
         <div 
-          className="relative h-12 w-32 md:h-16 md:w-40 cursor-pointer"
+          className="relative h-14 w-36 md:h-20 md:w-52 cursor-pointer transition-transform hover:scale-105"
           onClick={() => handleNavClick(0)}
         >
           <Image
@@ -49,7 +48,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
             data-ai-hint={logo['data-ai-hint']}
           />
         </div>
-        <div className="hidden md:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-4 py-1 uppercase opacity-80">
+        <div className="hidden lg:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-3 py-1 uppercase opacity-80 pointer-events-none select-none">
           <span>Ingeniería Eléctrica y Construcción</span>
           <span>Ensayos Eléctricos en Minería y</span>
           <span>Fibra Óptica</span>
