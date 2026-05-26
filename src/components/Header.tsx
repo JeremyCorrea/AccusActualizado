@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Menu, Search } from 'lucide-react';
@@ -51,13 +52,13 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
               <span className="sr-only">Abrir menú</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-[#AE1E24] text-white border-none w-48 rounded-none mt-4 p-0 shadow-2xl">
+          <DropdownMenuContent align="end" className="bg-[#AE1E24] text-white border-none w-56 rounded-none mt-4 p-0 shadow-2xl overflow-hidden">
             {navItems.map((item) => (
               <DropdownMenuItem
                 key={item.slideIndex}
                 onClick={() => handleNavClick(item.slideIndex)}
                 disabled={currentSlide === item.slideIndex}
-                className="cursor-pointer focus:bg-white/10 py-5 px-6 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-b border-white/10 last:border-0 uppercase"
+                className="cursor-pointer py-6 px-8 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-b border-white/10 last:border-0 uppercase transition-all duration-300 ease-in-out focus:bg-gradient-to-l focus:from-black/40 focus:via-black/20 focus:to-transparent outline-none ring-0 data-[highlighted]:bg-gradient-to-l data-[highlighted]:from-black/40 data-[highlighted]:via-black/20 data-[highlighted]:to-transparent"
               >
                 {item.label}
               </DropdownMenuItem>
