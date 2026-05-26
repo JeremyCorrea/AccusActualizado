@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button"
 import imageData from '@/app/lib/placeholder-images.json';
 
@@ -18,8 +20,8 @@ export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
         className="absolute inset-0 w-full h-full object-cover"
         poster={inicio.src}
       >
-        {/* Para cambiar el video, simplemente reemplaza el enlace de 'src' a continuación */}
-        <source src="https://videos.pexels.com/video-files/4492795/4492795-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        {/* Referencia al video local. Asegúrate de que el archivo esté en la carpeta 'public' */}
+        <source src="/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
       
