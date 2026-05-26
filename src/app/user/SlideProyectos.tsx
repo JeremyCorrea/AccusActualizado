@@ -63,35 +63,32 @@ export default function SlideProyectos() {
             {/* Stylized SVG Map of Chile */}
             <svg 
               viewBox="0 0 100 800" 
-              className="w-full h-full drop-shadow-[0_0_10px_rgba(174,30,36,0.5)]"
+              className="w-full h-full drop-shadow-[0_0_15px_rgba(174,30,36,0.6)]"
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Simplified stylized path of Chile */}
               <path 
                 d="M45,20 L55,40 L48,80 L52,150 L45,220 L55,300 L48,380 L53,450 L42,550 L58,650 L45,720 L55,780 L40,795" 
                 stroke="#AE1E24" 
-                strokeWidth="12" 
+                strokeWidth="14" 
                 strokeLinecap="round" 
                 className="cursor-pointer"
               />
               
-              {/* Interaction Hotspots */}
               {proyectosData.map((proj) => (
                 <circle
                   key={proj.id}
                   cx={proj.id === 'norte' ? 50 : proj.id === 'centro' ? 52 : 50}
                   cy={proj.id === 'norte' ? 100 : proj.id === 'centro' ? 350 : 650}
-                  r="15"
+                  r="20"
                   className={cn(
-                    "cursor-pointer transition-all duration-300 fill-transparent hover:fill-white/20",
-                    selectedProject.id === proj.id && "fill-white/40"
+                    "cursor-pointer transition-all duration-300 fill-transparent hover:fill-white/10",
+                    selectedProject.id === proj.id && "fill-white/30"
                   )}
                   onClick={() => setSelectedProject(proj)}
                 />
               ))}
 
-              {/* Selected Point Indicator */}
               <circle 
                 cx={selectedProject.id === 'norte' ? 50 : selectedProject.id === 'centro' ? 52 : 50} 
                 cy={selectedProject.id === 'norte' ? 100 : selectedProject.id === 'centro' ? 350 : 650} 
@@ -108,43 +105,38 @@ export default function SlideProyectos() {
                 className="pointer-events-none animate-pulse"
               />
             </svg>
-
-            {/* Connection Line (Visual only for desktop) */}
-            <div 
-              className="hidden lg:block absolute left-full h-px bg-white/40 origin-left transition-all duration-500"
-              style={{ 
-                width: '150px', 
-                top: selectedProject.id === 'norte' ? '12.5%' : selectedProject.id === 'centro' ? '43.7%' : '81.2%',
-                transform: 'rotate(-15deg)'
-              }}
-            />
           </div>
 
           {/* Right Side: Project Detail Window */}
           <div className="relative flex flex-col items-end">
-            {/* Project Title (Top Right of Frame) */}
-            <div className="absolute -top-8 right-0 text-right z-20">
-              <h2 className="text-white text-xl md:text-2xl font-bold tracking-tight">
+            {/* Project Header Style (Consistent with Services) */}
+            <div className="absolute -top-10 right-0 text-right z-20 flex flex-col items-end">
+              <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-1">
+                PROYECTO DESTACADO
+              </span>
+              <h2 className="text-white text-base md:text-lg font-bold tracking-[0.1em] uppercase">
                 {selectedProject.title}
               </h2>
             </div>
 
             {/* Project Image Frame (Oval/Rounded) */}
-            <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 ease-in-out transform">
+            <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[480px] lg:h-[480px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700">
               <Image
-                key={selectedProject.image}
+                key={selectedProject.id}
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 fill
                 className="object-cover animate-in fade-in zoom-in-95 duration-1000"
                 data-ai-hint={selectedProject.hint}
               />
+              {/* Corner accent to match Services aesthetics */}
+              <div className="absolute top-4 left-4 w-3 h-3 bg-white" />
             </div>
           </div>
         </div>
 
         {/* Bottom Description */}
-        <div className="w-full max-w-4xl mx-auto text-center mt-12 md:mt-0">
+        <div key={selectedProject.id} className="w-full max-w-4xl mx-auto text-center mt-12 md:mt-0 min-h-[80px] flex items-center">
           <p className="text-white/90 text-sm md:text-base leading-relaxed font-normal animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {selectedProject.description}
           </p>
