@@ -109,18 +109,18 @@ export default function SlideProyectos() {
 
           {/* Right Side: Project Detail Window */}
           <div className="relative flex flex-col items-end">
-            {/* Project Header Style (Consistent with Services) */}
-            <div className="absolute -top-10 right-0 text-right z-20 flex flex-col items-end">
-              <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-1">
+            {/* Project Header Style (Consistent with Services) - Aumentado espaciado superior */}
+            <div className="absolute -top-20 right-0 text-right z-20 flex flex-col items-end w-full max-w-[400px]">
+              <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
                 PROYECTO DESTACADO
               </span>
-              <h2 className="text-white text-base md:text-lg font-bold tracking-[0.1em] uppercase">
+              <h2 className="text-white text-lg md:text-xl font-bold tracking-[0.1em] uppercase leading-tight">
                 {selectedProject.title}
               </h2>
             </div>
 
-            {/* Project Image Frame (Oval/Rounded) */}
-            <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[480px] lg:h-[480px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700">
+            {/* Project Image Frame (Oval/Rounded) - Tamaño reducido para armonía */}
+            <div className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-8">
               <Image
                 key={selectedProject.id}
                 src={selectedProject.image}
@@ -136,8 +136,8 @@ export default function SlideProyectos() {
         </div>
 
         {/* Bottom Description */}
-        <div key={selectedProject.id} className="w-full max-w-4xl mx-auto text-center mt-12 md:mt-0 min-h-[80px] flex items-center">
-          <p className="text-white/90 text-sm md:text-base leading-relaxed font-normal animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div key={selectedProject.id} className="w-full max-w-4xl mx-auto text-center mt-12 md:mt-8 min-h-[80px] flex items-center">
+          <p className="text-white/80 text-sm md:text-base leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {selectedProject.description}
           </p>
         </div>
