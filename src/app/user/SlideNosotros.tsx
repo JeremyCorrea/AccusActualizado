@@ -74,16 +74,16 @@ export default function SlideNosotros() {
               <button
                 onClick={() => setActiveTab(item)}
                 className={cn(
-                  "px-6 py-2 text-[11px] md:text-[13px] font-bold tracking-[0.1em] transition-all duration-500 rounded-full border border-transparent whitespace-nowrap",
+                  "px-6 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-500 rounded-full border border-transparent whitespace-nowrap",
                   activeTab.id === item.id 
                     ? "bg-[#AE1E24] text-white shadow-lg" 
-                    : "text-white/70 hover:text-white"
+                    : "text-white/70 hover:text-white hover:bg-white/5"
                 )}
               >
                 {item.label}
               </button>
               {index < nosotrosData.length - 1 && (
-                <span className="mx-2 text-white/30 hidden md:inline">|</span>
+                <span className="mx-2 text-white/10 hidden md:inline">|</span>
               )}
             </div>
           ))}
