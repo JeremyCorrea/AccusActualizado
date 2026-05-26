@@ -1,3 +1,4 @@
+
 {
   "inicio": {
     "src": "https://picsum.photos/seed/1/1920/1080",
@@ -12,10 +13,10 @@
     "data-ai-hint": "electrical engineering"
   },
   "proyectos": {
-    "src": "https://picsum.photos/seed/3/1920/1080",
+    "src": "https://images.pexels.com/photos/5505961/pexels-photo-5505961.jpeg",
     "width": 1920,
     "height": 1080,
-    "data-ai-hint": "power lines"
+    "data-ai-hint": "electrical tower"
   },
   "nosotros": {
     "src": "https://picsum.photos/seed/4/1920/1080",
