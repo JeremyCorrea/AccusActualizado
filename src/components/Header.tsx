@@ -1,6 +1,7 @@
 
 "use client";
 
+import Image from 'next/image';
 import { Menu, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import imageData from '@/app/lib/placeholder-images.json';
 
 interface HeaderProps {
   currentSlide: number;
@@ -25,6 +27,8 @@ const navItems = [
 ];
 
 export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
+  const { logo } = imageData;
+  
   const handleNavClick = (index: number) => {
     setCurrentSlide(index);
   };
@@ -32,8 +36,18 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-24 px-6 md:px-16 bg-transparent text-white">
       <div className="flex items-center gap-4">
-        <div className="text-4xl font-bold tracking-tighter">
-          Accus
+        <div 
+          className="relative h-12 w-32 md:h-16 md:w-40 cursor-pointer"
+          onClick={() => handleNavClick(0)}
+        >
+          <Image
+            src={logo.src}
+            alt="Accus Logo"
+            fill
+            className="object-contain object-left"
+            priority
+            data-ai-hint={logo['data-ai-hint']}
+          />
         </div>
         <div className="hidden md:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-4 py-1 uppercase opacity-80">
           <span>Ingeniería Eléctrica y Construcción</span>
@@ -64,7 +78,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
                 disabled={currentSlide === item.slideIndex}
                 className={cn(
                   "cursor-pointer py-4 pr-3 pl-8 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-none uppercase outline-none ring-0 transition-all duration-300 ease-in-out relative group",
-                  "mx-2 mt-2", // Margen lateral para crear el efecto de espaciado en la sombra
+                  "mx-2 mt-2",
                   "focus:bg-gradient-to-l focus:from-black/40 focus:via-black/20 focus:to-transparent focus:text-white",
                   "data-[highlighted]:bg-gradient-to-l data-[highlighted]:from-black/40 data-[highlighted]:via-black/20 data-[highlighted]:to-transparent data-[highlighted]:text-white"
                 )}

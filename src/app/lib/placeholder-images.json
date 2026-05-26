@@ -29,5 +29,11 @@
     "width": 1920,
     "height": 1080,
     "data-ai-hint": "fiber optics"
+  },
+  "logo": {
+    "src": "/logo.png",
+    "width": 200,
+    "height": 80,
+    "data-ai-hint": "company logo"
   }
 }
