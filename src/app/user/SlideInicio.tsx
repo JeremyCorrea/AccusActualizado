@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button"
 import imageData from '@/app/lib/placeholder-images.json';
 
@@ -9,22 +10,38 @@ interface SlideInicioProps {
 
 export default function SlideInicio({ setCurrentSlide }: SlideInicioProps) {
   const { inicio } = imageData;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Forzamos la reproducción del video una vez que el componente se monta
+    // Esto ayuda a superar restricciones de algunos navegadores
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        // Si falla por políticas del navegador, al menos no rompe la página
+        console.log("Auto-play prevented by browser, waiting for user interaction or reload.");
+      });
+    }
+  }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 overflow-hidden">
+    <section className="relative min-h-screen w-full flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 overflow-hidden bg-black">
+      {/* Video de fondo con configuración robusta */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-80"
         poster={inicio.src}
       >
         <source src="/videos/2073129-uhd_3840_2160_30fps.mp4" type="video/mp4" />
         Tu navegador no soporta la etiqueta de video.
       </video>
       
-      <div className="absolute inset-0 bg-black/45" />
+      {/* Overlay oscuro para legibilidad del texto */}
+      <div className="absolute inset-0 bg-black/40" />
       
       <div className="relative z-10 w-full max-w-xl mt-20 md:mt-0">
         <h1 className="text-5xl md:text-7xl lg:text-[90px] font-normal text-white mb-4 leading-[1] tracking-tight">
