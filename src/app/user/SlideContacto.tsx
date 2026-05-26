@@ -68,6 +68,7 @@ export default function SlideContacto() {
             alt="Fiber optics background"
             fill
             className="object-cover"
+            priority
             data-ai-hint={contacto['data-ai-hint']}
         />
         <div className="absolute inset-0 bg-black/70" />
@@ -75,7 +76,7 @@ export default function SlideContacto() {
         <div className="relative z-10 w-full max-w-lg px-8 md:px-16 pt-28 pb-12">
             <div className="flex items-center gap-3 mb-8">
                 <Square fill="white" className="w-3 h-3 text-white" />
-                <h1 className="text-3xl md:text-4xl font-bold">Póngase en contacto con nosotros</h1>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight">Póngase en contacto con nosotros</h1>
             </div>
 
             <Form {...form}>
@@ -186,7 +187,7 @@ export default function SlideContacto() {
                     />
                 </div>
                 
-                <Button type="submit" size="lg" className="px-10 bg-primary hover:bg-primary/90">
+                <Button type="submit" size="lg" className="px-10 bg-primary hover:bg-primary/90 rounded-none text-[10px] md:text-xs font-bold tracking-widest uppercase h-auto py-4">
                     Enviar <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
             </form>
@@ -194,7 +195,7 @@ export default function SlideContacto() {
         </div>
 
         <div className="absolute bottom-6 w-full z-10">
-            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-white/70 font-medium text-sm">
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-white/70 font-medium text-[10px] uppercase tracking-wider">
                 <span>FUNDACIÓN AMERICAN FOR INTERNATIONAL DEVELOPMENT</span>
                 <span>AngloAmerican</span>
                 <span>Cbb</span>
