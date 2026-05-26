@@ -54,7 +54,7 @@ export default function SlideProyectos() {
       <div className="absolute inset-0 bg-black/65" />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full h-full max-w-7xl px-8 md:px-16 flex flex-col justify-between py-24">
+      <div className="relative z-10 w-full h-full max-w-7xl px-8 md:px-16 flex flex-col justify-between pt-32 pb-16">
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 flex-grow">
           
@@ -109,8 +109,8 @@ export default function SlideProyectos() {
 
           {/* Right Side: Project Detail Window */}
           <div className="relative flex flex-col items-end">
-            {/* Project Header Style (Consistent with Services) - Aumentado espaciado superior */}
-            <div className="absolute -top-20 right-0 text-right z-20 flex flex-col items-end w-full max-w-[400px]">
+            {/* Project Header Style - Ajustado para evitar colisión con el Header */}
+            <div className="absolute -top-16 md:-top-20 right-4 md:right-0 text-right z-20 flex flex-col items-end w-full max-w-[400px]">
               <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
                 PROYECTO DESTACADO
               </span>
@@ -119,8 +119,8 @@ export default function SlideProyectos() {
               </h2>
             </div>
 
-            {/* Project Image Frame (Oval/Rounded) - Tamaño reducido para armonía */}
-            <div className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-8">
+            {/* Project Image Frame */}
+            <div className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-12 md:mt-8">
               <Image
                 key={selectedProject.id}
                 src={selectedProject.image}
@@ -129,7 +129,6 @@ export default function SlideProyectos() {
                 className="object-cover animate-in fade-in zoom-in-95 duration-1000"
                 data-ai-hint={selectedProject.hint}
               />
-              {/* Corner accent to match Services aesthetics */}
               <div className="absolute top-4 left-4 w-3 h-3 bg-white" />
             </div>
           </div>
