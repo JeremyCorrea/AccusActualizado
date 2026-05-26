@@ -90,11 +90,11 @@ export default function SlideNosotros() {
         </nav>
 
         {/* Content Body */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20 flex-grow">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-24 flex-grow">
           
-          {/* Left Side: Curved Image Frame */}
-          <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] shrink-0">
-             <div className="relative w-full h-full overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/10 shadow-2xl">
+          {/* Left Side: Curved Image Frame (Redimensionado para ser más pequeño) */}
+          <div className="relative w-[240px] h-[240px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] shrink-0">
+             <div className="relative w-full h-full overflow-hidden rounded-[60px_15px_60px_15px] border-2 border-white/10 shadow-2xl">
                 <Image 
                   key={activeTab.id}
                   src={activeTab.image}
@@ -107,20 +107,20 @@ export default function SlideNosotros() {
           </div>
 
           {/* Right Side: Text Content */}
-          <div key={activeTab.id} className="flex flex-col items-start text-left max-w-2xl animate-in fade-in slide-in-from-right-8 duration-700">
+          <div key={activeTab.id} className="flex flex-col items-start text-left max-w-xl animate-in fade-in slide-in-from-right-8 duration-700">
             <span className="text-white/60 text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-4">
               {activeTab.subtitle}
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-8 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-6 leading-tight">
               {activeTab.title}
             </h2>
-            <p className="text-white/80 text-base md:text-lg leading-relaxed font-light mb-10">
+            <p className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed font-light mb-8">
               {activeTab.description}
             </p>
             
             <Button 
               size="lg" 
-              className="bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none px-8 py-6 text-xs font-bold tracking-widest uppercase flex items-center gap-3 transition-transform hover:translate-x-1"
+              className="bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none px-8 py-5 text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-3 transition-transform hover:translate-x-1"
             >
               CONOZCA A NUESTRO EQUIPO
               <ArrowRight className="w-4 h-4" />
