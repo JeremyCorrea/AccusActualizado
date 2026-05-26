@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   currentSlide: number;
@@ -52,13 +53,21 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
               <span className="sr-only">Abrir menú</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-[#AE1E24] text-white border-none w-56 rounded-none mt-4 p-0 shadow-2xl overflow-hidden">
+          <DropdownMenuContent 
+            align="end" 
+            className="bg-[#AE1E24] text-white border-none w-44 rounded-none mt-4 p-0 pb-4 shadow-2xl overflow-hidden"
+          >
             {navItems.map((item) => (
               <DropdownMenuItem
                 key={item.slideIndex}
                 onClick={() => handleNavClick(item.slideIndex)}
                 disabled={currentSlide === item.slideIndex}
-                className="cursor-pointer py-6 px-8 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-b border-white/10 last:border-0 uppercase transition-all duration-300 ease-in-out focus:bg-gradient-to-l focus:from-black/40 focus:via-black/20 focus:to-transparent outline-none ring-0 data-[highlighted]:bg-gradient-to-l data-[highlighted]:from-black/40 data-[highlighted]:via-black/20 data-[highlighted]:to-transparent"
+                className={cn(
+                  "cursor-pointer py-4 pr-3 pl-8 rounded-none text-right justify-end font-bold text-[10px] tracking-[0.2em] border-none uppercase outline-none ring-0 transition-all duration-300 ease-in-out relative group",
+                  "mx-2 mt-2", // Margen lateral para crear el efecto de espaciado en la sombra
+                  "focus:bg-gradient-to-l focus:from-black/40 focus:via-black/20 focus:to-transparent focus:text-white",
+                  "data-[highlighted]:bg-gradient-to-l data-[highlighted]:from-black/40 data-[highlighted]:via-black/20 data-[highlighted]:to-transparent data-[highlighted]:text-white"
+                )}
               >
                 {item.label}
               </DropdownMenuItem>
