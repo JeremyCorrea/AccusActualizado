@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { ArrowRight, Square } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 import { Button } from "@/components/ui/button"
 import {
@@ -74,10 +74,9 @@ export default function SlideContacto() {
         <div className="absolute inset-0 bg-black/70" />
       
         <div className="relative z-10 w-full max-w-lg px-8 md:px-16 pt-28 pb-12">
-            <div className="flex items-center gap-3 mb-8">
-                <Square fill="white" className="w-3 h-3 text-white" />
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight">Póngase en contacto con nosotros</h1>
-            </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight mb-8">
+              Póngase en contacto con nosotros
+            </h1>
 
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
