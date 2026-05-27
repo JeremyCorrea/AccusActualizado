@@ -72,38 +72,57 @@ export default function SlideProyectos() {
                 stroke="#AE1E24" 
                 strokeWidth="14" 
                 strokeLinecap="round" 
-                className="cursor-pointer"
+                className="opacity-80"
               />
               
-              {proyectosData.map((proj) => (
-                <circle
-                  key={proj.id}
-                  cx={proj.id === 'norte' ? 50 : proj.id === 'centro' ? 52 : 50}
-                  cy={proj.id === 'norte' ? 100 : proj.id === 'centro' ? 350 : 650}
-                  r="20"
-                  className={cn(
-                    "cursor-pointer transition-all duration-300 fill-transparent hover:fill-white/10",
-                    selectedProject.id === proj.id && "fill-white/30"
-                  )}
-                  onClick={() => setSelectedProject(proj)}
-                />
-              ))}
-
-              <circle 
-                cx={selectedProject.id === 'norte' ? 50 : selectedProject.id === 'centro' ? 52 : 50} 
-                cy={selectedProject.id === 'norte' ? 100 : selectedProject.id === 'centro' ? 350 : 650} 
-                r="6" 
-                fill="white" 
-                className="pointer-events-none"
-              />
-              <circle 
-                cx={selectedProject.id === 'norte' ? 50 : selectedProject.id === 'centro' ? 52 : 50} 
-                cy={selectedProject.id === 'norte' ? 100 : selectedProject.id === 'centro' ? 350 : 650} 
-                r="12" 
-                stroke="white" 
-                strokeWidth="2" 
-                className="pointer-events-none animate-pulse"
-              />
+              {proyectosData.map((proj) => {
+                const isSelected = selectedProject.id === proj.id;
+                const cx = proj.id === 'norte' ? 50 : proj.id === 'centro' ? 52 : 50;
+                const cy = proj.id === 'norte' ? 100 : proj.id === 'centro' ? 350 : 650;
+                
+                return (
+                  <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
+                    {/* Área de interacción ampliada */}
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r="25"
+                      className="fill-transparent group-hover:fill-white/5 transition-colors duration-300"
+                    />
+                    {/* El punto base (Gris cuando no está seleccionado) */}
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r="6"
+                      className={cn(
+                        "transition-all duration-500 ease-in-out",
+                        isSelected ? "fill-white" : "fill-white/30"
+                      )}
+                    />
+                    {/* Anillo de pulso (Solo cuando está seleccionado) */}
+                    {isSelected && (
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r="12"
+                        stroke="white"
+                        strokeWidth="2"
+                        className="pointer-events-none animate-pulse fill-none"
+                      />
+                    )}
+                    {/* Brillo externo al pasar el ratón */}
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r="10"
+                      className={cn(
+                        "fill-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+                        isSelected && "opacity-0"
+                      )}
+                    />
+                  </g>
+                );
+              })}
             </svg>
           </div>
 
