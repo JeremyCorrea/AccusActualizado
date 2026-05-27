@@ -129,7 +129,6 @@ export default function SlideProyectos() {
                 className="object-cover animate-in fade-in zoom-in-95 duration-1000"
                 data-ai-hint={selectedProject.hint}
               />
-              <div className="absolute top-4 left-4 w-3 h-3 bg-white" />
             </div>
           </div>
         </div>
