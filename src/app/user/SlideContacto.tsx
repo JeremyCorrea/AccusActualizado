@@ -1,4 +1,3 @@
-
 "use client"
 
 import Image from 'next/image';
@@ -87,7 +86,7 @@ export default function SlideContacto() {
             />
           </div>
           
-          <span className="text-primary text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-4">
+          <span className="text-white text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-4">
             ¿POR QUÉ ELEGIRNOS?
           </span>
           
@@ -115,7 +114,7 @@ export default function SlideContacto() {
           </div>
           
           <div className="pt-8 border-t border-white/10 w-full">
-            <span className="text-primary text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">
+            <span className="text-white text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">
               COTIZA CON NOSOTROS
             </span>
             <h3 className="text-xl font-bold uppercase tracking-wide">
