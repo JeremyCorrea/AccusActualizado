@@ -14,7 +14,7 @@ const proyectosData = [
     description: 'En ACCUS tenemos trayectorias en proyecto relacionados a Ensayos Eléctricos HIPOT a Bobinados, Medida de humedad del aceite, Resistencia de enrollados en frío y Factor de potencia del aislamiento. Nuestra experiencia garantiza resultados precisos y confiables, cumpliendo con los más altos estándares de la industria.',
     image: 'https://picsum.photos/seed/norte/800/600',
     hint: 'mining electrical project',
-    yPos: '25%'
+    yPos: '15%'
   },
   {
     id: 'centro',
@@ -23,7 +23,7 @@ const proyectosData = [
     description: 'Ejecución y mantenimiento de subestaciones en la región central, optimizando la distribución de energía para complejos industriales y mineros con tecnología de punta.',
     image: 'https://picsum.photos/seed/centro/800/600',
     hint: 'power substation',
-    yPos: '45%'
+    yPos: '40%'
   },
   {
     id: 'sur',
@@ -32,7 +32,7 @@ const proyectosData = [
     description: 'Implementación de infraestructuras de comunicación robustas en entornos desafiantes, conectando operaciones remotas con centros de control de alta eficiencia.',
     image: 'https://picsum.photos/seed/sur/800/600',
     hint: 'fiber optics installation',
-    yPos: '75%'
+    yPos: '70%'
   }
 ];
 
@@ -58,63 +58,74 @@ export default function SlideProyectos() {
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 flex-grow">
           
-          {/* Left Side: Interactive Map of Chile */}
-          <div className="relative w-20 md:w-28 h-[450px] flex items-center justify-center shrink-0">
-            {/* Stylized SVG Map of Chile */}
+          {/* Left Side: Interactive Map of Chile (Detailed SVG) */}
+          <div className="relative w-24 md:w-32 h-[500px] flex items-center justify-center shrink-0">
+            {/* Detailed SVG Map of Chile */}
             <svg 
               viewBox="0 0 100 800" 
-              className="w-full h-full drop-shadow-[0_0_15px_rgba(174,30,36,0.6)]"
+              className="w-full h-full drop-shadow-[0_0_20px_rgba(174,30,36,0.4)]"
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
+              {/* Chile Path - More detailed silhouette */}
               <path 
-                d="M45,20 L55,40 L48,80 L52,150 L45,220 L55,300 L48,380 L53,450 L42,550 L58,650 L45,720 L55,780 L40,795" 
-                stroke="#AE1E24" 
-                strokeWidth="14" 
-                strokeLinecap="round" 
-                className="opacity-80"
+                d="M50,15 L60,35 L55,60 L58,90 L52,130 L54,180 L50,220 L53,260 L48,310 L52,360 L46,420 L54,480 L42,550 L58,620 L45,680 L52,730 L40,785 L35,795 L45,790 L55,770 L60,740 L55,700 L62,650 L50,580 L55,500 L45,440 L52,380 L48,330 L55,280 L50,230 L58,190 L55,140 L62,100 L58,60 L65,40 L55,15 Z" 
+                fill="#AE1E24" 
+                className="opacity-90 transition-all duration-700"
               />
               
               {proyectosData.map((proj) => {
                 const isSelected = selectedProject.id === proj.id;
-                const cx = proj.id === 'norte' ? 50 : proj.id === 'centro' ? 52 : 50;
-                const cy = proj.id === 'norte' ? 100 : proj.id === 'centro' ? 350 : 650;
+                // Posiciones ajustadas a la nueva silueta
+                let cx = 55;
+                let cy = 100;
+
+                if (proj.id === 'norte') {
+                  cx = 56;
+                  cy = 80;
+                } else if (proj.id === 'centro') {
+                  cx = 52;
+                  cy = 340;
+                } else if (proj.id === 'sur') {
+                  cx = 48;
+                  cy = 600;
+                }
                 
                 return (
                   <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
-                    {/* Área de interacción ampliada */}
+                    {/* Interaction Area */}
                     <circle
                       cx={cx}
                       cy={cy}
-                      r="25"
+                      r="30"
                       className="fill-transparent group-hover:fill-white/5 transition-colors duration-300"
                     />
-                    {/* El punto base (Gris cuando no está seleccionado) */}
+                    {/* Base Point (Visible gray when inactive) */}
                     <circle
                       cx={cx}
                       cy={cy}
                       r="6"
                       className={cn(
-                        "transition-all duration-500 ease-in-out",
-                        isSelected ? "fill-white" : "fill-white/30"
+                        "transition-all duration-500 ease-in-out shadow-lg",
+                        isSelected ? "fill-white" : "fill-white/40"
                       )}
                     />
-                    {/* Anillo de pulso (Solo cuando está seleccionado) */}
+                    {/* Pulse Ring (Selected only) */}
                     {isSelected && (
                       <circle
                         cx={cx}
                         cy={cy}
-                        r="12"
+                        r="14"
                         stroke="white"
                         strokeWidth="2"
                         className="pointer-events-none animate-pulse fill-none"
                       />
                     )}
-                    {/* Brillo externo al pasar el ratón */}
+                    {/* External Glow on Hover */}
                     <circle
                       cx={cx}
                       cy={cy}
-                      r="10"
+                      r="12"
                       className={cn(
                         "fill-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
                         isSelected && "opacity-0"
@@ -128,7 +139,6 @@ export default function SlideProyectos() {
 
           {/* Right Side: Project Detail Window */}
           <div className="relative flex flex-col items-center md:items-end">
-            {/* Project Header Style */}
             <div className="absolute -top-16 md:-top-20 right-0 text-center md:text-right z-20 flex flex-col items-center md:items-end w-full max-w-[400px]">
               <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
                 PROYECTO DESTACADO
@@ -138,7 +148,6 @@ export default function SlideProyectos() {
               </h2>
             </div>
 
-            {/* Project Image Frame */}
             <div className="relative w-[260px] h-[260px] md:w-[340px] md:h-[340px] lg:w-[380px] lg:h-[380px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-12 md:mt-8">
               <Image
                 key={selectedProject.id}
