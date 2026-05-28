@@ -1,7 +1,7 @@
 "use client";
 
 import Image from 'next/image';
-import { Menu, Search } from 'lucide-react';
+import { Menu, Search, Phone, Mail, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -33,28 +33,51 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-24 px-8 md:px-16 lg:px-24 bg-transparent text-white">
-      <div className="flex items-center gap-1 md:gap-2 -ml-4 md:-ml-6 lg:-ml-8">
-        <div 
-          className="relative h-14 w-40 md:h-20 md:w-40 cursor-pointer transition-transform hover:scale-105"
-          onClick={() => handleNavClick(0)}
-        >
-          <Image
-            src={logo.src}
-            alt="Accus Logo"
-            fill
-            className="object-contain object-right"
-            priority
-            data-ai-hint={logo['data-ai-hint']}
-          />
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-28 px-8 md:px-16 lg:px-24 bg-transparent text-white">
+      {/* Contenedor Izquierdo: Logo + Info */}
+      <div className="flex flex-col items-start justify-center gap-1 -ml-4 md:-ml-6 lg:-ml-8">
+        {/* Fila Superior: Logo y Descripción */}
+        <div className="flex items-center gap-1 md:gap-2">
+          <div 
+            className="relative h-14 w-40 md:h-16 md:w-40 cursor-pointer transition-transform hover:scale-105"
+            onClick={() => handleNavClick(0)}
+          >
+            <Image
+              src={logo.src}
+              alt="Accus Logo"
+              fill
+              className="object-contain object-right"
+              priority
+              data-ai-hint={logo['data-ai-hint']}
+            />
+          </div>
+          <div className="hidden lg:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-3 py-1 uppercase opacity-80 pointer-events-none select-none">
+            <span>Ingeniería Eléctrica y Construcción</span>
+            <span>Ensayos Eléctricos en Minería y</span>
+            <span>Fibra Óptica</span>
+          </div>
         </div>
-        <div className="hidden lg:flex flex-col text-[10px] leading-tight font-medium border-l border-white/30 pl-3 py-1 uppercase opacity-80 pointer-events-none select-none">
-          <span>Ingeniería Eléctrica y Construcción</span>
-          <span>Ensayos Eléctricos en Minería y</span>
-          <span>Fibra Óptica</span>
+
+        {/* Fila Inferior: Información de Contacto */}
+        <div className="hidden md:flex items-center gap-4 text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase opacity-60 pl-2 lg:pl-6">
+          <div className="flex items-center gap-1.5">
+            <Phone className="w-2.5 h-2.5" />
+            <span>+56 9 8765 4321</span>
+          </div>
+          <span className="w-px h-2.5 bg-white/20" />
+          <div className="flex items-center gap-1.5">
+            <Mail className="w-2.5 h-2.5" />
+            <span>contacto@accussolutions.cl</span>
+          </div>
+          <span className="w-px h-2.5 bg-white/20" />
+          <div className="flex items-center gap-1.5">
+            <MapPin className="w-2.5 h-2.5" />
+            <span>Av. Las Condes #1234, Santiago</span>
+          </div>
         </div>
       </div>
       
+      {/* Botones Derecha */}
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white">
           <Search className="h-6 w-6" />
