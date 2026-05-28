@@ -41,7 +41,7 @@ export default function SlideProyectos() {
   const { proyectos, mapa } = imageData;
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden font-body">
+    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden font-body bg-black">
       {/* Background Image with Dark Overlay */}
       <Image
         src={proyectos.src}
@@ -54,12 +54,12 @@ export default function SlideProyectos() {
       <div className="absolute inset-0 bg-black/65" />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full h-full max-w-6xl px-8 flex flex-col justify-between pt-32 pb-12">
+      <div className="relative z-10 w-full h-full max-w-6xl px-8 flex flex-col justify-between pt-28 pb-10">
         
-        <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 flex-grow">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-24 flex-grow overflow-hidden">
           
           {/* Left Side: Interactive Map of Chile */}
-          <div className="relative w-24 md:w-32 h-[500px] flex items-center justify-center shrink-0">
+          <div className="relative w-20 md:w-28 h-[400px] md:h-[450px] flex items-center justify-center shrink-0">
             {/* Base Image Map */}
             <div className="absolute inset-0 z-0">
               <Image 
@@ -91,7 +91,7 @@ export default function SlideProyectos() {
                   cx = 52;
                   cy = 340;
                 } else if (proj.id === 'sur') {
-                  cx = 44; // Ajustado a la izquierda (era 48)
+                  cx = 44;
                   cy = 600;
                 }
                 
@@ -139,16 +139,16 @@ export default function SlideProyectos() {
 
           {/* Right Side: Project Detail Window */}
           <div className="relative flex flex-col items-center md:items-end">
-            <div className="absolute -top-16 md:-top-20 right-0 text-center md:text-right z-20 flex flex-col items-center md:items-end w-full max-w-[400px]">
-              <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
+            <div className="absolute -top-12 md:-top-16 right-0 text-center md:text-right z-20 flex flex-col items-center md:items-end w-full max-w-[400px]">
+              <span className="text-white/60 text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase mb-1">
                 PROYECTO DESTACADO
               </span>
-              <h2 className="text-white text-lg md:text-xl font-bold tracking-[0.1em] uppercase leading-tight">
+              <h2 className="text-white text-base md:text-lg font-bold tracking-[0.1em] uppercase leading-tight">
                 {selectedProject.title}
               </h2>
             </div>
 
-            <div className="relative w-[260px] h-[260px] md:w-[340px] md:h-[340px] lg:w-[380px] lg:h-[380px] overflow-hidden rounded-[80px_20px_80px_20px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-12 md:mt-8">
+            <div className="relative w-[220px] h-[220px] md:w-[300px] md:h-[300px] lg:w-[340px] lg:h-[340px] overflow-hidden rounded-[60px_15px_60px_15px] border-2 border-white/20 shadow-2xl transition-all duration-700 mt-10 md:mt-6">
               <Image
                 key={selectedProject.id}
                 src={selectedProject.image}
@@ -162,8 +162,8 @@ export default function SlideProyectos() {
         </div>
 
         {/* Bottom Description */}
-        <div key={selectedProject.id} className="w-full max-w-3xl mx-auto text-center mt-12 md:mt-10 min-h-[80px] flex items-center">
-          <p className="text-white/80 text-sm md:text-base leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div key={selectedProject.id} className="w-full max-w-3xl mx-auto text-center mt-6 md:mt-4 min-h-[60px] flex items-center">
+          <p className="text-white/80 text-xs md:text-sm leading-relaxed font-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {selectedProject.description}
           </p>
         </div>
