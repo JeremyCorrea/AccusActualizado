@@ -58,7 +58,7 @@ export default function SlideProyectos() {
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 flex-grow">
           
-          {/* Left Side: Interactive Map of Chile (Using your custom Image) */}
+          {/* Left Side: Interactive Map of Chile */}
           <div className="relative w-24 md:w-32 h-[500px] flex items-center justify-center shrink-0">
             {/* Base Image Map */}
             <div className="absolute inset-0 z-0">
@@ -71,7 +71,7 @@ export default function SlideProyectos() {
               />
             </div>
 
-            {/* SVG Overlay for points (Invisible coordinates map to image) */}
+            {/* SVG Overlay for points */}
             <svg 
               viewBox="0 0 100 800" 
               className="relative z-10 w-full h-full"
@@ -91,7 +91,7 @@ export default function SlideProyectos() {
                   cx = 52;
                   cy = 340;
                 } else if (proj.id === 'sur') {
-                  cx = 48;
+                  cx = 44; // Ajustado a la izquierda (era 48)
                   cy = 600;
                 }
                 
@@ -109,7 +109,7 @@ export default function SlideProyectos() {
                       r="6"
                       className={cn(
                         "transition-all duration-500 ease-in-out shadow-lg",
-                        isSelected ? "fill-white" : "fill-white/40"
+                        isSelected ? "fill-white" : "fill-white/20"
                       )}
                     />
                     {isSelected && (
