@@ -1,3 +1,4 @@
+
 "use client"
 
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { ArrowRight, MapPin, Smartphone, Mail } from 'lucide-react';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -31,6 +33,7 @@ const formSchema = z.object({
   privacyPolicy: z.boolean().refine((val) => val === true, {
     message: "Debes aceptar las políticas de privacidad.",
   }),
+  recaptcha: z.string().min(1, { message: "Por favor, completa el captcha de seguridad." }),
 })
 
 export default function SlideContacto() {
@@ -45,6 +48,7 @@ export default function SlideContacto() {
       phone: "",
       message: "",
       privacyPolicy: false,
+      recaptcha: "",
     },
   })
   const { contacto, logo } = imageData;
@@ -74,7 +78,7 @@ export default function SlideContacto() {
       
       <div className="relative z-10 w-full max-w-7xl px-8 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
-        {/* Left Information Card (Inspired by reference) */}
+        {/* Left Information Card */}
         <div className="bg-black/30 backdrop-blur-md p-8 md:p-12 border border-white/10 rounded-sm shadow-2xl flex flex-col items-center text-center">
           <div className="relative h-16 w-48 mb-6">
             <Image
@@ -232,6 +236,26 @@ export default function SlideContacto() {
                       <FormLabel className="font-light text-[10px] text-white/60 leading-tight">
                         Al seleccionar esta casilla, confirmo que he leído y acepto las políticas de privacidad.
                       </FormLabel>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* reCAPTCHA Section */}
+              <div className="pt-2">
+                <FormField
+                  control={form.control}
+                  name="recaptcha"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <ReCAPTCHA
+                          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                          theme="dark"
+                          onChange={(value) => field.onChange(value || "")}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400 text-[10px]" />
                     </FormItem>
                   )}
                 />
