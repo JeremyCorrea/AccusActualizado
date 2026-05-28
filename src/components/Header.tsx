@@ -58,8 +58,8 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
           </div>
         </div>
 
-        {/* Fila Inferior: Información de Contacto */}
-        <div className="hidden md:flex items-center gap-4 text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase opacity-60 pl-2 lg:pl-6">
+        {/* Fila Inferior: Información de Contacto (Ajustada a la derecha) */}
+        <div className="hidden md:flex items-center gap-4 text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase opacity-60 pl-6 lg:pl-10">
           <div className="flex items-center gap-1.5">
             <Phone className="w-2.5 h-2.5" />
             <span>+56 9 8765 4321</span>
