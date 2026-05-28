@@ -94,7 +94,7 @@ export default function SlideContacto() {
             ¿POR QUÉ ELEGIRNOS?
           </span>
           
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight uppercase">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight uppercase text-white">
             ¡DEDICADOS A PRESTAR SERVICIOS DE CALIDAD & EFICIENCIA!
           </h2>
           
@@ -121,7 +121,7 @@ export default function SlideContacto() {
             <span className="text-white text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">
               COTIZA CON NOSOTROS
             </span>
-            <h3 className="text-xl font-bold uppercase tracking-wide">
+            <h3 className="text-xl font-bold uppercase tracking-wide text-white">
               ¿NECESITAS AYUDA CON TU PROYECTO?
             </h3>
           </div>
@@ -241,7 +241,7 @@ export default function SlideContacto() {
                 />
               </div>
 
-              {/* reCAPTCHA Section */}
+              {/* reCAPTCHA Section with Dark Theme */}
               <div className="pt-2">
                 <FormField
                   control={form.control}
