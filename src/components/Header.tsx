@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, Search, Phone, Mail, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,13 +29,42 @@ const navItems = [
 
 export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   const { logo } = imageData;
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   
   const handleNavClick = (index: number) => {
     setCurrentSlide(index);
   };
 
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+        
+        // Si el usuario scrollea hacia abajo y ha pasado un umbral (ej. 100px)
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          setIsVisible(false);
+        } else {
+          // Si scrollea hacia arriba
+          setIsVisible(true);
+        }
+        
+        setLastScrollY(currentScrollY);
+      }
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-28 px-8 md:px-16 lg:px-24 bg-transparent text-white">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-28 px-8 md:px-16 lg:px-24 bg-transparent text-white transition-transform duration-500 ease-in-out",
+      !isVisible && "-translate-y-full"
+    )}>
       {/* Contenedor Izquierdo: Logo + Info */}
       <div className="flex flex-col items-start justify-center gap-1 -ml-4 md:-ml-6 lg:-ml-8">
         {/* Fila Superior: Logo y Descripción */}
