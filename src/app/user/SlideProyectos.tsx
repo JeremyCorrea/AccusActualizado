@@ -38,7 +38,7 @@ const proyectosData = [
 
 export default function SlideProyectos() {
   const [selectedProject, setSelectedProject] = useState(proyectosData[0]);
-  const { proyectos } = imageData;
+  const { proyectos, mapa } = imageData;
 
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden font-body">
@@ -58,25 +58,29 @@ export default function SlideProyectos() {
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 flex-grow">
           
-          {/* Left Side: Interactive Map of Chile (Detailed SVG) */}
+          {/* Left Side: Interactive Map of Chile (Using your custom Image) */}
           <div className="relative w-24 md:w-32 h-[500px] flex items-center justify-center shrink-0">
-            {/* Detailed SVG Map of Chile */}
+            {/* Base Image Map */}
+            <div className="absolute inset-0 z-0">
+              <Image 
+                src={mapa.src}
+                alt="Mapa de Chile"
+                fill
+                className="object-contain opacity-90 drop-shadow-[0_0_15px_rgba(174,30,36,0.3)]"
+                priority
+              />
+            </div>
+
+            {/* SVG Overlay for points (Invisible coordinates map to image) */}
             <svg 
               viewBox="0 0 100 800" 
-              className="w-full h-full drop-shadow-[0_0_20px_rgba(174,30,36,0.4)]"
+              className="relative z-10 w-full h-full"
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Chile Path - More detailed silhouette */}
-              <path 
-                d="M50,15 L60,35 L55,60 L58,90 L52,130 L54,180 L50,220 L53,260 L48,310 L52,360 L46,420 L54,480 L42,550 L58,620 L45,680 L52,730 L40,785 L35,795 L45,790 L55,770 L60,740 L55,700 L62,650 L50,580 L55,500 L45,440 L52,380 L48,330 L55,280 L50,230 L58,190 L55,140 L62,100 L58,60 L65,40 L55,15 Z" 
-                fill="#AE1E24" 
-                className="opacity-90 transition-all duration-700"
-              />
-              
               {proyectosData.map((proj) => {
                 const isSelected = selectedProject.id === proj.id;
-                // Posiciones ajustadas a la nueva silueta
+                // Coordinates relative to the 100x800 grid
                 let cx = 55;
                 let cy = 100;
 
@@ -93,14 +97,12 @@ export default function SlideProyectos() {
                 
                 return (
                   <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
-                    {/* Interaction Area */}
                     <circle
                       cx={cx}
                       cy={cy}
                       r="30"
                       className="fill-transparent group-hover:fill-white/5 transition-colors duration-300"
                     />
-                    {/* Base Point (Visible gray when inactive) */}
                     <circle
                       cx={cx}
                       cy={cy}
@@ -110,7 +112,6 @@ export default function SlideProyectos() {
                         isSelected ? "fill-white" : "fill-white/40"
                       )}
                     />
-                    {/* Pulse Ring (Selected only) */}
                     {isSelected && (
                       <circle
                         cx={cx}
@@ -121,7 +122,6 @@ export default function SlideProyectos() {
                         className="pointer-events-none animate-pulse fill-none"
                       />
                     )}
-                    {/* External Glow on Hover */}
                     <circle
                       cx={cx}
                       cy={cy}
