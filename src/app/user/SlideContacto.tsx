@@ -24,7 +24,6 @@ import { useToast } from "@/hooks/use-toast"
 import imageData from '@/app/lib/placeholder-images.json';
 
 const formSchema = z.object({
-  topic: z.string().min(2, { message: "El tema debe tener al menos 2 caracteres." }),
   firstName: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
   lastName: z.string().min(2, { message: "El apellido debe tener al menos 2 caracteres." }),
   email: z.string().email({ message: "Por favor, introduce un correo electrónico válido." }),
@@ -41,7 +40,6 @@ export default function SlideContacto() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      topic: "",
       firstName: "",
       lastName: "",
       email: "",
@@ -135,19 +133,6 @@ export default function SlideContacto() {
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="topic"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white/90 font-light text-xs">Tema*</FormLabel>
-                    <FormControl>
-                      <Input {...field} className={inputStyles} />
-                    </FormControl>
-                    <FormMessage className="text-red-400 text-[10px]" />
-                  </FormItem>
-                )}
-              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <FormField
                   control={form.control}
