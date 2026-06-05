@@ -1,4 +1,4 @@
-import type {Config} from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: ['class'],
@@ -10,9 +10,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['system-ui', 'sans-serif'],
-        headline: ['system-ui', 'sans-serif'],
-        code: ['monospace'],
+        // Configuradas correctamente con comillas internas para fuentes con espacios
+        caslon: ['"Libre Caslon Text"', 'serif'],
+        montserrat: ['"Montserrat"', 'sans-serif'],
+        suse: ['"SUSE"', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -73,20 +74,12 @@ export default {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
