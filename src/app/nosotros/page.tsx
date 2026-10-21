@@ -77,7 +77,39 @@ const nosotrosData = [
           Fomentamos una cultura corporativa de mejora continua y aprendizaje técnico. Nuestro capital humano es el activo más valioso.
         </p>
       </>
-    )
+    ),
+    orgStructure: {
+      title: "Estructura Organizacional",
+      levels: [
+        {
+          role: "Gerente General",
+          name: "Luis Acuña Lopez",
+          color: "bg-[#AE1E24] text-white",
+        },
+        {
+          role: "Sub Gerente",
+          name: "Héctor Tapia Quilodrán",
+          color: "bg-zinc-900 text-white",
+        }
+      ],
+      branches: [
+        {
+          title: "Gerencia de Operaciones",
+          leader: "Rodrigo Vergara Venegas",
+          subRoles: ["Jefe de Operaciones", "Ingeniero Proyectista", "Encargado de Logística", "Jefe de Maquinaria", "Operadores / Rigger"]
+        },
+        {
+          title: "Gerencia de Minería",
+          leader: "Robert Marín Pérez",
+          subRoles: ["Administrador de Contrato", "Encargado de Licitaciones", "Jefe SSOMA", "Ingeniero de Oficina Técnica"]
+        },
+        {
+          title: "Gerencia Comercial / RRHH",
+          leader: "Carla Tapia Quilodrán",
+          subRoles: ["Administrativa Comercial", "Jefe de Relaciones Laborales", "Control de Costos", "Asistente Finanzas"]
+        }
+      ]
+    }
   },
   {
     id: 'evolucion',
@@ -191,6 +223,55 @@ export default function NosotrosPage() {
                   {p}
                 </p>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Estructura Organizacional */}
+        {activeTab.orgStructure && (
+          <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="text-center mb-16 relative">
+              <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
+                {activeTab.orgStructure.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto" />
+            </div>
+
+            <div className="flex flex-col items-center space-y-10 w-full overflow-x-auto pb-10">
+              {/* Nivel 1 & 2: Alta Gerencia */}
+              <div className="flex flex-col items-center gap-8 min-w-[320px]">
+                {activeTab.orgStructure.levels.map((node, i) => (
+                  <div key={i} className={cn("px-8 py-5 border shadow-sm text-center min-w-[280px] group transition-all hover:scale-105", node.color)}>
+                    <p className="text-[10px] uppercase tracking-widest font-bold opacity-80 mb-1">{node.role}</p>
+                    <p className="text-sm md:text-base font-black tracking-tight">{node.name}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Conectores Visuales Centrales */}
+              <div className="hidden md:block w-px h-10 bg-zinc-200" />
+
+              {/* Ramas de Gerencia */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+                {activeTab.orgStructure.branches.map((branch, idx) => (
+                  <div key={idx} className="flex flex-col space-y-6">
+                    {/* Cabeza de Rama */}
+                    <div className="bg-white border border-zinc-200 p-6 text-center shadow-sm group hover:border-[#AE1E24] transition-colors">
+                      <p className="text-[9px] uppercase tracking-widest font-bold text-zinc-400 mb-2">{branch.title}</p>
+                      <p className="text-sm font-bold text-zinc-900">{branch.leader}</p>
+                    </div>
+                    
+                    {/* Roles Secundarios */}
+                    <div className="space-y-3">
+                      {branch.subRoles.map((role, rIdx) => (
+                        <div key={rIdx} className="bg-zinc-50 border-l-2 border-zinc-100 p-3 text-left group hover:border-[#AE1E24] transition-all">
+                          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{role}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
