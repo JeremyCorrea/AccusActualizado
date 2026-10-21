@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Menu, Phone, Mail, MapPin } from 'lucide-react';
+import { Menu, Mail, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -68,19 +68,24 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
       !isVisible && "-translate-y-full",
       isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : (isLightBgPage ? "bg-white/80 py-3" : "bg-transparent py-4")
     )}>
-      {/* Barra superior técnica */}
+      {/* Barra superior técnica: Solo Mail y Ubicación General */}
       <div className={cn(
         "hidden md:flex items-center justify-between px-8 lg:px-24 py-1 border-b text-[10px] font-bold tracking-[0.1em] uppercase transition-colors",
         useDarkTheme ? "border-zinc-100 text-zinc-500" : "border-white/20 text-white"
       )}>
         <div className="flex gap-6">
-          <div className="flex items-center gap-2"><Phone size={12} className="text-[#AE1E24]" /> +56 992595761</div>
-          <div className="flex items-center gap-2"><Mail size={12} className="text-[#AE1E24]" /> accus@accusingenieria.cl</div>
+          <div className="flex items-center gap-2">
+            <Mail size={12} className="text-[#AE1E24]" /> 
+            accus@accusingenieria.cl
+          </div>
         </div>
-        <div className="flex items-center gap-2"><MapPin size={12} className="text-[#AE1E24]" /> Coquimbo, Chile</div>
+        <div className="flex items-center gap-2">
+          <MapPin size={12} className="text-[#AE1E24]" /> 
+          Coquimbo, Chile
+        </div>
       </div>
 
-      <div className="flex flex-col px-6 lg:px-24 mt-2">
+      <div className="flex flex-col px-6 lg:px-24 mt-2 mb-2">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <div className="relative h-12 w-36 cursor-pointer" onClick={() => handleNavClick('/')}>
@@ -89,13 +94,6 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
                 alt="Accus Logo" 
                 className={cn("h-full w-full object-contain object-left transition-all", useDarkTheme ? "brightness-100" : "brightness-0 invert")} 
               />
-            </div>
-            {/* Texto descriptivo al lado del logo (ajustado para ser más pequeño) */}
-            <div className={cn(
-              "text-[8px] font-bold tracking-[0.15em] uppercase mt-1 transition-colors",
-              useDarkTheme ? "text-zinc-400" : "text-white/60"
-            )}>
-              Ingeniería Eléctrica • Construcción • Ensayos • Fibra Óptica
             </div>
           </div>
 
@@ -137,18 +135,6 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-        </div>
-
-        {/* Fila Inferior: Información de Contacto (Debajo del logo y descripción) */}
-        <div className={cn(
-          "hidden md:flex items-center gap-4 text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase mt-1 lg:pl-[75px] transition-opacity duration-500",
-          useDarkTheme ? "text-zinc-500" : "text-white/60"
-        )}>
-          <span className="flex items-center gap-1"><Phone size={10} className="text-[#AE1E24]" /> +56 992595761</span>
-          <span className="opacity-30">|</span>
-          <span className="flex items-center gap-1"><Mail size={10} className="text-[#AE1E24]" /> accus@accusingenieria.cl</span>
-          <span className="opacity-30">|</span>
-          <span className="flex items-center gap-1"><MapPin size={10} className="text-[#AE1E24]" /> Pasaje Murano 3770, Coquimbo</span>
         </div>
       </div>
     </header>
