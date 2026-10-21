@@ -1,7 +1,10 @@
+
 "use client";
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const WhatsAppIcon = () => (
   <svg
@@ -19,16 +22,35 @@ const WhatsAppIcon = () => (
 );
 
 export default function FloatingIcons() {
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Calculamos la distancia al fondo de la página
+      const scrollPosition = window.innerHeight + window.pageYOffset;
+      const totalHeight = document.documentElement.scrollHeight;
+      
+      // Si estamos a menos de 120px del fondo (cerca del footer), ocultamos
+      setIsHidden(scrollPosition >= totalHeight - 120);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="fixed bottom-16 right-8 z-50 flex flex-col items-end gap-3">
+    <div className={cn(
+      "fixed bottom-16 right-8 z-50 flex flex-col items-end gap-3 transition-all duration-500 ease-in-out",
+      isHidden ? "opacity-0 translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"
+    )}>
       {/* Botón de mensaje (Redirige a /contacto de forma nativa) */}
       <Link
         href="/contacto"
         aria-label="Contactar aquí"
-        className="flex items-center gap-0 sm:gap-2 bg-[#AE1E24] text-white p-2 sm:px-4 sm:py-2 rounded-full shadow-md hover:opacity-90 transition-opacity"
+        className="flex items-center gap-0 sm:gap-2 bg-[#AE1E24] text-white p-2 sm:px-4 sm:py-2 rounded-full shadow-lg hover:bg-[#AE1E24]/90 transition-all active:scale-95"
       >
-        <span className="hidden sm:inline text-sm font-medium">Contacta aquí</span>
-        <Mail size={20} strokeWidth={1.5} />
+        <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-widest">Contacta aquí</span>
+        <Mail size={18} strokeWidth={2} />
       </Link>
 
       {/* Botón de WhatsApp */}
@@ -37,9 +59,9 @@ export default function FloatingIcons() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat vía WhatsApp"
-        className="flex items-center gap-0 sm:gap-2 bg-[#AE1E24] text-white p-2 sm:px-4 sm:py-2 rounded-full shadow-md hover:opacity-90 transition-opacity"
+        className="flex items-center gap-0 sm:gap-2 bg-[#AE1E24] text-white p-2 sm:px-4 sm:py-2 rounded-full shadow-lg hover:bg-[#AE1E24]/90 transition-all active:scale-95"
       >
-        <span className="hidden sm:inline text-sm font-medium">Chat vía Whatsapp</span>
+        <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-widest">Chat vía Whatsapp</span>
         <WhatsAppIcon />
       </a>
     </div>

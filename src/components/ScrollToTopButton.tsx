@@ -1,18 +1,29 @@
+
 "use client";
 
 import { ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isNearBottom, setIsNearBottom] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
+      // Detección de scroll para mostrar el botón
       if (window.pageYOffset > 300) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
+
+      // Detección de proximidad al footer
+      const scrollPosition = window.innerHeight + window.pageYOffset;
+      const totalHeight = document.documentElement.scrollHeight;
+      
+      // Si estamos a menos de 120px del fondo, lo marcamos para ocultar
+      setIsNearBottom(scrollPosition >= totalHeight - 120);
     };
 
     window.addEventListener("scroll", toggleVisibility);
@@ -28,26 +39,27 @@ export default function ScrollToTopButton() {
 
   return (
     <div 
-      className={`fixed bottom-4 left-4 z-50 flex flex-col items-center transition-all duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
+      className={cn(
+        "fixed bottom-4 left-4 z-50 flex flex-col items-center transition-all duration-500 ease-in-out",
+        (isVisible && !isNearBottom) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+      )}
     >
       <button
         onClick={scrollToTop}
         className="group flex flex-col items-center justify-center focus:outline-none"
         aria-label="Scroll to top"
       >
-        {/* Texto superior: Ahora tiene un drop-shadow para que se lea sobre cualquier color */}
-        <span className="text-[10px] text-white/70 uppercase tracking-[0.3em] mb-2 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+        {/* Texto superior */}
+        <span className="text-[10px] text-zinc-500 uppercase tracking-[0.3em] mb-2 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           Subir
         </span>
 
-        {/* Círculo del botón: Al hacer hover se vuelve negro opaco con borde blanco más definido */}
-        <div className="p-3 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white transition-all duration-300 group-hover:border-white/50 group-hover:bg-black/90">
+        {/* Círculo del botón */}
+        <div className="p-3 rounded-full bg-white/80 backdrop-blur-md border border-zinc-200 text-zinc-900 shadow-xl transition-all duration-300 group-hover:border-[#AE1E24] group-hover:bg-white group-hover:text-[#AE1E24] active:scale-90">
           <ArrowUp 
-            size={24} 
-            strokeWidth={1.5} 
-            className="group-hover:text-white transition-colors duration-300"
+            size={20} 
+            strokeWidth={2} 
+            className="transition-colors duration-300"
           />
         </div>
       </button>
