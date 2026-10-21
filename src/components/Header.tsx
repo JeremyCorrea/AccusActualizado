@@ -68,21 +68,23 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
       !isVisible && "-translate-y-full",
       isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : (isLightBgPage ? "bg-white/80 py-3" : "bg-transparent py-4")
     )}>
-      {/* Barra superior técnica: Mail y Ubicación */}
+      {/* Barra superior técnica: Mail y Ubicación agrupados */}
       <div className={cn(
-        "hidden md:flex items-center justify-between px-8 lg:px-24 py-1 border-b text-[10px] font-bold tracking-[0.1em] uppercase transition-colors",
+        "hidden md:flex items-center justify-between px-6 lg:px-[75px] py-1 border-b text-[10px] font-bold tracking-[0.1em] uppercase transition-colors",
         useDarkTheme ? "border-zinc-100 text-zinc-500" : "border-white/20 text-white"
       )}>
-        <div className="flex gap-6">
+        <div className="flex gap-8">
           <div className="flex items-center gap-2">
             <Mail size={12} className="text-[#AE1E24]" /> 
             accus@accusingenieria.cl
           </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={12} className="text-[#AE1E24]" /> 
+            Coquimbo, Chile
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <MapPin size={12} className="text-[#AE1E24]" /> 
-          Coquimbo, Chile
-        </div>
+        {/* Lado derecho vacío para mantener equilibrio visual */}
+        <div></div>
       </div>
 
       <div className="flex flex-col px-6 lg:px-[75px] mt-2 mb-2">
