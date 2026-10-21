@@ -1,202 +1,133 @@
+
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import imageData from '@/app/lib/placeholder-images.json';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-// Datos de los proyectos vinculados a las imágenes locales del proyecto
 const proyectosData = [
   {
     id: 'norte',
     region: 'Zona Norte',
     title: 'Transformadores de corriente',
-    description: 'En ACCUS tenemos trayectoria en proyectos relacionados a Ensayos Eléctricos HIPOT a Bobinados, Medida de humedad del aceite, Resistencia de enrollados en frío y Factor de potencia del aislamiento. Nuestra experiencia garantiza resultados precisos y confiables, cumpliendo con los más altos estándares de la industria.',
+    description: 'Ensayos Eléctricos HIPOT a Bobinados y Medida de humedad del aceite en plantas mineras de gran escala.',
     image: '/pictures/1.webp',
     hint: 'mining electrical project',
+    cx: 56, cy: 80
   },
   {
     id: 'centro',
     region: 'Zona Central',
-    title: 'Subestaciones de Alta Tensión',
-    description: 'Ejecución y mantenimiento de subestaciones en la región central, optimizando la distribución de energía para complejos industriales y mineros con tecnología de punta.',
+    title: 'Subestaciones Alta Tensión',
+    description: 'Ejecución y mantenimiento de subestaciones optimizando la distribución para complejos industriales.',
     image: '/pictures/2.webp',
     hint: 'power substation',
+    cx: 52, cy: 340
   },
   {
     id: 'sur',
     region: 'Zona Sur',
-    title: 'Redes de Fibra Óptica Industrial',
-    description: 'Implementación de infraestructuras de comunicación robustas en entornos desafiantes, conectando operaciones remotas con centros de control de alta eficiencia.',
+    title: 'Fibra Óptica Industrial',
+    description: 'Implementación de infraestructuras de comunicación robustas en entornos desafiantes del sur.',
     image: '/pictures/3.webp',
     hint: 'fiber optics installation',
+    cx: 44, cy: 600
   }
 ];
 
 export default function ProyectosPage() {
   const [selectedProject, setSelectedProject] = useState(proyectosData[0]);
-  const [lineCoordinates, setLineCoordinates] = useState({ startX: 0, startY: 0, endX: 0, endY: 0 });
-
-  const sectionRef = useRef<HTMLElement>(null);
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  const updateOrthogonalPath = useCallback(() => {
-    if (!mapContainerRef.current || !titleRef.current || !sectionRef.current) return;
-
-    const activeCircle = mapContainerRef.current.querySelector('circle[data-selected="true"]');
-    if (!activeCircle) return;
-
-    const sectionRect = sectionRef.current.getBoundingClientRect();
-    const circleRect = activeCircle.getBoundingClientRect();
-    const titleRect = titleRef.current.getBoundingClientRect();
-
-    const startX = circleRect.left + circleRect.width / 2 - sectionRect.left;
-    const startY = circleRect.top + circleRect.height / 2 - sectionRect.top;
-    const endX = titleRect.left - sectionRect.left - 8;
-    const endY = titleRect.top + titleRect.height / 2 - sectionRect.top;
-
-    setLineCoordinates({ startX, startY, endX, endY });
-  }, []);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => updateOrthogonalPath(), 50);
-    window.addEventListener('resize', updateOrthogonalPath);
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('resize', updateOrthogonalPath);
-    };
-  }, [selectedProject, updateOrthogonalPath]);
-
-  useEffect(() => {
-    const observer = new ResizeObserver(() => updateOrthogonalPath());
-    if (mapContainerRef.current) observer.observe(mapContainerRef.current);
-    if (titleRef.current) observer.observe(titleRef.current);
-    return () => observer.disconnect();
-  }, [updateOrthogonalPath]);
-
-  // Construcción del path de forma segura basada en el estado de coordenadas numéricas
-  const linePath = `M ${lineCoordinates.startX} ${lineCoordinates.startY} L ${lineCoordinates.endX} ${lineCoordinates.startY} L ${lineCoordinates.endX} ${lineCoordinates.endY}`;
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen w-full flex flex-col items-center justify-center font-body bg-black pb-20 md:pb-0">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={imageData.proyectos.src}
-          alt="Power lines background"
-          fill
-          className="object-cover"
-          priority
-          data-ai-hint={imageData.proyectos['data-ai-hint']}
-        />
-        <div className="absolute inset-0 bg-black/65" />
-      </div>
+    <section className="relative h-screen w-full bg-white font-body pt-24 md:pt-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col">
+        
+        <div className="text-center mb-8">
+          <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-2 block">Portafolio</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight">Proyectos en Chile</h1>
+        </div>
 
-      <div className="relative z-10 w-full max-w-6xl px-4 md:px-8 py-8 md:py-12 pt-20 md:pt-24 lg:pt-28 flex flex-col gap-6 md:gap-10">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 relative">
-          <div ref={mapContainerRef} className="relative w-28 md:w-32 lg:w-36 h-auto">
-            <div className="relative aspect-[2/5]">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-10">
+          
+          {/* Mapa Interactiva (Izquierda) */}
+          <div className="lg:col-span-4 flex justify-center items-center h-full max-h-[60vh] relative">
+            <div className="relative w-32 md:w-40 h-full">
               <Image
-                src={imageData.mapa.src}
+                src="/mapachile2.webp"
                 alt="Mapa de Chile"
                 fill
-                className="object-contain opacity-90 drop-shadow-[0_0_15px_rgba(174,30,36,0.3)]"
+                className="object-contain grayscale opacity-30"
                 priority
-                sizes="(max-width: 768px) 112px, 128px"
               />
-            </div>
-            <svg
-              viewBox="0 0 100 800"
-              className="absolute inset-0 w-full h-full"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              {proyectosData.map((proj) => {
-                const isSelected = selectedProject.id === proj.id;
-                let cx = 55, cy = 100;
-                if (proj.id === 'norte') { cx = 56; cy = 80; }
-                else if (proj.id === 'centro') { cx = 52; cy = 340; }
-                else if (proj.id === 'sur') { cx = 44; cy = 600; }
-
-                return (
-                  <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
-                    <circle cx={cx} cy={cy} r="30" className="fill-transparent group-hover:fill-white/5 transition-colors" />
-                    <circle
-                      cx={cx}
-                      cy={cy}
-                      r="6"
-                      data-selected={isSelected ? "true" : "false"}
-                      className={cn(
-                        "transition-all duration-500",
-                        isSelected ? "fill-white" : "fill-white/20"
+              <svg
+                viewBox="0 0 100 800"
+                className="absolute inset-0 w-full h-full z-10"
+                fill="none"
+              >
+                {proyectosData.map((proj) => {
+                  const isSelected = selectedProject.id === proj.id;
+                  return (
+                    <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
+                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-[#AE1E24]/5 transition-colors" />
+                      <circle
+                        cx={proj.cx}
+                        cy={proj.cy}
+                        r="6"
+                        className={cn(
+                          "transition-all duration-500",
+                          isSelected ? "fill-[#AE1E24]" : "fill-zinc-300"
+                        )}
+                      />
+                      {isSelected && (
+                        <circle cx={proj.cx} cy={proj.cy} r="14" stroke="#AE1E24" strokeWidth="2" className="animate-pulse fill-none" />
                       )}
-                    />
-                    {isSelected && (
-                      <circle cx={cx} cy={cy} r="14" stroke="white" strokeWidth="2" className="animate-pulse fill-none" />
-                    )}
-                    <circle cx={cx} cy={cy} r="12" className={cn(
-                      "fill-white/10 opacity-0 group-hover:opacity-100 transition-opacity",
-                      isSelected && "opacity-0"
-                    )} />
-                  </g>
-                );
-              })}
-            </svg>
+                    </g>
+                  );
+                })}
+              </svg>
+            </div>
           </div>
 
-          <div className="flex flex-col items-center md:items-end text-center md:text-right max-w-[280px] md:max-w-md">
-            <span className="text-white/60 text-[11px] font-bold tracking-[0.3em] uppercase mb-2">
-              PROYECTO DESTACADO
-            </span>
-            <h2 ref={titleRef} className="text-white text-base md:text-xl lg:text-2xl font-bold tracking-[0.1em] uppercase leading-tight mb-4 md:mb-6">
-              {selectedProject.title}
-            </h2>
-            
-            {/* Contenedor de la Imagen Asimétrica */}
-            <div className="relative w-[200px] h-[200px] md:w-[280px] md:h-[280px] lg:w-[320px] lg:h-[320px] overflow-hidden rounded-tl-[999px] rounded-bl-[999px] rounded-tr-[40px] rounded-br-[40px] border-2 border-white/80 shadow-2xl">
-              <Image
+          {/* Visualización Proyecto (Derecha) */}
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="relative aspect-square w-full bg-zinc-50 overflow-hidden group border border-zinc-100 shadow-sm">
+              <div className="absolute inset-0 border-[15px] border-white z-10" />
+              <Image 
                 key={selectedProject.id}
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 fill
-                className="object-cover transition-all duration-700 animate-fade-in"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105 animate-in fade-in"
                 data-ai-hint={selectedProject.hint}
-                sizes="(max-width: 768px) 200px, (max-width: 1024px) 280px, 320px"
               />
+              <div className="absolute top-8 right-8 z-20 bg-[#AE1E24] text-white px-5 py-2 text-[9px] font-bold tracking-widest uppercase">
+                {selectedProject.region}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start animate-in fade-in slide-in-from-right-8 duration-700">
+              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 leading-tight">
+                {selectedProject.title}
+              </h2>
+              <p className="text-lg text-zinc-500 font-light leading-relaxed mb-8">
+                {selectedProject.description}
+              </p>
+              <div className="flex flex-col gap-4 w-full border-t border-zinc-100 pt-6">
+                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                  <span>Estado: Ejecutado</span>
+                  <span className="text-[#AE1E24]">Ver Detalle</span>
+                </div>
+                <Button className="bg-[#AE1E24] text-white rounded-none py-6 font-bold uppercase tracking-widest text-xs group">
+                  EXPLORAR CASO <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="w-full max-w-3xl mx-auto text-center mt-2 md:mt-4">
-          <p className="text-white/80 text-sm md:text-base leading-relaxed font-light">
-            {selectedProject.description}
-          </p>
         </div>
       </div>
-
-      {/* Línea SVG de interconexión dinámica */}
-      <svg
-        className="absolute top-0 left-0 w-full h-full pointer-events-none z-20 hidden md:block"
-        style={{ position: 'absolute' }}
-      >
-        <path
-          d={linePath}
-          stroke="rgba(255,255,255,0.35)"
-          strokeWidth="1.5"
-          fill="none"
-          className="transition-all duration-500 ease-out"
-        />
-        {lineCoordinates.endX > 0 && (
-          <circle
-            cx={lineCoordinates.endX}
-            cy={lineCoordinates.endY}
-            r="3"
-            fill="rgba(255,255,255,0.5)"
-            className="transition-all duration-500"
-          />
-        )}
-      </svg>
     </section>
   );
 }

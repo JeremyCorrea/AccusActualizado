@@ -36,7 +36,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Páginas que tienen fondo blanco y requieren header oscuro por defecto
-  const isLightBgPage = ['/servicios', '/contacto'].includes(pathname);
+  const isLightBgPage = ['/servicios', '/contacto', '/proyectos', '/nosotros'].includes(pathname);
   const useDarkTheme = isScrolled || isLightBgPage;
 
   const handleNavClick = (route: string) => {
@@ -68,7 +68,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
       !isVisible && "-translate-y-full",
       isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : (isLightBgPage ? "bg-white/80 py-3" : "bg-transparent py-4")
     )}>
-      {/* Barra superior técnica: Solo Mail y Ubicación General */}
+      {/* Barra superior técnica: Mail y Ubicación */}
       <div className={cn(
         "hidden md:flex items-center justify-between px-8 lg:px-24 py-1 border-b text-[10px] font-bold tracking-[0.1em] uppercase transition-colors",
         useDarkTheme ? "border-zinc-100 text-zinc-500" : "border-white/20 text-white"
@@ -85,7 +85,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
         </div>
       </div>
 
-      <div className="flex flex-col px-6 lg:px-24 mt-2 mb-2">
+      <div className="flex flex-col px-6 lg:px-[75px] mt-2 mb-2">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <div className="relative h-12 w-36 cursor-pointer" onClick={() => handleNavClick('/')}>
