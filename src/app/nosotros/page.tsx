@@ -27,7 +27,20 @@ const nosotrosData = [
           Realizamos diagnósticos de mallas a tierra, análisis de calidad de energía, termografías infrarrojas y mantenimiento predictivo en subestaciones eléctricas.
         </p>
       </>
-    )
+    ),
+    extendedInfo: {
+      title: "Historia",
+      paragraphs: [
+        "Nuestros inicios se remontan a hace más de 15 años, cuando nuestro fundador, Luis Acuña Lopez, comenzó a realizar trabajos eléctricos de forma particular, atendiendo a los clientes de la región de Coquimbo.",
+        "Con responsabilidad y compromiso se logró ganar la confianza de los clientes. El esfuerzo y la dedicación permitieron alcanzar el logro de consolidar ACCUS INGENIERIA LTDA., brindando servicios a la pequeña y gran industria minera.",
+        "A lo largo de los años, la empresa demostró sus capacidades y compromiso con la industria. La creación de ACCUS fue fruto de la unión de esfuerzos y visión técnica. Comenzamos esta aventura empresarial con un equipo altamente calificado, equipamiento de última tecnología y una flota preparada para los desafíos del terreno minero.",
+        "Sin duda, la trayectoria marcó un punto de inflexión importante para la empresa. Nos adjudicamos trabajos críticos en importantes faenas mineras, lo que nos abrió las puertas al mundo de la gran minería y energía en Chile.",
+        "Con la incorporación de jóvenes profesionales, llenos de entusiasmo y con un fuerte deseo de aprender, ACCUS logra posicionarse en la minería, logrando formar un equipo humano de alta calidad, quienes hoy en día son los pilares de nuestra organización, demostrando a diario su compromiso con la seguridad, tanto propia como la de sus compañeros.",
+        "Es un orgullo ver cómo estos talentos contribuyen al crecimiento de ACCUS y al desarrollo de la minería en nuestro país. Contamos con una visión moderna al negocio, combinando la vasta experiencia de los fundadores con las últimas tendencias y avances de la industria.",
+        "Actualmente contamos con la infraestructura, los recursos humanos y financieros necesarios para afrontar nuevos desafíos en la industria minera, tanto a nivel nacional como internacional.",
+        "Nuestra política corporativa, centrada en la calidad, la prevención de riesgos y el respeto al medio ambiente, nos permite garantizar un servicio profesional, confiable y de excelencia."
+      ]
+    }
   },
   {
     id: 'valores',
@@ -129,7 +142,7 @@ export default function NosotrosPage() {
         </nav>
 
         {/* Contenido Central */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full mb-20">
           <div className="relative aspect-square w-full bg-zinc-50 overflow-hidden group border border-zinc-100">
             <div className="absolute inset-0 border-[20px] border-white z-10" />
             <Image 
@@ -161,6 +174,26 @@ export default function NosotrosPage() {
             </Button>
           </div>
         </div>
+
+        {/* Información Extendida (Historia, etc.) */}
+        {activeTab.extendedInfo && (
+          <div className="w-full max-w-4xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="text-center relative">
+              <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
+                {activeTab.extendedInfo.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto" />
+            </div>
+            
+            <div className="space-y-8 text-zinc-600 text-base md:text-lg font-light leading-relaxed text-left md:text-justify">
+              {activeTab.extendedInfo.paragraphs.map((p, index) => (
+                <p key={index} className="opacity-90 hover:opacity-100 transition-opacity">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
