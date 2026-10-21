@@ -10,28 +10,28 @@ const services = [
     id: 0, 
     label: "Ingeniería Eléctrica", 
     shortLabel: "Ing. Eléctrica",
-    description: "En ACCUS ofrecemos un servicio integral de ingeniería eléctrica, diseñado para garantizar seguridad, calidad, eficiencia y cumplimiento normativo en cada proyecto.",
+    description: "Servicios integrales de ingeniería eléctrica diseñados bajo estándares internacionales para garantizar la máxima seguridad y eficiencia operacional.",
     imageFile: "acc02.webp"
   },
   { 
     id: 1, 
     label: "Construcción", 
     shortLabel: "Construcción",
-    description: "Ejecución de proyectos de infraestructura eléctrica con los más altos estándares de calidad y seguridad industrial, adaptados a las necesidades de cada cliente.",
+    description: "Ejecución técnica de infraestructura crítica con personal certificado y equipamiento de última generación para la industria minera.",
     imageFile: "pararrayos.webp"
   },
   { 
     id: 2, 
-    label: "Ensayos Eléctricos Mina", 
-    shortLabel: "Ensayos Mina",
-    description: "Pruebas y diagnósticos especializados para el sector minero, asegurando la continuidad operacional y la integridad de los equipos críticos en terreno.",
+    label: "Ensayos Eléctricos", 
+    shortLabel: "Ensayos",
+    description: "Diagnósticos preventivos y correctivos en terreno, asegurando la continuidad operacional mediante pruebas de aislamiento y potencia.",
     imageFile: "fibra-optica.webp"   
   },
   { 
     id: 3, 
     label: "Fibra Óptica", 
     shortLabel: "Fibra Óptica",
-    description: "Instalación y mantenimiento de redes de comunicación de alta velocidad para entornos industriales exigentes, garantizando una conectividad robustas.",
+    description: "Implementación de redes de comunicación robustas y de alta velocidad para entornos industriales desafiantes y complejos.",
     imageFile: "cableado-estructurado.webp"
   },
 ];
@@ -40,111 +40,68 @@ const getImagePath = (imageFile: string) => `/pictures/${imageFile}`;
 
 export default function ServiciosPage() {
   const [activeTab, setActiveTab] = useState(0);
-  const { servicios } = imageData;
-
-  const getPrevIndex = (current: number) => (current === 0 ? services.length - 1 : current - 1);
-  const getNextIndex = (current: number) => (current === services.length - 1 ? 0 : current + 1);
-
-  const prevIdx = getPrevIndex(activeTab);
-  const nextIdx = getNextIndex(activeTab);
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-start font-body">
-      {/* Background Image */}
-      <Image
-        src={servicios.src}
-        alt="Background"
-        fill
-        className="object-cover"
-        priority
-        data-ai-hint={servicios['data-ai-hint']}
-      />
-      <div className="absolute inset-0 bg-black/65" />
-
-      {/* Main Content Container */}
-      {/* CAMBIO CLAVE: Se aumentó el padding superior de pt-20 md:pt-24 a pt-44 md:pt-48 */}
-      <div className="relative z-10 w-full max-w-7xl px-4 md:px-8 flex flex-col items-center min-h-screen pt-44 md:pt-48 pb-12">
+    <section className="relative min-h-screen w-full bg-white font-body pt-32 md:pt-40">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center">
         
-        {/* Navigation Tabs */}
-        <nav className="flex items-center justify-center gap-2 mb-6 md:mb-8 flex-wrap shrink-0">
+        <div className="text-center mb-16">
+          <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Especialidades</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight">Nuestros Servicios</h1>
+        </div>
+
+        {/* Navegación Estilo Pestañas Corporativas */}
+        <nav className="flex items-center justify-center gap-2 mb-16 flex-wrap border-b border-zinc-100 w-full pb-4">
           {services.map((service, index) => (
-            <div key={service.id} className="flex items-center">
-              <button
-                onClick={() => setActiveTab(index)}
-                className={cn(
-                  "px-4 md:px-6 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-500 rounded-full border border-transparent whitespace-nowrap",
-                  activeTab === index 
-                    ? "bg-[#AE1E24] text-white shadow-lg" 
-                    : "text-white/50 hover:text-white hover:bg-white/5"
-                )}
-              >
-                {service.label}
-              </button>
-              
-              {index < services.length - 1 && (
-                <span className="mx-1 md:mx-2 text-white/10 inline-block">|</span>
+            <button
+              key={service.id}
+              onClick={() => setActiveTab(index)}
+              className={cn(
+                "px-8 py-3 text-[11px] font-black tracking-widest uppercase transition-all relative",
+                activeTab === index 
+                  ? "text-[#AE1E24]" 
+                  : "text-zinc-400 hover:text-zinc-600"
               )}
-            </div>
+            >
+              {service.label}
+              {activeTab === index && (
+                <div className="absolute bottom-[-17px] left-0 w-full h-1 bg-[#AE1E24]" />
+              )}
+            </button>
           ))}
         </nav>
 
-        {/* Carousel Visual Display */}
-        <div className="flex-grow w-full flex items-center justify-center gap-4 md:gap-8 lg:gap-12">
-          
-          {/* Imagen previa (solo escritorio) */}
-          <div className="hidden lg:flex flex-col items-center opacity-40 scale-90 transition-all duration-700">
-            <div className="relative w-[min(140px,18vh)] h-[min(140px,18vh)] bg-[#AE1E24]/40 p-2 flex items-center justify-center">
-              <div className="absolute top-2 left-2 w-2 h-2 bg-white/60" />
-              <div className="relative w-full h-full rounded-full overflow-hidden">
-                <Image 
-                  src={getImagePath(services[prevIdx].imageFile)}
-                  alt={services[prevIdx].shortLabel}
-                  fill
-                  className="object-cover grayscale"
-                />
-              </div>
+        {/* Visualización del Servicio */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+          <div className="relative aspect-square w-full bg-zinc-50 overflow-hidden group">
+            <div className="absolute inset-0 border-[20px] border-white z-10" />
+            <Image 
+              src={getImagePath(services[activeTab].imageFile)}
+              alt={services[activeTab].label}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute top-10 right-10 z-20 bg-[#AE1E24] text-white px-6 py-2 text-[10px] font-bold tracking-widest uppercase">
+              {services[activeTab].shortLabel}
             </div>
           </div>
 
-          {/* Imagen principal activa */}
-          <div className="flex flex-col items-center transition-all duration-700">
-            <div className="relative w-[min(400px,40vh)] h-[min(400px,40vh)] md:w-[min(480px,45vh)] md:h-[min(480px,45vh)] bg-[#AE1E24]/90 p-6 md:p-8 flex items-center justify-center shadow-2xl">
-              <div className="absolute top-4 left-4 w-4 h-4 bg-white" />
-              <span className="absolute top-4 right-4 text-white/90 font-bold text-[9px] tracking-[0.2em] hidden md:block uppercase">
-                {services[activeTab].shortLabel}
-              </span>
-              <div className="relative w-full h-full rounded-full overflow-hidden">
-                <Image 
-                  src={getImagePath(services[activeTab].imageFile)}
-                  alt={services[activeTab].shortLabel}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          <div className="flex flex-col items-start animate-in fade-in slide-in-from-right-8 duration-700">
+            <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 mb-8 leading-tight">
+              {services[activeTab].label}
+            </h2>
+            <p className="text-xl text-zinc-500 font-light leading-relaxed mb-10">
+              {services[activeTab].description}
+            </p>
+            <div className="space-y-4 w-full">
+              {["Cumplimiento Normativo SEC", "Personal Altamente Calificado", "Equipamiento Certificado"].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 py-4 border-b border-zinc-100 text-zinc-900 font-bold text-sm tracking-wide">
+                  <div className="w-2 h-2 bg-[#AE1E24]" />
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
-
-          {/* Imagen siguiente (solo escritorio) */}
-          <div className="hidden lg:flex flex-col items-center opacity-40 scale-90 transition-all duration-700">
-            <div className="relative w-[min(140px,18vh)] h-[min(140px,18vh)] bg-[#AE1E24]/40 p-2 flex items-center justify-center">
-              <div className="absolute top-2 left-2 w-2 h-2 bg-white/60" />
-              <div className="relative w-full h-full rounded-full overflow-hidden">
-                <Image 
-                  src={getImagePath(services[nextIdx].imageFile)}
-                  alt={services[nextIdx].shortLabel}
-                  fill
-                  className="object-cover grayscale"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Description Block */}
-        <div key={activeTab} className="w-full max-w-2xl text-center mt-6 md:mt-8 shrink-0 min-h-[clamp(60px,12vh,90px)] flex items-center justify-center">
-          <p className="text-white text-sm md:text-base lg:text-lg leading-relaxed font-normal drop-shadow-md animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            {services[activeTab].description}
-          </p>
         </div>
       </div>
     </section>
