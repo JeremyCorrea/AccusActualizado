@@ -126,7 +126,16 @@ const nosotrosData = [
           A lo largo de estos 15 años, hemos incorporado equipamiento de última tecnología para ensayos dieléctricos.
         </p>
       </>
-    )
+    ),
+    certifications: {
+      title: "Premios y certificaciones",
+      text: "En búsqueda de la mejora en nuestros procesos con el objeto de brindar un servicio de excelencia y calidad a nuestros clientes, el pasado 2020 ACCUS Ingeniería Ltda. llevó a cabo un exigente, pero enriquecedor proceso de implementación de normas internacionales y tras 7 meses de arduo trabajo finalmente este culminó logrando la Certificación de Calidad ISO 9001:2015 para nuestra empresa otorgada por la prestigiosa certificadora SGS Chile Ltda.",
+      logos: [
+        { src: "/certificados/logo_ias.webp", alt: "ISO 9001:2015" },
+        { src: "/certificados/logo_pelambres.webp", alt: "Los Pelambres Antofagasta Minerals" },
+        { src: "/certificados/logo_vial.webp", alt: "Sello Excelencia Carlos Vial" }
+      ]
+    }
   }
 ];
 
@@ -269,6 +278,36 @@ export default function NosotrosPage() {
                         </div>
                       ))}
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Premios y Certificaciones */}
+        {activeTab.certifications && (
+          <div className="w-full max-w-5xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="text-center relative">
+              <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
+                {activeTab.certifications.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto" />
+            </div>
+            
+            <div className="text-center max-w-4xl mx-auto">
+              <p className="text-zinc-600 text-base md:text-lg font-light leading-relaxed mb-16">
+                {activeTab.certifications.text}
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center justify-items-center">
+                {activeTab.certifications.logos.map((logo, idx) => (
+                  <div key={idx} className="relative h-24 w-full max-w-[240px] group transition-all">
+                    <img 
+                      src={logo.src} 
+                      alt={logo.alt} 
+                      className="object-contain w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" 
+                    />
                   </div>
                 ))}
               </div>
