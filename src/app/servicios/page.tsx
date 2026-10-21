@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 const services = [
   { 
@@ -21,10 +21,36 @@ const services = [
         {
           value: "+1.000 Km",
           label: "Líneas eléctricas construídas",
-          gradient: "from-zinc-900 to-[#AE1E24]"
+          gradient: "from-zinc-950 via-zinc-900 to-[#AE1E24]",
+          textColor: "text-white",
+          hasArrow: false
+        },
+        {
+          value: "+300",
+          label: "Proyectos realizados y entregados",
+          gradient: "from-white to-white",
+          textColor: "text-zinc-900",
+          border: "border-zinc-100",
+          hasArrow: false
+        },
+        {
+          value: "+300.000 Hrs",
+          label: "Horas hombre trabajadas",
+          gradient: "from-[#AE1E24] via-zinc-900 to-zinc-950",
+          textColor: "text-white",
+          hasArrow: false
         }
       ],
-      footerTitle: "Centrados en la excelencia operativa y la innovación"
+      descriptions: [
+        {
+          title: "Centrados en la excelencia operativa y la innovación",
+          text: ""
+        },
+        {
+          title: "",
+          text: "Nos caracterizamos por entregar siempre un valor agregado en nuestros proyectos, con la finalidad de que el cliente quede con plena confianza que su servicio o proyecto es exitoso."
+        }
+      ]
     }
   },
   { 
@@ -134,29 +160,63 @@ export default function ServiciosPage() {
               </p>
             </div>
 
-            {/* Grid de Estadísticas y Frase Final */}
-            <div className="bg-zinc-50 w-full py-16 px-8 border border-zinc-100 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
-              {services[activeTab].extendedInfo.stats.map((stat, idx) => (
-                <div key={idx} className="flex flex-col md:flex-row items-center gap-12 group">
-                  <div className={cn(
-                    "w-64 h-64 bg-gradient-to-br flex flex-col items-center justify-center p-8 shadow-2xl transition-transform group-hover:scale-105",
-                    stat.gradient
-                  )}>
-                    <span className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-2">{stat.value}</span>
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest text-center">{stat.label}</span>
-                  </div>
-                  
-                  <div className="max-w-xs">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-[2px] bg-[#AE1E24]" />
-                      <span className="text-[#AE1E24] text-[10px] font-bold uppercase tracking-widest">Excelencia Operativa</span>
-                    </div>
-                    <h4 className="text-xl md:text-2xl font-bold text-zinc-900 leading-tight">
-                      {services[activeTab].extendedInfo.footerTitle}
-                    </h4>
-                  </div>
-                </div>
-              ))}
+            {/* Grid de Estadísticas Estilo Matriz */}
+            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+              
+              {/* Fila 1: Km Card + Texto 1 */}
+              <div className={cn(
+                "aspect-square bg-gradient-to-br flex flex-col justify-center p-10 shadow-2xl transition-transform hover:scale-[1.02]",
+                services[activeTab].extendedInfo.stats[0].gradient,
+                services[activeTab].extendedInfo.stats[0].textColor
+              )}>
+                <span className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
+                  {services[activeTab].extendedInfo.stats[0].value}
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-widest opacity-80 leading-relaxed max-w-[140px]">
+                  {services[activeTab].extendedInfo.stats[0].label}
+                </span>
+              </div>
+
+              <div className="flex items-start gap-4 p-6 self-center lg:col-span-2">
+                <ChevronRight className="text-[#AE1E24] shrink-0 mt-1" size={24} strokeWidth={3} />
+                <h4 className="text-xl md:text-2xl font-bold text-zinc-900 leading-tight">
+                  {services[activeTab].extendedInfo.descriptions[0].title}
+                </h4>
+              </div>
+
+              {/* Fila 2: Proyectos Card + Horas Card + Texto 2 */}
+              <div className={cn(
+                "aspect-square flex flex-col justify-center p-10 shadow-xl transition-transform hover:scale-[1.02] border",
+                services[activeTab].extendedInfo.stats[1].gradient,
+                services[activeTab].extendedInfo.stats[1].textColor,
+                services[activeTab].extendedInfo.stats[1].border
+              )}>
+                <span className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
+                  {services[activeTab].extendedInfo.stats[1].value}
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-widest opacity-80 leading-relaxed max-w-[140px]">
+                  {services[activeTab].extendedInfo.stats[1].label}
+                </span>
+              </div>
+
+              <div className={cn(
+                "aspect-square bg-gradient-to-br flex flex-col justify-center p-10 shadow-2xl transition-transform hover:scale-[1.02]",
+                services[activeTab].extendedInfo.stats[2].gradient,
+                services[activeTab].extendedInfo.stats[2].textColor
+              )}>
+                <span className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
+                  {services[activeTab].extendedInfo.stats[2].value}
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-widest opacity-80 leading-relaxed max-w-[140px]">
+                  {services[activeTab].extendedInfo.stats[2].label}
+                </span>
+              </div>
+
+              <div className="p-6 self-center">
+                <p className="text-zinc-600 text-sm font-light leading-relaxed">
+                  {services[activeTab].extendedInfo.descriptions[1].text}
+                </p>
+              </div>
             </div>
           </div>
         )}
