@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -68,7 +69,7 @@ export default function ContactoPage() {
   if (!isMounted) return null;
 
   return (
-    <section className="relative min-h-screen w-full bg-white pt-32 pb-24">
+    <section className="relative min-h-screen w-full bg-white pt-44 pb-24">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
         
         {/* Lado Izquierdo: Información Corporativa */}
@@ -144,17 +145,30 @@ export default function ContactoPage() {
                 />
               </div>
 
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Email Corporativo</FormLabel>
-                    <FormControl><Input type="email" {...field} className={inputStyles} /></FormControl>
-                    <FormMessage className="text-red-500 text-[10px]" />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Email Corporativo</FormLabel>
+                      <FormControl><Input type="email" {...field} className={inputStyles} /></FormControl>
+                      <FormMessage className="text-red-500 text-[10px]" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Teléfono</FormLabel>
+                      <FormControl><Input {...field} className={inputStyles} /></FormControl>
+                      <FormMessage className="text-red-500 text-[10px]" />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
@@ -184,7 +198,11 @@ export default function ContactoPage() {
                   )}
                 />
                 <div className="overflow-hidden">
-                  <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" onChange={(val) => form.setValue("recaptcha", val || "")} />
+                  <ReCAPTCHA 
+                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
+                    theme="dark"
+                    onChange={(val) => form.setValue("recaptcha", val || "")} 
+                  />
                 </div>
               </div>
 
