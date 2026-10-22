@@ -28,47 +28,51 @@ const navItems = [
 
 export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   const router = useRouter();
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname || '';
   
   const logoSrc = "/logo.png";
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-
-  // Páginas que tienen fondo blanco y requieren header oscuro por defecto
-  const isLightBgPage = ['/servicios', '/contacto', '/proyectos', '/nosotros'].includes(pathname);
-  const useDarkTheme = isScrolled || isLightBgPage;
-
-  const handleNavClick = (route: string) => {
-    router.push(route);
-  };
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        setIsScrolled(currentScrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
 
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-        setLastScrollY(currentScrollY);
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
       }
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', controlNavbar);
     return () => window.removeEventListener('scroll', controlNavbar);
   }, [lastScrollY]);
 
+  // Páginas que tienen fondo blanco y requieren header oscuro por defecto
+  const isLightBgPage = ['/servicios', '/contacto', '/proyectos', '/nosotros'].includes(pathname);
+  
+  // Estrategia de hidratación segura para evitar discrepancias entre servidor y cliente
+  const useDarkTheme = isMounted ? (isScrolled || isLightBgPage) : isLightBgPage;
+
+  const handleNavClick = (route: string) => {
+    router.push(route);
+  };
+
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out h-auto",
       !isVisible && "-translate-y-full",
-      isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-2" : (isLightBgPage ? "bg-white/80 py-3" : "bg-transparent py-4")
+      useDarkTheme ? "bg-white/95 backdrop-blur-md shadow-md py-2" : (isLightBgPage ? "bg-white/80 py-3" : "bg-transparent py-4")
     )}>
-      {/* Barra superior técnica: Mail y Ubicación agrupados */}
+      {/* Barra superior técnica: Mail y Ubicación */}
       <div className={cn(
         "hidden md:flex items-center justify-between px-6 lg:px-[75px] py-1 border-b text-[10px] font-bold tracking-[0.1em] uppercase transition-colors",
         useDarkTheme ? "border-zinc-100 text-zinc-500" : "border-white/20 text-white"
@@ -83,8 +87,6 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
             Coquimbo, Chile
           </div>
         </div>
-        {/* Lado derecho vacío para mantener equilibrio visual */}
-        <div></div>
       </div>
 
       <div className="flex flex-col px-6 lg:px-[75px] mt-2 mb-2">
@@ -114,28 +116,31 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
             ))}
           </nav>
 
+          {/* Menú móvil envuelto en isMounted para evitar errores de hidratación con Radix */}
           <div className="lg:hidden">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className={cn("rounded-none", useDarkTheme ? "text-zinc-900" : "text-white")}>
-                  <Menu size={24} />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-white border-none shadow-2xl p-0 rounded-none overflow-hidden">
-                {navItems.map((item) => (
-                  <DropdownMenuItem
-                    key={item.route}
-                    onClick={() => handleNavClick(item.route)}
-                    className={cn(
-                      "py-5 px-8 font-black text-[11px] tracking-widest uppercase rounded-none focus:bg-zinc-50 focus:text-[#AE1E24]",
-                      pathname === item.route ? "text-[#AE1E24] bg-zinc-50" : "text-zinc-900"
-                    )}
-                  >
-                    {item.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {isMounted && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className={cn("rounded-none", useDarkTheme ? "text-zinc-900" : "text-white")}>
+                    <Menu size={24} />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-white border-none shadow-2xl p-0 rounded-none overflow-hidden">
+                  {navItems.map((item) => (
+                    <DropdownMenuItem
+                      key={item.route}
+                      onClick={() => handleNavClick(item.route)}
+                      className={cn(
+                        "py-5 px-8 font-black text-[11px] tracking-widest uppercase rounded-none focus:bg-zinc-50 focus:text-[#AE1E24]",
+                        pathname === item.route ? "text-[#AE1E24] bg-zinc-50" : "text-zinc-900"
+                      )}
+                    >
+                      {item.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
       </div>
