@@ -1,11 +1,18 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const proyectosData = [
   {
@@ -37,22 +44,37 @@ const proyectosData = [
   }
 ];
 
+const featuredProjects = [
+  {
+    title: "SERVICIOS ELECTRICOS MINA",
+    client: "MINERA LOS PELAMBRES",
+    date: "OCTUBRE 2022 – OCTUBRE 2024",
+    images: ["/pictures/1.webp", "/pictures/2.webp", "/pictures/3.webp", "/pictures/4.webp"]
+  },
+  {
+    title: "LÍNEA MT 13,8 KV DERIVACIÓN 4440-US-003, PROYECTO MANTO VERDE",
+    client: "AUSENCO",
+    date: "MARZO 2024 – OCTUBRE 2024",
+    images: ["/pictures/4.webp", "/pictures/1.webp", "/pictures/2.webp", "/pictures/3.webp"]
+  }
+];
+
 export default function ProyectosPage() {
   const [selectedProject, setSelectedProject] = useState(proyectosData[0]);
 
   return (
-    <section className="relative h-screen w-full bg-white font-body pt-24 md:pt-32 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col">
+    <section className="relative min-h-screen w-full bg-white font-body pt-24 md:pt-44 pb-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        <div className="text-center mb-8">
+        {/* Sección 1: Mapa Interactivo */}
+        <div className="text-center mb-12">
           <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-2 block">Portafolio</span>
           <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 tracking-tight">Proyectos en Chile</h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-10">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-32 min-h-[60vh]">
           {/* Mapa Interactiva (Izquierda) */}
-          <div className="lg:col-span-4 flex justify-center items-center h-full max-h-[60vh] relative">
+          <div className="lg:col-span-4 flex justify-center items-center relative h-[500px]">
             <div className="relative w-32 md:w-40 h-full">
               <Image
                 src="/mapachile2.webp"
@@ -125,8 +147,69 @@ export default function ProyectosPage() {
               </div>
             </div>
           </div>
-
         </div>
+
+        {/* Sección 2: Proyectos Destacados (Estructura Solicitada) */}
+        <div className="mt-32 space-y-24">
+          <div className="text-left mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">Proyectos destacados</h2>
+          </div>
+
+          {featuredProjects.map((project, index) => (
+            <div key={index} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Información del Proyecto (Izquierda) */}
+              <div className="lg:col-span-4 space-y-8 pr-6">
+                <div className="flex items-start gap-4 group">
+                  <div className="mt-1 shrink-0">
+                    <ChevronRight className="text-[#AE1E24] w-8 h-8" strokeWidth={4} />
+                  </div>
+                  <div className="space-y-6">
+                    <h3 className="text-lg md:text-xl font-bold text-zinc-900 leading-tight uppercase tracking-tight">
+                      {project.title}
+                    </h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">CLIENTE:</p>
+                        <p className="text-sm font-bold text-zinc-900 uppercase">{project.client}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">FECHA DE EJECUCIÓN:</p>
+                        <p className="text-sm font-bold text-zinc-900 uppercase">{project.date}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Carrusel de Imágenes (Derecha) */}
+              <div className="lg:col-span-8 relative">
+                <Carousel className="w-full">
+                  <CarouselContent className="-ml-4">
+                    {project.images.map((img, i) => (
+                      <CarouselItem key={i} className="pl-4 md:basis-1/2 lg:basis-1/2">
+                        <div className="relative aspect-[4/3] overflow-hidden group">
+                          <Image
+                            src={img}
+                            alt={`${project.title} - ${i + 1}`}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-start gap-4 mt-6">
+                    <CarouselPrevious className="static translate-y-0 rounded-full border-zinc-200 hover:border-[#AE1E24] hover:text-[#AE1E24]" />
+                    <CarouselNext className="static translate-y-0 rounded-full border-zinc-200 hover:border-[#AE1E24] hover:text-[#AE1E24]" />
+                  </div>
+                </Carousel>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
