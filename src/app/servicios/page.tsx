@@ -58,7 +58,46 @@ const services = [
     label: "Construcción", 
     shortLabel: "Construcción",
     description: "Ejecución técnica de infraestructura crítica con personal certificado y equipamiento de última generación para la industria minera.",
-    imageFile: "pararrayos.webp"
+    imageFile: "pararrayos.webp",
+    extendedInfo: {
+      mainTitle: "Construcción y montaje industrial",
+      subtitle: "Ejecución de precisión técnica",
+      description: "Nuestra unidad de construcción está especializada en el montaje de infraestructuras críticas para la minería y la industria energética, garantizando plazos y seguridad absoluta en cada maniobra.",
+      stats: [
+        {
+          value: "+80",
+          label: "Subestaciones y salas eléctricas montadas",
+          gradient: "from-zinc-950 via-zinc-900 to-[#AE1E24]",
+          textColor: "text-white",
+          hasArrow: false
+        },
+        {
+          value: "100%",
+          label: "Cumplimiento en estándares de seguridad",
+          gradient: "from-white to-white",
+          textColor: "text-zinc-900",
+          border: "border-zinc-100",
+          hasArrow: false
+        },
+        {
+          value: "+150 Km",
+          label: "Tendido de líneas y canalizaciones",
+          gradient: "from-[#AE1E24] via-zinc-900 to-zinc-950",
+          textColor: "text-white",
+          hasArrow: false
+        }
+      ],
+      descriptions: [
+        {
+          title: "Compromiso con la continuidad operativa",
+          text: ""
+        },
+        {
+          title: "",
+          text: "Desarrollamos montajes eléctricos de alta complejidad, desde la cimentación hasta la puesta en marcha, asegurando la integración perfecta con los sistemas existentes del cliente."
+        }
+      ]
+    }
   },
   { 
     id: 2, 
@@ -163,7 +202,7 @@ export default function ServiciosPage() {
             {/* Grid de Estadísticas Estilo Matriz */}
             <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
               
-              {/* Fila 1: Km Card + Texto 1 */}
+              {/* Fila 1: Stats Card 1 + Texto 1 */}
               <div className={cn(
                 "aspect-square bg-gradient-to-br flex flex-col justify-center p-10 shadow-2xl transition-transform hover:scale-[1.02]",
                 services[activeTab].extendedInfo.stats[0].gradient,
@@ -184,7 +223,7 @@ export default function ServiciosPage() {
                 </h4>
               </div>
 
-              {/* Fila 2: Proyectos Card + Horas Card + Texto 2 */}
+              {/* Fila 2: Stats Card 2 + Stats Card 3 + Texto 2 */}
               <div className={cn(
                 "aspect-square flex flex-col justify-center p-10 shadow-xl transition-transform hover:scale-[1.02] border",
                 services[activeTab].extendedInfo.stats[1].gradient,
