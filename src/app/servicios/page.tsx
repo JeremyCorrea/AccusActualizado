@@ -193,13 +193,22 @@ const services = [
 const VideoCarousel = ({ videos }: { videos: string[] }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: false, 
+    loop: true, 
     align: 'start',
     containScroll: 'trimSnaps'
   });
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollPrev = useCallback(() => {
+    const nextIndex = (activeVideoIndex - 1 + videos.length) % videos.length;
+    setActiveVideoIndex(nextIndex);
+    if (emblaApi) emblaApi.scrollTo(nextIndex);
+  }, [emblaApi, activeVideoIndex, videos.length]);
+
+  const scrollNext = useCallback(() => {
+    const nextIndex = (activeVideoIndex + 1) % videos.length;
+    setActiveVideoIndex(nextIndex);
+    if (emblaApi) emblaApi.scrollTo(nextIndex);
+  }, [emblaApi, activeVideoIndex, videos.length]);
 
   const handleVideoSelect = (index: number) => {
     setActiveVideoIndex(index);
@@ -257,7 +266,7 @@ const VideoCarousel = ({ videos }: { videos: string[] }) => {
           </div>
         </div>
 
-        {/* Controles del Navegador */}
+        {/* Controles del Navegador - Corregidos para navegar activamente */}
         <button
           onClick={scrollPrev}
           className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 text-zinc-400 hover:text-white hover:bg-[#AE1E24] transition-all hidden lg:flex"
