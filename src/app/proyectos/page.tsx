@@ -13,6 +13,25 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+const logos = [
+  { src: '/clientes/logo_1.webp', alt: 'Fundación Minera Los Pelamidos' },
+  { src: '/clientes/logo_2.webp', alt: 'Antimásiva Mineral' },
+  { src: '/clientes/logo_3.webp', alt: 'AngloAmerican' },
+  { src: '/clientes/logo_4.webp', alt: 'Cbb' },
+  { src: '/clientes/logo_5.webp', alt: 'Arauco Celulosa' },
+  { src: '/clientes/logo_6.webp', alt: 'San José' },
+  { src: '/clientes/logo_7.webp', alt: 'Cap Huachipato' },
+  { src: '/clientes/logo_8.webp', alt: 'Universidad de Chile' },
+  { src: '/clientes/logo_9.webp', alt: 'Agrosonda' },
+  { src: '/clientes/logo_10.webp', alt: 'Abengoa' },
+  { src: '/clientes/logo_11.webp', alt: 'Elecnor' },
+  { src: '/clientes/logo_12.webp', alt: 'El Golfo' },
+  { src: '/clientes/logo_13.webp', alt: 'Salmones Camanchaca' },
+  { src: '/clientes/logo_14.webp', alt: 'Northstar Energy' },
+  { src: '/clientes/logo_15.webp', alt: 'Parque Eolico Punta Palmeras' },
+  { src: '/clientes/logo_16.webp', alt: 'Parque Eolico San Pedro' },
+];
+
 const proyectosData = [
   {
     id: 'norte',
@@ -136,9 +155,8 @@ export default function ProyectosPage() {
                 {selectedProject.description}
               </p>
               
-              {/* Bloque Informativo de Mapa Interactivo con Diseño Premium */}
+              {/* Bloque Informativo de Mapa Interactivo */}
               <div className="w-full bg-zinc-900 text-white p-8 relative overflow-hidden group transition-all hover:bg-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 border-l-4 border-[#AE1E24] shadow-2xl">
-                {/* Elemento decorativo de fondo */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#AE1E24]/10 rounded-full -translate-y-16 translate-x-16 blur-3xl group-hover:bg-[#AE1E24]/20 transition-all" />
                 
                 <div className="flex items-start gap-5 relative z-10">
@@ -225,6 +243,42 @@ export default function ProyectosPage() {
           </div>
         </div>
       </div>
+
+      {/* Sección 3: Nuestros Clientes (Carrusel Infinito) */}
+      <section className="bg-white py-32 border-t border-zinc-100 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-20">
+            <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Alianzas</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">Nuestros Clientes</h2>
+            <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-6" />
+          </div>
+
+          <div className="relative">
+            <div className="flex w-max animate-infinite-scroll grayscale hover:grayscale-0 transition-all duration-700">
+              {logos.map((logo, idx) => (
+                <div key={`original-${idx}`} className="flex-shrink-0 mx-10 flex items-center justify-center" style={{ minWidth: '140px' }}>
+                  <img src={logo.src} alt={logo.alt} className="max-h-12 md:max-h-14 w-auto object-contain" />
+                </div>
+              ))}
+              {logos.map((logo, idx) => (
+                <div key={`clone-${idx}`} className="flex-shrink-0 mx-10 flex items-center justify-center" style={{ minWidth: '140px' }}>
+                  <img src={logo.src} alt={logo.alt} className="max-h-12 md:max-h-14 w-auto object-contain" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes infiniteScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-infinite-scroll {
+          animation: infiniteScroll 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
