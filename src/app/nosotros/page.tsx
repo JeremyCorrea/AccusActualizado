@@ -29,16 +29,18 @@ const nosotrosData = [
       </>
     ),
     extendedInfo: {
-      title: "Historia",
+      title: "Nuestra Historia",
       paragraphs: [
-        "Nuestros inicios se remontan a hace más de 15 años, cuando nuestro fundador, Luis Acuña Lopez, comenzó a realizar trabajos eléctricos de forma particular, atendiendo a los clientes de la región de Coquimbo.",
-        "Con responsabilidad y compromiso se logró ganar la confianza de los clientes. El esfuerzo y la dedicación permitieron alcanzar el logro de consolidar ACCUS INGENIERIA LTDA., brindando servicios a la pequeña y gran industria minera.",
-        "A lo largo de los años, la empresa demostró sus capacidades y compromiso con la industria. La creación de ACCUS fue fruto de la unión de esfuerzos y visión técnica. Comenzamos esta aventura empresarial con un equipo altamente calificado, equipamiento de última tecnología y una flota preparada para los desafíos del terreno minero.",
-        "Sin duda, la trayectoria marcó un punto de infracción importante para la empresa. Nos adjudicamos trabajos críticos en importantes faenas mineras, lo que nos abrió las puertas al mundo de la gran minería y energía en Chile.",
-        "Con la incorporación de jóvenes profesionales, llenos de entusiasmo y con un fuerte deseo de aprender, ACCUS logra posicionarse en la minería, logrando formar un equipo humano de alta calidad, quienes hoy en día son los pilares de nuestra organización, demostrando a diario su compromiso con la seguridad, tanto propia como la de sus compañeros.",
-        "Es un orgullo ver cómo estos talentos contribuyen al crecimiento de ACCUS y al desarrollo de la minería en nuestro país. Contamos con una visión moderna al negocio, combinando la vasta experiencia de los fundadores con las últimas tendencias y avances de la industria.",
-        "Actualmente contamos con la infraestructura, los recursos humanos y financieros necesarios para afrontar nuevos desafíos en la industria minera, tanto a nivel nacional como internacional.",
-        "Nuestra política corporativa, centrada en la calidad, la prevención de riesgos y el respeto al medio ambiente, nos permite garantizar un servicio profesional, confiable y de excelencia."
+        "ACCUS INGENIERIA LTDA. nació hace más de 15 años por iniciativa de su fundador, Luis Acuña López, quien inició prestando servicios eléctricos especializados en la región de Coquimbo. Gracias a un compromiso inquebrantable con la calidad y la seguridad, lo que comenzó como un esfuerzo personal se transformó en una organización sólida y confiable.",
+        "A lo largo de su trayectoria, la empresa ha evolucionado integrando tecnología de vanguardia y formando un equipo de profesionales altamente calificados. Hoy, ACCUS se posiciona como un socio estratégico en la gran minería y el sector energético chileno, destacando por su capacidad técnica, eficiencia operativa y una visión moderna que combina experiencia con innovación constante."
+      ],
+      trajectory: [
+        { year: "2008", title: "Fundación", desc: "Inicios de servicios eléctricos en la IV Región.", img: "/pictures/1.webp" },
+        { year: "2012", title: "Crecimiento", desc: "Consolidación en proyectos de mediana minería.", img: "/pictures/2.webp" },
+        { year: "2015", title: "Gran Minería", desc: "Adjudicación de contratos críticos en faenas líderes.", img: "/pictures/4.webp" },
+        { year: "2018", title: "Tecnología", desc: "Incorporación de equipos de ensayo de última generación.", img: "/pictures/3.webp" },
+        { year: "2020", title: "Certificación ISO", desc: "Obtención de certificación ISO 9001:2015.", img: "/pictures/1.webp" },
+        { year: "2024", title: "Innovación", desc: "Liderazgo en fibra óptica y proyectos llave en mano.", img: "/pictures/2.webp" }
       ]
     }
   },
@@ -269,7 +271,7 @@ export default function NosotrosPage() {
 
         {/* Información Extendida (Historia, etc.) */}
         {activeTab.extendedInfo && (
-          <div className="w-full max-w-4xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="w-full max-w-6xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="text-center relative">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
                 {activeTab.extendedInfo.title}
@@ -277,13 +279,46 @@ export default function NosotrosPage() {
               <div className="w-20 h-1 bg-[#AE1E24] mx-auto" />
             </div>
             
-            <div className="space-y-8 text-zinc-600 text-base md:text-lg font-light leading-relaxed text-left md:text-justify">
+            <div className="max-w-4xl mx-auto space-y-8 text-zinc-600 text-base md:text-lg font-light leading-relaxed text-left md:text-justify mb-20">
               {activeTab.extendedInfo.paragraphs.map((p, index) => (
                 <p key={index} className="opacity-90 hover:opacity-100 transition-opacity">
                   {p}
                 </p>
               ))}
             </div>
+
+            {/* Mosaico Masonry de Trayectoria - Solo para Quienes Somos */}
+            {activeTab.extendedInfo.trajectory && (
+              <div className="w-full">
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                  {activeTab.extendedInfo.trajectory.map((item, idx) => (
+                    <div 
+                      key={idx} 
+                      className="break-inside-avoid relative group overflow-hidden bg-zinc-100 border border-zinc-200"
+                    >
+                      <div className="relative aspect-[4/5] w-full">
+                        <Image 
+                          src={item.img} 
+                          alt={item.title} 
+                          fill 
+                          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                        />
+                        {/* Overlay Semi-transparente */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                          <span className="text-white text-4xl font-black mb-2 tracking-tighter">{item.year}</span>
+                          <h4 className="text-[#AE1E24] text-xs font-bold uppercase tracking-widest mb-3">{item.title}</h4>
+                          <p className="text-white/90 text-xs leading-relaxed font-light">{item.desc}</p>
+                        </div>
+                        {/* Indicador de Año Permanente (Sutil) */}
+                        <div className="absolute top-4 left-4 bg-[#AE1E24] text-white px-3 py-1 text-[10px] font-bold tracking-widest group-hover:opacity-0 transition-opacity">
+                          {item.year}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
