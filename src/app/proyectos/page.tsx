@@ -98,7 +98,7 @@ export default function ProyectosPage() {
                 src="/mapachile2.webp"
                 alt="Mapa de Chile"
                 fill
-                className="object-contain grayscale opacity-30"
+                className="object-contain"
                 priority
               />
               <svg
@@ -110,18 +110,18 @@ export default function ProyectosPage() {
                   const isSelected = selectedProject.id === proj.id;
                   return (
                     <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
-                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-[#AE1E24]/5 transition-colors" />
+                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-white/20 transition-colors" />
                       <circle
                         cx={proj.cx}
                         cy={proj.cy}
                         r="6"
                         className={cn(
                           "transition-all duration-500",
-                          isSelected ? "fill-[#AE1E24]" : "fill-zinc-300"
+                          isSelected ? "fill-white stroke-[#AE1E24] stroke-2" : "fill-zinc-300 stroke-white stroke-1"
                         )}
                       />
                       {isSelected && (
-                        <circle cx={proj.cx} cy={proj.cy} r="14" stroke="#AE1E24" strokeWidth="2" className="animate-pulse fill-none" />
+                        <circle cx={proj.cx} cy={proj.cy} r="14" stroke="white" strokeWidth="2" className="animate-pulse fill-none" />
                       )}
                     </g>
                   );
