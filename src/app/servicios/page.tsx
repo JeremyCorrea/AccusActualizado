@@ -1,10 +1,10 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 
 const services = [
@@ -191,67 +191,96 @@ const services = [
 ];
 
 const VideoCarousel = ({ videos }: { videos: string[] }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    emblaApi.on('select', onSelect);
-    onSelect();
-  }, [emblaApi, onSelect]);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: false, 
+    align: 'start',
+    containScroll: 'trimSnaps'
+  });
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
+  const handleVideoSelect = (index: number) => {
+    setActiveVideoIndex(index);
+    if (emblaApi) emblaApi.scrollTo(index);
+  };
+
   return (
-    <div className="relative w-full max-w-6xl mx-auto py-20 group">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {videos.map((video, idx) => (
-            <div key={idx} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4">
-              <div className="relative aspect-video bg-black overflow-hidden shadow-2xl">
-                <video
-                  src={video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover opacity-80"
-                />
-              </div>
-            </div>
-          ))}
+    <div className="w-full max-w-5xl mx-auto py-12 space-y-8">
+      {/* Visualizador Principal de Gran Escala */}
+      <div className="relative aspect-video w-full bg-zinc-900 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] border border-zinc-800 overflow-hidden group">
+        <video
+          key={videos[activeVideoIndex]}
+          src={videos[activeVideoIndex]}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover transition-opacity duration-700"
+        />
+        {/* Overlay informativo sutil */}
+        <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity">
+          <div>
+            <span className="text-[#AE1E24] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">Visualización Técnica</span>
+            <p className="text-white text-sm font-light tracking-wide">Registro de operaciones en terreno - Clip {activeVideoIndex + 1}</p>
+          </div>
+          <div className="flex items-center gap-2 text-white/50 text-[10px] font-bold uppercase tracking-widest">
+            <Play size={12} className="fill-white/50" /> Reproduciendo
+          </div>
         </div>
       </div>
 
-      {/* Controles Transparentes */}
-      <button
-        onClick={scrollPrev}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#AE1E24] hover:border-[#AE1E24] transition-all opacity-0 group-hover:opacity-100"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        onClick={scrollNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#AE1E24] hover:border-[#AE1E24] transition-all opacity-0 group-hover:opacity-100"
-      >
-        <ChevronRight size={24} />
-      </button>
+      {/* Navegador de Miniaturas (Carrusel) */}
+      <div className="relative group/nav">
+        <div className="overflow-hidden px-1" ref={emblaRef}>
+          <div className="flex gap-4">
+            {videos.map((video, idx) => (
+              <div 
+                key={idx} 
+                className={cn(
+                  "flex-[0_0_45%] md:flex-[0_0_22%] cursor-pointer transition-all duration-300 relative aspect-video border-2",
+                  activeVideoIndex === idx ? "border-[#AE1E24] scale-100" : "border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100"
+                )}
+                onClick={() => handleVideoSelect(idx)}
+              >
+                <video
+                  src={video}
+                  muted
+                  className="w-full h-full object-cover"
+                />
+                {activeVideoIndex === idx && (
+                  <div className="absolute inset-0 bg-[#AE1E24]/10 pointer-events-none" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
-      {/* Puntos de Navegación */}
-      <div className="flex justify-center gap-2 mt-8">
+        {/* Controles del Navegador */}
+        <button
+          onClick={scrollPrev}
+          className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 text-zinc-400 hover:text-white hover:bg-[#AE1E24] transition-all hidden lg:flex"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={scrollNext}
+          className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 text-zinc-400 hover:text-white hover:bg-[#AE1E24] transition-all hidden lg:flex"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Puntos de Ubicación */}
+      <div className="flex justify-center gap-3">
         {videos.map((_, idx) => (
           <button
             key={idx}
-            onClick={() => emblaApi?.scrollTo(idx)}
+            onClick={() => handleVideoSelect(idx)}
             className={cn(
-              "w-2 h-2 rounded-full transition-all",
-              selectedIndex === idx ? "bg-[#AE1E24] w-8" : "bg-zinc-300"
+              "w-1.5 h-1.5 rounded-none transition-all",
+              activeVideoIndex === idx ? "bg-[#AE1E24] w-6" : "bg-zinc-300"
             )}
           />
         ))}
