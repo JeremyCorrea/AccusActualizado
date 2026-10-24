@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronRight, ArrowLeft } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -198,7 +198,7 @@ export default function ProyectosPage() {
                               src={img}
                               alt={`${project.title} - ${i + 1}`}
                               fill
-                              className="object-cover transition-transform duration-700 group-hover:scale-105"
+                              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
                             />
                           </div>
                         </CarouselItem>
