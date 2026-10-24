@@ -92,8 +92,8 @@ export default function ProyectosPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-32 min-h-[60vh]">
           {/* Mapa Interactiva (Izquierda) */}
-          <div className="lg:col-span-4 flex justify-center items-center relative h-[500px]">
-            <div className="relative w-32 md:w-40 h-full">
+          <div className="lg:col-span-4 flex justify-center items-center relative h-[600px]">
+            <div className="relative w-36 md:w-48 h-full">
               <Image
                 src="/mapachile2.webp"
                 alt="Mapa de Chile"
@@ -111,27 +111,28 @@ export default function ProyectosPage() {
                   return (
                     <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
                       {/* Área de clic invisible para facilitar la interacción */}
-                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-white/10 transition-colors" />
+                      <circle cx={proj.cx} cy={proj.cy} r="35" className="fill-transparent" />
                       
                       {/* Efecto de palpitación (Aura expansiva) */}
                       <circle 
                         cx={proj.cx} 
                         cy={proj.cy} 
-                        r="12" 
+                        r="18" 
                         className={cn(
-                          "fill-white/40 animate-ping",
-                          isSelected ? "opacity-100" : "opacity-40"
+                          "fill-white/80 animate-ping origin-center",
+                          isSelected ? "opacity-100" : "opacity-60"
                         )} 
+                        style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
                       />
 
-                      {/* Punto central del proyecto */}
+                      {/* Punto central del proyecto - Alta visibilidad */}
                       <circle
                         cx={proj.cx}
                         cy={proj.cy}
-                        r="6"
+                        r={isSelected ? "9" : "7"}
                         className={cn(
-                          "transition-all duration-500",
-                          isSelected ? "fill-white stroke-[#AE1E24] stroke-2 shadow-lg" : "fill-white stroke-zinc-400 stroke-1"
+                          "transition-all duration-300 fill-white stroke-2 shadow-[0_0_15px_rgba(255,255,255,0.5)]",
+                          isSelected ? "stroke-[#AE1E24]" : "stroke-zinc-900"
                         )}
                       />
 
@@ -140,7 +141,7 @@ export default function ProyectosPage() {
                         <circle 
                           cx={proj.cx} 
                           cy={proj.cy} 
-                          r="14" 
+                          r="15" 
                           stroke="white" 
                           strokeWidth="2" 
                           className="animate-pulse fill-none" 
