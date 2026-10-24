@@ -4,8 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronRight, MousePointer2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ChevronRight, MousePointer2 } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -121,7 +120,7 @@ export default function ProyectosPage() {
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105 animate-in fade-in"
+                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110 animate-in fade-in"
                 data-ai-hint={selectedProject.hint}
               />
               <div className="absolute top-8 right-8 z-20 bg-[#AE1E24] text-white px-5 py-2 text-[9px] font-bold tracking-widest uppercase">
@@ -137,15 +136,24 @@ export default function ProyectosPage() {
                 {selectedProject.description}
               </p>
               
-              {/* Mensaje de Interactividad Reemplazando Botones */}
-              <div className="mt-4 p-6 bg-zinc-50 border-l-4 border-[#AE1E24] animate-in fade-in slide-in-from-left-4 duration-1000">
-                <div className="flex items-center gap-2 mb-2">
-                  <MousePointer2 className="w-4 h-4 text-[#AE1E24]" />
-                  <p className="text-[10px] font-bold text-[#AE1E24] uppercase tracking-[0.2em]">Mapa Interactivo</p>
+              {/* Bloque Informativo de Mapa Interactivo con Diseño Premium */}
+              <div className="w-full bg-zinc-900 text-white p-8 relative overflow-hidden group transition-all hover:bg-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 border-l-4 border-[#AE1E24] shadow-2xl">
+                {/* Elemento decorativo de fondo */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#AE1E24]/10 rounded-full -translate-y-16 translate-x-16 blur-3xl group-hover:bg-[#AE1E24]/20 transition-all" />
+                
+                <div className="flex items-start gap-5 relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-[#AE1E24] flex items-center justify-center shrink-0 shadow-lg">
+                    <MousePointer2 className="w-6 h-6 text-white animate-bounce" />
+                  </div>
+                  <div>
+                    <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#AE1E24] mb-3">
+                      Experiencia Interactiva
+                    </h3>
+                    <p className="text-sm font-light leading-relaxed text-zinc-300">
+                      Nuestra presencia abarca todo el territorio nacional. <strong className="text-white font-bold">Interactúe con el mapa de Chile</strong> a su izquierda: haga clic en los puntos geográficos para explorar detalles de cada proyecto estratégico ejecutado por nuestro equipo a lo largo del país.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-zinc-600 leading-relaxed italic">
-                  Explore nuestra presencia nacional: El mapa de Chile a su izquierda es interactivo. Seleccione los diferentes puntos para visualizar los proyectos estratégicos ejecutados por ACCUS a lo largo de todo el territorio.
-                </p>
               </div>
             </div>
           </div>
