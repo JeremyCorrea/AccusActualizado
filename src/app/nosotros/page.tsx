@@ -215,72 +215,76 @@ export default function NosotrosPage() {
   }, [isModalOpen]);
 
   return (
-    <section className="relative min-h-screen w-full bg-white font-body pt-32 md:pt-44 pb-20">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center">
-        
-        <div className="text-center mb-16">
-          <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Identidad Corporativa</span>
-          <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight">Nosotros</h1>
-        </div>
+    <div className="relative min-h-screen w-full bg-white font-body">
+      {/* Hero / Header Section */}
+      <section className="pt-32 md:pt-44 pb-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center">
+          <div className="text-center mb-16">
+            <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Identidad Corporativa</span>
+            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight">Nosotros</h1>
+          </div>
 
-        {/* Navegación Estilo Pestañas */}
-        <nav className="flex items-center justify-center gap-2 mb-16 flex-wrap border-b border-zinc-100 w-full pb-4">
-          {nosotrosData.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item)}
-              className={cn(
-                "px-8 py-3 text-[11px] font-black tracking-widest uppercase transition-all relative",
-                activeTab.id === item.id 
-                  ? "text-[#AE1E24]" 
-                  : "text-zinc-400 hover:text-zinc-600"
-              )}
-            >
-              {item.label}
-              {activeTab.id === item.id && (
-                <div className="absolute bottom-[-17px] left-0 w-full h-1 bg-[#AE1E24]" />
-              )}
-            </button>
-          ))}
-        </nav>
+          {/* Navegación Estilo Pestañas */}
+          <nav className="flex items-center justify-center gap-2 mb-16 flex-wrap border-b border-zinc-100 w-full pb-4">
+            {nosotrosData.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item)}
+                className={cn(
+                  "px-8 py-3 text-[11px] font-black tracking-widest uppercase transition-all relative",
+                  activeTab.id === item.id 
+                    ? "text-[#AE1E24]" 
+                    : "text-zinc-400 hover:text-zinc-600"
+                )}
+              >
+                {item.label}
+                {activeTab.id === item.id && (
+                  <div className="absolute bottom-[-17px] left-0 w-full h-1 bg-[#AE1E24]" />
+                )}
+              </button>
+            ))}
+          </nav>
 
-        {/* Contenido Central */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full mb-20">
-          <div className="relative aspect-square w-full bg-zinc-50 overflow-hidden group border border-zinc-100">
-            <div className="absolute inset-0 border-[20px] border-white z-10" />
-            <Image 
-              src={activeTab.image}
-              alt={activeTab.label}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              data-ai-hint={activeTab.hint}
-            />
-            <div className="absolute top-10 right-10 z-20 bg-[#AE1E24] text-white px-6 py-2 text-[10px] font-bold tracking-widest uppercase">
-              {activeTab.subtitle}
+          {/* Contenido Central */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full mb-20">
+            <div className="relative aspect-square w-full bg-zinc-50 overflow-hidden group border border-zinc-100">
+              <div className="absolute inset-0 border-[20px] border-white z-10" />
+              <Image 
+                src={activeTab.image}
+                alt={activeTab.label}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                data-ai-hint={activeTab.hint}
+              />
+              <div className="absolute top-10 right-10 z-20 bg-[#AE1E24] text-white px-6 py-2 text-[10px] font-bold tracking-widest uppercase">
+                {activeTab.subtitle}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start animate-in fade-in slide-in-from-right-8 duration-700">
+              <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 mb-8 leading-tight">
+                {activeTab.title}
+              </h2>
+              <p className="text-xl text-zinc-500 font-light leading-relaxed mb-10">
+                {activeTab.description}
+              </p>
+              
+              <Button
+                size="lg"
+                onClick={() => setIsModalOpen(true)}
+                className="bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none px-10 py-7 text-xs font-bold tracking-widest uppercase flex items-center gap-3"
+              >
+                CONOCER MÁS <ArrowRight className="w-5 h-5" />
+              </Button>
             </div>
           </div>
-
-          <div className="flex flex-col items-start animate-in fade-in slide-in-from-right-8 duration-700">
-            <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 mb-8 leading-tight">
-              {activeTab.title}
-            </h2>
-            <p className="text-xl text-zinc-500 font-light leading-relaxed mb-10">
-              {activeTab.description}
-            </p>
-            
-            <Button
-              size="lg"
-              onClick={() => setIsModalOpen(true)}
-              className="bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none px-10 py-7 text-xs font-bold tracking-widest uppercase flex items-center gap-3"
-            >
-              CONOCER MÁS <ArrowRight className="w-5 h-5" />
-            </Button>
-          </div>
         </div>
+      </section>
 
-        {/* Misión y Visión */}
-        {activeTab.missionVision && (
-          <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      {/* Misión y Visión (Fondo Gris Sutil) */}
+      {activeTab.missionVision && (
+        <section className="w-full bg-zinc-50 py-24 border-y border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="text-center mb-16 relative">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
                 {activeTab.missionVision.title}
@@ -291,9 +295,9 @@ export default function NosotrosPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {activeTab.missionVision.cards.map((card, i) => (
-                <div key={i} className="bg-zinc-50 border border-zinc-200 group hover:bg-white hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                <div key={i} className="bg-white border border-zinc-200 group hover:shadow-2xl transition-all duration-500 overflow-hidden">
                   <div className="relative h-80 w-full overflow-hidden">
                     <img src={card.image} alt={card.title} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-[#AE1E24]/10 group-hover:bg-transparent transition-colors" />
@@ -309,12 +313,14 @@ export default function NosotrosPage() {
               ))}
             </div>
           </div>
-        )}
+        </section>
+      )}
 
-        {/* Información Extendida (Historia, etc.) */}
-        {activeTab.extendedInfo && (
-          <div className="w-full max-w-6xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <div className="text-center relative">
+      {/* Información Extendida / Historia (Fondo Gris Sutil) */}
+      {activeTab.extendedInfo && (
+        <section className="w-full bg-zinc-50 py-24 border-y border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="text-center relative mb-16">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
                 {activeTab.extendedInfo.title}
               </h3>
@@ -330,12 +336,12 @@ export default function NosotrosPage() {
             </div>
 
             {activeTab.extendedInfo.trajectory && (
-              <div className="w-full">
+              <div className="w-full max-w-6xl mx-auto">
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                   {activeTab.extendedInfo.trajectory.map((item, idx) => (
                     <div 
                       key={idx} 
-                      className="break-inside-avoid relative group overflow-hidden bg-zinc-100 border border-zinc-200"
+                      className="break-inside-avoid relative group overflow-hidden bg-white border border-zinc-200"
                     >
                       <div className="relative aspect-[4/5] w-full">
                         <Image 
@@ -359,11 +365,13 @@ export default function NosotrosPage() {
               </div>
             )}
           </div>
-        )}
+        </section>
+      )}
 
-        {/* Estructura Organizacional y Perfiles Ejecutivos */}
-        {activeTab.orgStructure && (
-          <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      {/* Estructura Organizacional (Fondo Gris Sutil) */}
+      {activeTab.orgStructure && (
+        <section className="w-full bg-zinc-50 py-24 border-y border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="text-center mb-16 relative">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
                 {activeTab.orgStructure.title}
@@ -393,7 +401,7 @@ export default function NosotrosPage() {
                     
                     <div className="space-y-3">
                       {branch.subRoles.map((role, rIdx) => (
-                        <div key={rIdx} className="bg-zinc-50 border-l-2 border-zinc-100 p-3 text-left group hover:border-[#AE1E24] transition-all">
+                        <div key={rIdx} className="bg-white border-l-2 border-zinc-100 p-3 text-left group hover:border-[#AE1E24] transition-all shadow-sm">
                           <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{role}</p>
                         </div>
                       ))}
@@ -402,103 +410,109 @@ export default function NosotrosPage() {
                 ))}
               </div>
             </div>
-
-            {/* Apartado: Liderazgo Estratégico (Perfiles Ejecutivos) */}
-            {activeTab.executiveProfiles && (
-              <div className="w-full max-w-6xl mx-auto mt-32 space-y-20 border-t border-zinc-100 pt-24">
-                <div className="text-center space-y-4">
-                  <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
-                    {activeTab.executiveProfiles.subtitle}
-                  </span>
-                  <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
-                    {activeTab.executiveProfiles.title}
-                  </h3>
-                  <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
-                  <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
-                    {activeTab.executiveProfiles.description}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-16 max-w-5xl mx-auto">
-                  {activeTab.executiveProfiles.members.map((member, idx) => (
-                    <div 
-                      key={idx} 
-                      className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 group"
-                    >
-                      <div className="shrink-0 relative">
-                        <div className="absolute inset-0 rounded-full border-2 border-[#AE1E24] scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                        <Avatar className="w-40 h-40 md:w-48 md:h-48 border-4 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                          <AvatarImage src={member.image} alt={member.name} className="object-cover" />
-                          <AvatarFallback className="bg-zinc-100 text-[#AE1E24] text-4xl font-black">{member.initials}</AvatarFallback>
-                        </Avatar>
-                      </div>
-
-                      <div className="flex-1 text-center md:text-left space-y-4 py-4">
-                        <div className="space-y-1">
-                          <h4 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tighter uppercase">
-                            {member.name}
-                          </h4>
-                          <p className="text-[#AE1E24] text-xs font-bold uppercase tracking-[0.3em]">
-                            {member.role}
-                          </p>
-                        </div>
-                        <div className="w-12 h-0.5 bg-zinc-200 group-hover:w-24 group-hover:bg-[#AE1E24] transition-all duration-500" />
-                        <p className="text-zinc-600 text-base md:text-lg font-light leading-relaxed">
-                          {member.experience}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Apartado: Nuestro Equipo (Mosaico Masonry) */}
-            {activeTab.teamMosaic && (
-              <div className="w-full max-w-6xl mx-auto mt-32 space-y-20 border-t border-zinc-100 pt-24">
-                <div className="text-center space-y-4">
-                  <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
-                    {activeTab.teamMosaic.subtitle}
-                  </span>
-                  <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
-                    {activeTab.teamMosaic.title}
-                  </h3>
-                  <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
-                  <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
-                    {activeTab.teamMosaic.description}
-                  </p>
-                </div>
-
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                  {activeTab.teamMosaic.images.map((item, idx) => (
-                    <div 
-                      key={idx} 
-                      className="break-inside-avoid relative group overflow-hidden bg-zinc-100 border border-zinc-200"
-                    >
-                      <div className="relative aspect-[4/5] w-full">
-                        <Image 
-                          src={item.src} 
-                          alt={item.alt} 
-                          fill 
-                          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-                        />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                          <h4 className="text-[#AE1E24] text-[10px] font-bold uppercase tracking-widest mb-1">ACCUS TEAM</h4>
-                          <p className="text-white text-xs font-light tracking-wide uppercase">{item.caption}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-        )}
+        </section>
+      )}
 
-        {/* Premios y Certificaciones */}
-        {activeTab.certifications && (
-          <div className="w-full max-w-5xl mx-auto mt-24 space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <div className="text-center relative">
+      {/* Liderazgo Estratégico (Fondo Blanco) */}
+      {activeTab.executiveProfiles && (
+        <section className="w-full bg-white py-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="text-center space-y-4 mb-20">
+              <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
+                {activeTab.executiveProfiles.subtitle}
+              </span>
+              <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+                {activeTab.executiveProfiles.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
+              <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
+                {activeTab.executiveProfiles.description}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-16 max-w-5xl mx-auto">
+              {activeTab.executiveProfiles.members.map((member, idx) => (
+                <div 
+                  key={idx} 
+                  className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 group"
+                >
+                  <div className="shrink-0 relative">
+                    <div className="absolute inset-0 rounded-full border-2 border-[#AE1E24] scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                    <Avatar className="w-40 h-40 md:w-48 md:h-48 border-4 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                      <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+                      <AvatarFallback className="bg-zinc-100 text-[#AE1E24] text-4xl font-black">{member.initials}</AvatarFallback>
+                    </Avatar>
+                  </div>
+
+                  <div className="flex-1 text-center md:text-left space-y-4 py-4">
+                    <div className="space-y-1">
+                      <h4 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tighter uppercase">
+                        {member.name}
+                      </h4>
+                      <p className="text-[#AE1E24] text-xs font-bold uppercase tracking-[0.3em]">
+                        {member.role}
+                      </p>
+                    </div>
+                    <div className="w-12 h-0.5 bg-zinc-200 group-hover:w-24 group-hover:bg-[#AE1E24] transition-all duration-500" />
+                    <p className="text-zinc-600 text-base md:text-lg font-light leading-relaxed">
+                      {member.experience}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Nuestro Equipo (Fondo Gris Sutil) */}
+      {activeTab.teamMosaic && (
+        <section className="w-full bg-zinc-50 py-24 border-t border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="text-center space-y-4 mb-20">
+              <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
+                {activeTab.teamMosaic.subtitle}
+              </span>
+              <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+                {activeTab.teamMosaic.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
+              <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
+                {activeTab.teamMosaic.description}
+              </p>
+            </div>
+
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+              {activeTab.teamMosaic.images.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="break-inside-avoid relative group overflow-hidden bg-white border border-zinc-200 shadow-sm"
+                >
+                  <div className="relative aspect-[4/5] w-full">
+                    <Image 
+                      src={item.src} 
+                      alt={item.alt} 
+                      fill 
+                      className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                      <h4 className="text-[#AE1E24] text-[10px] font-bold uppercase tracking-widest mb-1">ACCUS TEAM</h4>
+                      <p className="text-white text-xs font-light tracking-wide uppercase">{item.caption}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Premios y Certificaciones (Fondo Gris Sutil) */}
+      {activeTab.certifications && (
+        <section className="w-full bg-zinc-50 py-24 border-t border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="text-center relative mb-16">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
                 {activeTab.certifications.title}
               </h3>
@@ -523,8 +537,8 @@ export default function NosotrosPage() {
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </section>
+      )}
 
       {/* Modal */}
       {isModalOpen && (
@@ -539,6 +553,6 @@ export default function NosotrosPage() {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 }
