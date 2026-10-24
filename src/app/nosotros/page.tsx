@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const nosotrosData = [
   {
@@ -129,6 +130,34 @@ const nosotrosData = [
           subRoles: ["Administrativa Comercial", "Jefe de Relaciones Laborales", "Control de Costos", "Asistente Finanzas"]
         }
       ]
+    },
+    executiveProfiles: {
+      title: "Liderazgo Estratégico",
+      subtitle: "Compromiso y Visión Directiva",
+      description: "Nuestro equipo directivo combina décadas de experiencia técnica en terreno con una gestión empresarial moderna y enfocada en resultados para la gran minería.",
+      members: [
+        {
+          name: "Luis Acuña López",
+          role: "Gerente General",
+          experience: "Fundador de ACCUS con más de 25 años de trayectoria en ingeniería eléctrica aplicada. Experto en normativas SEC y liderando proyectos críticos para compañías como Antofagasta Minerals y AngloAmerican.",
+          image: "https://picsum.photos/seed/executive1/400/400",
+          initials: "LA"
+        },
+        {
+          name: "Héctor Tapia Quilodrán",
+          role: "Sub Gerente",
+          experience: "Especialista en gestión de contratos y optimización de procesos industriales. Responsable de la excelencia operativa y la implementación de sistemas de gestión de calidad bajo normas internacionales.",
+          image: "https://picsum.photos/seed/executive2/400/400",
+          initials: "HT"
+        },
+        {
+          name: "Rodrigo Vergara Venegas",
+          role: "Gerente de Operaciones",
+          experience: "Líder en ejecución de proyectos de alta tensión y fibra óptica industrial. Coordina equipos multidisciplinarios en terreno asegurando el cumplimiento de plazos y estándares de seguridad.",
+          image: "https://picsum.photos/seed/executive3/400/400",
+          initials: "RV"
+        }
+      ]
     }
   },
   {
@@ -236,7 +265,7 @@ export default function NosotrosPage() {
           </div>
         </div>
 
-        {/* Misión y Visión (Tarjetas con Hover similares a Inicio) */}
+        {/* Misión y Visión */}
         {activeTab.missionVision && (
           <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="text-center mb-16 relative">
@@ -287,7 +316,6 @@ export default function NosotrosPage() {
               ))}
             </div>
 
-            {/* Mosaico Masonry de Trayectoria - Solo para Quienes Somos */}
             {activeTab.extendedInfo.trajectory && (
               <div className="w-full">
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -303,13 +331,11 @@ export default function NosotrosPage() {
                           fill 
                           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                         />
-                        {/* Overlay Semi-transparente */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                           <span className="text-white text-4xl font-black mb-2 tracking-tighter">{item.year}</span>
                           <h4 className="text-[#AE1E24] text-xs font-bold uppercase tracking-widest mb-3">{item.title}</h4>
                           <p className="text-white/90 text-xs leading-relaxed font-light">{item.desc}</p>
                         </div>
-                        {/* Indicador de Año Permanente (Sutil) */}
                         <div className="absolute top-4 left-4 bg-[#AE1E24] text-white px-3 py-1 text-[10px] font-bold tracking-widest group-hover:opacity-0 transition-opacity">
                           {item.year}
                         </div>
@@ -333,7 +359,6 @@ export default function NosotrosPage() {
             </div>
 
             <div className="flex flex-col items-center space-y-10 w-full overflow-x-auto pb-10">
-              {/* Nivel 1 & 2: Alta Gerencia */}
               <div className="flex flex-col items-center gap-8 min-w-[320px]">
                 {activeTab.orgStructure.levels.map((node, i) => (
                   <div key={i} className={cn("px-8 py-5 border shadow-sm text-center min-w-[280px] group transition-all hover:scale-105", node.color)}>
@@ -343,20 +368,16 @@ export default function NosotrosPage() {
                 ))}
               </div>
 
-              {/* Conectores Visuales Centrales */}
               <div className="hidden md:block w-px h-10 bg-zinc-200" />
 
-              {/* Ramas de Gerencia */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
                 {activeTab.orgStructure.branches.map((branch, idx) => (
                   <div key={idx} className="flex flex-col space-y-6">
-                    {/* Cabeza de Rama */}
                     <div className="bg-white border border-zinc-200 p-6 text-center shadow-sm group hover:border-[#AE1E24] transition-colors">
                       <p className="text-[9px] uppercase tracking-widest font-bold text-zinc-400 mb-2">{branch.title}</p>
                       <p className="text-sm font-bold text-zinc-900">{branch.leader}</p>
                     </div>
                     
-                    {/* Roles Secundarios */}
                     <div className="space-y-3">
                       {branch.subRoles.map((role, rIdx) => (
                         <div key={rIdx} className="bg-zinc-50 border-l-2 border-zinc-100 p-3 text-left group hover:border-[#AE1E24] transition-all">
@@ -368,6 +389,58 @@ export default function NosotrosPage() {
                 ))}
               </div>
             </div>
+
+            {/* Apartado: Liderazgo Estratégico (Perfiles Ejecutivos) */}
+            {activeTab.executiveProfiles && (
+              <div className="w-full max-w-6xl mx-auto mt-32 space-y-20 border-t border-zinc-100 pt-24">
+                <div className="text-center space-y-4">
+                  <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
+                    {activeTab.executiveProfiles.subtitle}
+                  </span>
+                  <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+                    {activeTab.executiveProfiles.title}
+                  </h3>
+                  <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
+                  <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
+                    {activeTab.executiveProfiles.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-16 max-w-5xl mx-auto">
+                  {activeTab.executiveProfiles.members.map((member, idx) => (
+                    <div 
+                      key={idx} 
+                      className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 group"
+                    >
+                      {/* Imagen Circular */}
+                      <div className="shrink-0 relative">
+                        <div className="absolute inset-0 rounded-full border-2 border-[#AE1E24] scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                        <Avatar className="w-40 h-40 md:w-48 md:h-48 border-4 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                          <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+                          <AvatarFallback className="bg-zinc-100 text-[#AE1E24] text-4xl font-black">{member.initials}</AvatarFallback>
+                        </Avatar>
+                      </div>
+
+                      {/* Información de Perfil */}
+                      <div className="flex-1 text-center md:text-left space-y-4 py-4">
+                        <div className="space-y-1">
+                          <h4 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tighter uppercase">
+                            {member.name}
+                          </h4>
+                          <p className="text-[#AE1E24] text-xs font-bold uppercase tracking-[0.3em]">
+                            {member.role}
+                          </p>
+                        </div>
+                        <div className="w-12 h-0.5 bg-zinc-200 group-hover:w-24 group-hover:bg-[#AE1E24] transition-all duration-500" />
+                        <p className="text-zinc-600 text-base md:text-lg font-light leading-relaxed">
+                          {member.experience}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
