@@ -104,14 +104,92 @@ const services = [
     label: "Ensayos Eléctricos", 
     shortLabel: "Ensayos",
     description: "Diagnósticos preventivos y correctivos en terreno, asegurando la continuidad operacional mediante pruebas de aislamiento y potencia.",
-    imageFile: "fibra-optica.webp"   
+    imageFile: "fibra-optica.webp",
+    extendedInfo: {
+      mainTitle: "Diagnóstico y Ensayos Eléctricos de Potencia",
+      subtitle: "Garantía de Continuidad Operacional",
+      description: "Realizamos pruebas críticas de aislamiento, relación de transformación y diagnóstico de equipos eléctricos bajo los más altos estándares de precisión técnica.",
+      stats: [
+        {
+          value: "+500",
+          label: "Equipos de potencia diagnosticados",
+          gradient: "from-zinc-950 via-zinc-900 to-[#AE1E24]",
+          textColor: "text-white",
+          hasArrow: false
+        },
+        {
+          value: "24/7",
+          label: "Disponibilidad para emergencias técnicas",
+          gradient: "from-white to-white",
+          textColor: "text-zinc-900",
+          border: "border-zinc-100",
+          hasArrow: false
+        },
+        {
+          value: "100%",
+          label: "Precisión en informes técnicos",
+          gradient: "from-[#AE1E24] via-zinc-900 to-zinc-950",
+          textColor: "text-white",
+          hasArrow: false
+        }
+      ],
+      descriptions: [
+        {
+          title: "Mantenimiento Predictivo de Clase Mundial",
+          text: ""
+        },
+        {
+          title: "",
+          text: "Utilizamos equipamiento certificado de última generación para detectar anomalías antes de que ocurran, minimizando paradas no programadas y extendiendo la vida útil de sus activos."
+        }
+      ]
+    }
   },
   { 
     id: 3, 
     label: "Fibra Óptica", 
     shortLabel: "Fibra Óptica",
     description: "Implementación de redes de comunicación robustas y de alta velocidad para entornos industriales desafiantes y complejos.",
-    imageFile: "cableado-estructurado.webp"
+    imageFile: "cableado-estructurado.webp",
+    extendedInfo: {
+      mainTitle: "Soluciones de Conectividad en Fibra Óptica",
+      subtitle: "Infraestructura de Datos para la Minería 4.0",
+      description: "Implementamos redes de comunicación de alta velocidad en los entornos más hostiles, asegurando la transmisión de datos crítica para la telemetría y control industrial.",
+      stats: [
+        {
+          value: "+200 Km",
+          label: "Fibra óptica tendida y fusionada",
+          gradient: "from-zinc-950 via-zinc-900 to-[#AE1E24]",
+          textColor: "text-white",
+          hasArrow: false
+        },
+        {
+          value: "< 0.1dB",
+          label: "Pérdida por fusión garantizada",
+          gradient: "from-white to-white",
+          textColor: "text-zinc-900",
+          border: "border-zinc-100",
+          hasArrow: false
+        },
+        {
+          value: "+100",
+          label: "Nodos de comunicación operativos",
+          gradient: "from-[#AE1E24] via-zinc-900 to-zinc-950",
+          textColor: "text-white",
+          hasArrow: false
+        }
+      ],
+      descriptions: [
+        {
+          title: "Conectividad Robusta y de Alta Velocidad",
+          text: ""
+        },
+        {
+          title: "",
+          text: "Desde el diseño de la red hasta la certificación de enlaces con OTDR, entregamos soluciones que soportan la digitalización total y el monitoreo remoto de la faena minera."
+        }
+      ]
+    }
   },
 ];
 
@@ -228,7 +306,7 @@ export default function ServiciosPage() {
                 "aspect-square flex flex-col justify-center p-10 shadow-xl transition-transform hover:scale-[1.02] border",
                 services[activeTab].extendedInfo.stats[1].gradient,
                 services[activeTab].extendedInfo.stats[1].textColor,
-                services[activeTab].extendedInfo.stats[1].border
+                services[activeTab].extendedInfo.stats[1].border ? services[activeTab].extendedInfo.stats[1].border : ""
               )}>
                 <span className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
                   {services[activeTab].extendedInfo.stats[1].value}
