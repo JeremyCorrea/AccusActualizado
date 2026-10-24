@@ -110,18 +110,41 @@ export default function ProyectosPage() {
                   const isSelected = selectedProject.id === proj.id;
                   return (
                     <g key={proj.id} onClick={() => setSelectedProject(proj)} className="cursor-pointer group">
-                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-white/20 transition-colors" />
+                      {/* Área de clic invisible para facilitar la interacción */}
+                      <circle cx={proj.cx} cy={proj.cy} r="30" className="fill-transparent group-hover:fill-white/10 transition-colors" />
+                      
+                      {/* Efecto de palpitación (Aura expansiva) */}
+                      <circle 
+                        cx={proj.cx} 
+                        cy={proj.cy} 
+                        r="12" 
+                        className={cn(
+                          "fill-white/40 animate-ping",
+                          isSelected ? "opacity-100" : "opacity-40"
+                        )} 
+                      />
+
+                      {/* Punto central del proyecto */}
                       <circle
                         cx={proj.cx}
                         cy={proj.cy}
                         r="6"
                         className={cn(
                           "transition-all duration-500",
-                          isSelected ? "fill-white stroke-[#AE1E24] stroke-2" : "fill-zinc-300 stroke-white stroke-1"
+                          isSelected ? "fill-white stroke-[#AE1E24] stroke-2 shadow-lg" : "fill-white stroke-zinc-400 stroke-1"
                         )}
                       />
+
+                      {/* Anillo de selección palpitante (Solo para el seleccionado) */}
                       {isSelected && (
-                        <circle cx={proj.cx} cy={proj.cy} r="14" stroke="white" strokeWidth="2" className="animate-pulse fill-none" />
+                        <circle 
+                          cx={proj.cx} 
+                          cy={proj.cy} 
+                          r="14" 
+                          stroke="white" 
+                          strokeWidth="2" 
+                          className="animate-pulse fill-none" 
+                        />
                       )}
                     </g>
                   );
