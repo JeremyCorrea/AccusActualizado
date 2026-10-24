@@ -34,7 +34,7 @@ const nosotrosData = [
         "Nuestros inicios se remontan a hace más de 15 años, cuando nuestro fundador, Luis Acuña Lopez, comenzó a realizar trabajos eléctricos de forma particular, atendiendo a los clientes de la región de Coquimbo.",
         "Con responsabilidad y compromiso se logró ganar la confianza de los clientes. El esfuerzo y la dedicación permitieron alcanzar el logro de consolidar ACCUS INGENIERIA LTDA., brindando servicios a la pequeña y gran industria minera.",
         "A lo largo de los años, la empresa demostró sus capacidades y compromiso con la industria. La creación de ACCUS fue fruto de la unión de esfuerzos y visión técnica. Comenzamos esta aventura empresarial con un equipo altamente calificado, equipamiento de última tecnología y una flota preparada para los desafíos del terreno minero.",
-        "Sin duda, la trayectoria marcó un punto de inflexión importante para la empresa. Nos adjudicamos trabajos críticos en importantes faenas mineras, lo que nos abrió las puertas al mundo de la gran minería y energía en Chile.",
+        "Sin duda, la trayectoria marcó un punto de infracción importante para la empresa. Nos adjudicamos trabajos críticos en importantes faenas mineras, lo que nos abrió las puertas al mundo de la gran minería y energía en Chile.",
         "Con la incorporación de jóvenes profesionales, llenos de entusiasmo y con un fuerte deseo de aprender, ACCUS logra posicionarse en la minería, logrando formar un equipo humano de alta calidad, quienes hoy en día son los pilares de nuestra organización, demostrando a diario su compromiso con la seguridad, tanto propia como la de sus compañeros.",
         "Es un orgullo ver cómo estos talentos contribuyen al crecimiento de ACCUS y al desarrollo de la minería en nuestro país. Contamos con una visión moderna al negocio, combinando la vasta experiencia de los fundadores con las últimas tendencias y avances de la industria.",
         "Actualmente contamos con la infraestructura, los recursos humanos y financieros necesarios para afrontar nuevos desafíos en la industria minera, tanto a nivel nacional como internacional.",
@@ -60,7 +60,25 @@ const nosotrosData = [
           <strong>Sustentabilidad:</strong> Diseñamos soluciones eficientes que reducen la huella de carbono.
         </p>
       </>
-    )
+    ),
+    missionVision: {
+      title: "Misión y Visión",
+      summary: "Nuestros pilares estratégicos definen el rumbo de ACCUS hacia la excelencia y la sostenibilidad en cada proyecto que emprendemos.",
+      cards: [
+        {
+          tag: "Propósito",
+          title: "Nuestra Misión",
+          description: "Proveer soluciones integrales de ingeniería eléctrica, construcción y mantenimiento con los más altos estándares de seguridad y calidad, contribuyendo al desarrollo sostenible de la industria minera y energética nacional.",
+          image: "/pictures/4.webp"
+        },
+        {
+          tag: "Futuro",
+          title: "Nuestra Visión",
+          description: "Ser el referente líder en servicios de ingeniería eléctrica y fibra óptica en Chile, reconocidos por nuestra innovación tecnológica, excelencia operativa y compromiso inquebrantable con la seguridad.",
+          image: "/pictures/1.webp"
+        }
+      ]
+    }
   },
   {
     id: 'gente',
@@ -215,6 +233,39 @@ export default function NosotrosPage() {
             </Button>
           </div>
         </div>
+
+        {/* Misión y Visión (Tarjetas con Hover similares a Inicio) */}
+        {activeTab.missionVision && (
+          <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="text-center mb-16 relative">
+              <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 tracking-tight pb-6">
+                {activeTab.missionVision.title}
+              </h3>
+              <div className="w-20 h-1 bg-[#AE1E24] mx-auto" />
+              <p className="mt-8 text-zinc-600 text-lg font-light leading-relaxed max-w-3xl mx-auto">
+                {activeTab.missionVision.summary}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-6">
+              {activeTab.missionVision.cards.map((card, i) => (
+                <div key={i} className="bg-zinc-50 border border-zinc-200 group hover:bg-white hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                  <div className="relative h-80 w-full overflow-hidden">
+                    <img src={card.image} alt={card.title} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-[#AE1E24]/10 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute top-6 left-6 z-20 bg-[#AE1E24] text-white px-4 py-1 text-[9px] font-bold tracking-widest uppercase">
+                      {card.tag}
+                    </div>
+                  </div>
+                  <div className="p-10 flex flex-col items-start">
+                    <h3 className="text-2xl font-bold text-zinc-900 mb-4 uppercase tracking-tighter">{card.title}</h3>
+                    <p className="text-zinc-500 text-base leading-relaxed font-light">{card.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Información Extendida (Historia, etc.) */}
         {activeTab.extendedInfo && (
