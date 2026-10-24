@@ -244,8 +244,8 @@ export default function ProyectosPage() {
         </div>
       </div>
 
-      {/* Sección 3: Nuestros Clientes (Carrusel Infinito) */}
-      <section className="bg-white py-32 border-t border-zinc-100 overflow-hidden">
+      {/* Sección 3: Nuestros Clientes (Carrusel Infinito Centrado) */}
+      <section className="bg-white py-32 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-20">
             <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Alianzas</span>
@@ -253,7 +253,7 @@ export default function ProyectosPage() {
             <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-6" />
           </div>
 
-          <div className="relative">
+          <div className="overflow-hidden">
             <div className="flex w-max animate-infinite-scroll grayscale hover:grayscale-0 transition-all duration-700">
               {logos.map((logo, idx) => (
                 <div key={`original-${idx}`} className="flex-shrink-0 mx-10 flex items-center justify-center" style={{ minWidth: '140px' }}>
