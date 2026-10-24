@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, MousePointer2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -136,14 +136,16 @@ export default function ProyectosPage() {
               <p className="text-lg text-zinc-500 font-light leading-relaxed mb-8">
                 {selectedProject.description}
               </p>
-              <div className="flex flex-col gap-4 w-full border-t border-zinc-100 pt-6">
-                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                  <span>Estado: Ejecutado</span>
-                  <span className="text-[#AE1E24]">Ver Detalle</span>
+              
+              {/* Mensaje de Interactividad Reemplazando Botones */}
+              <div className="mt-4 p-6 bg-zinc-50 border-l-4 border-[#AE1E24] animate-in fade-in slide-in-from-left-4 duration-1000">
+                <div className="flex items-center gap-2 mb-2">
+                  <MousePointer2 className="w-4 h-4 text-[#AE1E24]" />
+                  <p className="text-[10px] font-bold text-[#AE1E24] uppercase tracking-[0.2em]">Mapa Interactivo</p>
                 </div>
-                <Button className="bg-[#AE1E24] text-white rounded-none py-6 font-bold uppercase tracking-widest text-xs group">
-                  EXPLORAR CASO <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+                <p className="text-sm text-zinc-600 leading-relaxed italic">
+                  Explore nuestra presencia nacional: El mapa de Chile a su izquierda es interactivo. Seleccione los diferentes puntos para visualizar los proyectos estratégicos ejecutados por ACCUS a lo largo de todo el territorio.
+                </p>
               </div>
             </div>
           </div>
