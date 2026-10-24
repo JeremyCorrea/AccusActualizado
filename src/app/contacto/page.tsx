@@ -65,7 +65,7 @@ export default function ContactoPage() {
     form.reset()
   }
 
-  const inputStyles = "bg-white/80 border border-zinc-200 rounded-none px-4 py-6 text-base text-zinc-900 focus:border-[#AE1E24] focus:ring-0 transition-all backdrop-blur-sm";
+  const inputStyles = "bg-white/60 border border-zinc-200 rounded-none px-4 py-6 text-base text-zinc-900 focus:border-[#AE1E24] focus:ring-0 transition-all backdrop-blur-md";
 
   if (!isMounted) return null;
 
@@ -117,21 +117,28 @@ export default function ContactoPage() {
           </div>
         </div>
 
-        {/* Lado Derecho: Formulario Estilo Codelco con Fondo de Imagen */}
-        <div className="relative p-8 md:p-12 border border-zinc-100 shadow-sm overflow-hidden group min-h-[700px] flex flex-col justify-center">
-          {/* Capa de Imagen de Fondo */}
+        {/* Lado Derecho: Formulario con Fondo de Imagen Impactante */}
+        <div className="relative p-8 md:p-12 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[750px] flex flex-col justify-center">
+          
+          {/* Capa de Imagen de Fondo con Efecto Profesional */}
           <div className="absolute inset-0 z-0">
             <Image 
               src={imageData.contacto.src}
-              alt="Contacto Background"
+              alt="Industrial Background"
               fill
-              className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700"
-              data-ai-hint="industrial engineering"
+              className="object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+              data-ai-hint="fiber optics"
             />
-            <div className="absolute inset-0 bg-white/95" />
+            {/* Gradiente y Overlay para Legibilidad */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-[2px]" />
           </div>
 
           <div className="relative z-10">
+            <div className="mb-10">
+              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">Solicitud de contacto</h2>
+              <div className="w-12 h-1 bg-[#AE1E24] mt-3" />
+            </div>
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -211,7 +218,7 @@ export default function ContactoPage() {
                       </FormItem>
                     )}
                   />
-                  <div className="overflow-hidden bg-white/50 p-1">
+                  <div className="overflow-hidden bg-white/50 p-1 border border-zinc-100">
                     <ReCAPTCHA 
                       sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
                       theme="light"
@@ -220,7 +227,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none py-8 text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-lg hover:shadow-[#AE1E24]/20">
+                <Button type="submit" className="w-full bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none py-8 text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-lg hover:shadow-[#AE1E24]/20 active:scale-[0.98]">
                   Enviar Solicitud <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </form>
