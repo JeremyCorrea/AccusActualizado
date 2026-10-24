@@ -158,6 +158,19 @@ const nosotrosData = [
           initials: "RV"
         }
       ]
+    },
+    teamMosaic: {
+      title: "Nuestro Equipo",
+      subtitle: "Capital Humano en Terreno",
+      description: "Nuestro activo más importante son los profesionales y técnicos que día a día despliegan su experiencia en las faenas más exigentes del país.",
+      images: [
+        { src: "/pictures/1.webp", alt: "Ingenieros en terreno", caption: "Equipo de Ingeniería" },
+        { src: "/pictures/2.webp", alt: "Personal técnico", caption: "Especialistas Eléctricos" },
+        { src: "/pictures/3.webp", alt: "Operaciones mineras", caption: "Faenas Mineras" },
+        { src: "/pictures/4.webp", alt: "Montaje industrial", caption: "Equipo de Montaje" },
+        { src: "https://picsum.photos/seed/team1/600/800", alt: "Equipo técnico", caption: "Personal Calificado" },
+        { src: "https://picsum.photos/seed/team2/800/600", alt: "Supervisión", caption: "Oficina Técnica" }
+      ]
     }
   },
   {
@@ -348,7 +361,7 @@ export default function NosotrosPage() {
           </div>
         )}
 
-        {/* Estructura Organizacional */}
+        {/* Estructura Organizacional y Perfiles Ejecutivos */}
         {activeTab.orgStructure && (
           <div className="w-full mt-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="text-center mb-16 relative">
@@ -412,7 +425,6 @@ export default function NosotrosPage() {
                       key={idx} 
                       className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 group"
                     >
-                      {/* Imagen Circular */}
                       <div className="shrink-0 relative">
                         <div className="absolute inset-0 rounded-full border-2 border-[#AE1E24] scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500" />
                         <Avatar className="w-40 h-40 md:w-48 md:h-48 border-4 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
@@ -421,7 +433,6 @@ export default function NosotrosPage() {
                         </Avatar>
                       </div>
 
-                      {/* Información de Perfil */}
                       <div className="flex-1 text-center md:text-left space-y-4 py-4">
                         <div className="space-y-1">
                           <h4 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tighter uppercase">
@@ -435,6 +446,46 @@ export default function NosotrosPage() {
                         <p className="text-zinc-600 text-base md:text-lg font-light leading-relaxed">
                           {member.experience}
                         </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Apartado: Nuestro Equipo (Mosaico Masonry) */}
+            {activeTab.teamMosaic && (
+              <div className="w-full max-w-6xl mx-auto mt-32 space-y-20 border-t border-zinc-100 pt-24">
+                <div className="text-center space-y-4">
+                  <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase block">
+                    {activeTab.teamMosaic.subtitle}
+                  </span>
+                  <h3 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+                    {activeTab.teamMosaic.title}
+                  </h3>
+                  <div className="w-20 h-1 bg-[#AE1E24] mx-auto mt-4" />
+                  <p className="max-w-3xl mx-auto text-zinc-500 text-lg font-light leading-relaxed mt-6">
+                    {activeTab.teamMosaic.description}
+                  </p>
+                </div>
+
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                  {activeTab.teamMosaic.images.map((item, idx) => (
+                    <div 
+                      key={idx} 
+                      className="break-inside-avoid relative group overflow-hidden bg-zinc-100 border border-zinc-200"
+                    >
+                      <div className="relative aspect-[4/5] w-full">
+                        <Image 
+                          src={item.src} 
+                          alt={item.alt} 
+                          fill 
+                          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                          <h4 className="text-[#AE1E24] text-[10px] font-bold uppercase tracking-widest mb-1">ACCUS TEAM</h4>
+                          <p className="text-white text-xs font-light tracking-wide uppercase">{item.caption}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
