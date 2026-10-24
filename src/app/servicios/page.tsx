@@ -199,7 +199,7 @@ export default function ServiciosPage() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="relative min-h-screen w-full bg-white font-body pt-32 md:pt-40 pb-20">
+    <section className="relative min-h-screen w-full bg-white font-body pt-32 md:pt-40 pb-0">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center">
         
         <div className="text-center mb-16">
@@ -260,10 +260,13 @@ export default function ServiciosPage() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Información Extendida (Estilo Codelco) */}
-        {services[activeTab].extendedInfo && (
-          <div className="w-full mt-24 space-y-24 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      {/* Información Extendida con Fondo Gris Sutil (Ancho Completo) */}
+      {services[activeTab].extendedInfo && (
+        <div className="w-full bg-zinc-50 py-24 border-t border-zinc-100 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-24">
+            
             {/* Header de Información Extendida */}
             <div className="text-center max-w-4xl mx-auto">
               <h3 className="text-2xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight">
@@ -303,10 +306,9 @@ export default function ServiciosPage() {
 
               {/* Fila 2: Stats Card 2 + Stats Card 3 + Texto 2 */}
               <div className={cn(
-                "aspect-square flex flex-col justify-center p-10 shadow-xl transition-transform hover:scale-[1.02] border",
-                services[activeTab].extendedInfo.stats[1].gradient,
+                "aspect-square flex flex-col justify-center p-10 shadow-xl transition-transform hover:scale-[1.02] border bg-white",
                 services[activeTab].extendedInfo.stats[1].textColor,
-                services[activeTab].extendedInfo.stats[1].border ? services[activeTab].extendedInfo.stats[1].border : ""
+                services[activeTab].extendedInfo.stats[1].border ? services[activeTab].extendedInfo.stats[1].border : "border-zinc-100"
               )}>
                 <span className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
                   {services[activeTab].extendedInfo.stats[1].value}
@@ -336,8 +338,8 @@ export default function ServiciosPage() {
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
