@@ -71,10 +71,10 @@ export default function ContactoPage() {
 
   return (
     <section className="relative min-h-screen w-full bg-white pt-32 pb-16">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         
         {/* Lado Izquierdo: Información Corporativa */}
-        <div className="space-y-8 lg:space-y-12 lg:pt-10">
+        <div className="lg:col-span-7 space-y-8 lg:space-y-12 lg:pt-10">
           <div>
             <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Hablemos</span>
             <h1 className="text-4xl md:text-7xl font-bold text-zinc-900 leading-[1.1] tracking-tighter">
@@ -118,7 +118,7 @@ export default function ContactoPage() {
         </div>
 
         {/* Lado Derecho: Formulario con Fondo de Imagen y Efecto Oscuro */}
-        <div className="relative p-6 md:p-10 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[650px] flex flex-col justify-center bg-zinc-900">
+        <div className="lg:col-span-5 relative p-6 md:p-10 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[650px] flex flex-col justify-center bg-zinc-900">
           
           {/* Capa de Imagen de Fondo */}
           <div className="absolute inset-0 z-0">

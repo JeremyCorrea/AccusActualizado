@@ -48,7 +48,7 @@ const Footer = () => {
               <p className="text-zinc-300">Pje. Murano 3770</p>
               <p>Coquimbo, Chile</p>
               <p>+56 992595761</p>
-              <p className="hover:text-white transition-colors cursor-pointer font-bold underline underline-offset-4" onClick={() => setIsMapModalOpen(true)}>
+              <p className="hover:text-white transition-colors cursor-pointer font-bold" onClick={() => setIsMapModalOpen(true)}>
                 Ver ubicación en mapa
               </p>
             </div>
