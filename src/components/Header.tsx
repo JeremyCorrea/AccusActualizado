@@ -31,7 +31,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
   const rawPathname = usePathname();
   const pathname = rawPathname || '';
   
-  const logoSrc = "/logo.png";
+  const logoSrc = "/LogoAccus.png";
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);

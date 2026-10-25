@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -41,7 +42,7 @@ const Footer = () => {
           {/* Lado Izquierdo: Identidad y Datos */}
           <div className="space-y-4 max-w-sm">
             <Link href="/" className="block">
-              <img src="/logo.png" className="h-8 w-auto brightness-0 invert" alt="Accus Solutions" />
+              <img src="/LogoAccus.png" className="h-8 w-auto brightness-0 invert" alt="Accus Solutions" />
             </Link>
             <div className="text-[11px] leading-relaxed tracking-wider font-medium space-y-1">
               <p className="text-zinc-300">Pje. Murano 3770</p>
