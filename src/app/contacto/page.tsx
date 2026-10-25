@@ -117,25 +117,24 @@ export default function ContactoPage() {
           </div>
         </div>
 
-        {/* Lado Derecho: Formulario con Fondo de Imagen Impactante */}
-        <div className="relative p-8 md:p-12 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[750px] flex flex-col justify-center">
+        {/* Lado Derecho: Formulario con Fondo de Imagen y Efecto Oscuro */}
+        <div className="relative p-8 md:p-12 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[750px] flex flex-col justify-center bg-zinc-900">
           
-          {/* Capa de Imagen de Fondo con Efecto Profesional */}
+          {/* Capa de Imagen de Fondo */}
           <div className="absolute inset-0 z-0">
             <Image 
               src={imageData.contacto.src}
               alt="Industrial Background"
               fill
-              className="object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
-              data-ai-hint="fiber optics"
+              className="object-cover opacity-60 transition-all duration-1000"
             />
-            {/* Gradiente y Overlay para Legibilidad */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-[2px]" />
+            {/* Efecto de Oscuridad y Gradiente para Contraste */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/30 backdrop-blur-[2px]" />
           </div>
 
           <div className="relative z-10">
             <div className="mb-10">
-              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">Solicitud de contacto</h2>
+              <h2 className="text-2xl font-bold text-white tracking-tight">Solicitud de contacto</h2>
               <div className="w-12 h-1 bg-[#AE1E24] mt-3" />
             </div>
 
@@ -147,9 +146,9 @@ export default function ContactoPage() {
                     name="firstName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Nombre</FormLabel>
+                        <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Nombre</FormLabel>
                         <FormControl><Input {...field} className={inputStyles} /></FormControl>
-                        <FormMessage className="text-red-500 text-[10px]" />
+                        <FormMessage className="text-red-400 text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -158,9 +157,9 @@ export default function ContactoPage() {
                     name="lastName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Apellido</FormLabel>
+                        <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Apellido</FormLabel>
                         <FormControl><Input {...field} className={inputStyles} /></FormControl>
-                        <FormMessage className="text-red-500 text-[10px]" />
+                        <FormMessage className="text-red-400 text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -172,9 +171,9 @@ export default function ContactoPage() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Email Corporativo</FormLabel>
+                        <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Email Corporativo</FormLabel>
                         <FormControl><Input type="email" {...field} className={inputStyles} /></FormControl>
-                        <FormMessage className="text-red-500 text-[10px]" />
+                        <FormMessage className="text-red-400 text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -183,9 +182,9 @@ export default function ContactoPage() {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Teléfono</FormLabel>
+                        <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Teléfono</FormLabel>
                         <FormControl><Input {...field} className={inputStyles} /></FormControl>
-                        <FormMessage className="text-red-500 text-[10px]" />
+                        <FormMessage className="text-red-400 text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -196,9 +195,9 @@ export default function ContactoPage() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-zinc-900 font-bold text-[10px] uppercase tracking-widest">Mensaje / Consulta</FormLabel>
+                      <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Mensaje / Consulta</FormLabel>
                       <FormControl><Textarea {...field} className={`${inputStyles} h-32 resize-none`} /></FormControl>
-                      <FormMessage className="text-red-500 text-[10px]" />
+                      <FormMessage className="text-red-400 text-[10px]" />
                     </FormItem>
                   )}
                 />
@@ -210,18 +209,18 @@ export default function ContactoPage() {
                     render={({ field }) => (
                       <FormItem className="flex items-start space-x-3 space-y-0">
                         <FormControl>
-                          <Checkbox checked={field.value} onCheckedChange={field.onChange} className="rounded-none border-zinc-300 data-[state=checked]:bg-[#AE1E24]" />
+                          <Checkbox checked={field.value} onCheckedChange={field.onChange} className="rounded-none border-zinc-500 data-[state=checked]:bg-[#AE1E24] data-[state=checked]:border-[#AE1E24]" />
                         </FormControl>
-                        <FormLabel className="text-[10px] text-zinc-500 font-medium leading-tight">
+                        <FormLabel className="text-[10px] text-zinc-300 font-medium leading-tight">
                           Acepto el procesamiento de mis datos según la política de privacidad corporativa.
                         </FormLabel>
                       </FormItem>
                     )}
                   />
-                  <div className="overflow-hidden bg-white/50 p-1 border border-zinc-100">
+                  <div className="overflow-hidden bg-white/10 p-1 border border-white/20 backdrop-blur-md">
                     <ReCAPTCHA 
                       sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
-                      theme="light"
+                      theme="dark"
                       onChange={(val) => form.setValue("recaptcha", val || "")} 
                     />
                   </div>
