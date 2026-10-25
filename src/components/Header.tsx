@@ -92,7 +92,8 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
       <div className="flex flex-col px-6 lg:px-[75px] mt-2 mb-2">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <div className="relative h-12 w-36 cursor-pointer" onClick={() => handleNavClick('/')}>
+            {/* Logo redimensionado para mayor impacto visual y legibilidad */}
+            <div className="relative h-16 w-48 cursor-pointer" onClick={() => handleNavClick('/')}>
               <img 
                 src={logoSrc} 
                 alt="Accus Logo" 
