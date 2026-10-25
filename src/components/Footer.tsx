@@ -36,19 +36,19 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-zinc-900 text-zinc-400 py-10 px-6 border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <footer className="bg-zinc-900 text-zinc-400 py-12 px-6 border-t border-zinc-800">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
           
           {/* Lado Izquierdo: Identidad y Datos */}
-          <div className="space-y-4 max-w-sm">
+          <div className="space-y-6 max-w-sm">
             <Link href="/" className="block">
-              <img src="/LogoAccus.png" className="h-8 w-auto brightness-0 invert" alt="Accus Solutions" />
+              <img src="/LogoAccus.png" className="h-10 w-auto brightness-0 invert" alt="Accus Solutions" />
             </Link>
-            <div className="text-[11px] leading-relaxed tracking-wider font-medium space-y-1">
+            <div className="text-[13px] md:text-sm leading-relaxed tracking-wider font-medium space-y-2">
               <p className="text-zinc-300">Pje. Murano 3770</p>
               <p>Coquimbo, Chile</p>
               <p>+56 992595761</p>
-              <p className="hover:text-white transition-colors cursor-pointer" onClick={() => setIsMapModalOpen(true)}>
+              <p className="hover:text-white transition-colors cursor-pointer font-bold underline underline-offset-4" onClick={() => setIsMapModalOpen(true)}>
                 Ver ubicación en mapa
               </p>
             </div>
@@ -56,7 +56,7 @@ const Footer = () => {
 
           {/* Lado Derecho: Navegación y Legal */}
           <div className="flex flex-col items-start md:items-end gap-6">
-            <nav className="flex flex-wrap gap-x-8 gap-y-2 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <nav className="flex flex-wrap gap-x-8 gap-y-3 text-[12px] font-bold uppercase tracking-[0.2em]">
               <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
               <Link href="/servicios" className="hover:text-white transition-colors">Servicios</Link>
               <Link href="/proyectos" className="hover:text-white transition-colors">Proyectos</Link>
@@ -65,13 +65,13 @@ const Footer = () => {
               <button onClick={() => setIsPrivacyModalOpen(true)} className="hover:text-white transition-colors uppercase">Privacidad</button>
             </nav>
 
-            <div className="flex items-center gap-5">
-              <Link href="#" className="hover:text-white transition-colors"><Instagram size={16} /></Link>
-              <Link href="#" className="hover:text-white transition-colors"><Linkedin size={16} /></Link>
-              <Link href="#" className="hover:text-white transition-colors"><Facebook size={16} /></Link>
+            <div className="flex items-center gap-6">
+              <Link href="#" className="hover:text-white transition-colors"><Instagram size={20} /></Link>
+              <Link href="#" className="hover:text-white transition-colors"><Linkedin size={20} /></Link>
+              <Link href="#" className="hover:text-white transition-colors"><Facebook size={20} /></Link>
             </div>
 
-            <p className="text-[9px] uppercase tracking-widest text-zinc-600 mt-2">
+            <p className="text-[11px] uppercase tracking-widest text-zinc-600 mt-2">
               © {new Date().getFullYear()} Accus Ingeniería Ltda. Todos los derechos reservados.
             </p>
           </div>

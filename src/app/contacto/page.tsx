@@ -65,16 +65,16 @@ export default function ContactoPage() {
     form.reset()
   }
 
-  const inputStyles = "bg-white/60 border border-zinc-200 rounded-none px-4 py-6 text-base text-zinc-900 focus:border-[#AE1E24] focus:ring-0 transition-all backdrop-blur-md";
+  const inputStyles = "bg-white/60 border border-zinc-200 rounded-none px-4 py-4 text-sm text-zinc-900 focus:border-[#AE1E24] focus:ring-0 transition-all backdrop-blur-md";
 
   if (!isMounted) return null;
 
   return (
-    <section className="relative min-h-screen w-full bg-white pt-44 pb-24">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+    <section className="relative min-h-screen w-full bg-white pt-32 pb-16">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
         
         {/* Lado Izquierdo: Información Corporativa */}
-        <div className="space-y-12">
+        <div className="space-y-8 lg:space-y-12 lg:pt-10">
           <div>
             <span className="text-[#AE1E24] text-xs font-bold tracking-[0.4em] uppercase mb-4 block">Hablemos</span>
             <h1 className="text-4xl md:text-7xl font-bold text-zinc-900 leading-[1.1] tracking-tighter">
@@ -86,7 +86,7 @@ export default function ContactoPage() {
             Estamos preparados para abordar desafíos técnicos complejos en cualquier punto del territorio nacional. Nuestro equipo técnico responderá su solicitud a la brevedad.
           </p>
 
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8">
             <div className="flex items-center gap-6 group">
               <div className="w-14 h-14 bg-zinc-50 flex items-center justify-center group-hover:bg-[#AE1E24] transition-colors">
                 <MapPin className="text-[#AE1E24] group-hover:text-white transition-colors" size={24} />
@@ -118,7 +118,7 @@ export default function ContactoPage() {
         </div>
 
         {/* Lado Derecho: Formulario con Fondo de Imagen y Efecto Oscuro */}
-        <div className="relative p-8 md:p-12 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[750px] flex flex-col justify-center bg-zinc-900">
+        <div className="relative p-6 md:p-10 border border-zinc-100 shadow-2xl overflow-hidden group min-h-[650px] flex flex-col justify-center bg-zinc-900">
           
           {/* Capa de Imagen de Fondo */}
           <div className="absolute inset-0 z-0">
@@ -133,14 +133,14 @@ export default function ContactoPage() {
           </div>
 
           <div className="relative z-10">
-            <div className="mb-10">
+            <div className="mb-6 lg:mb-10">
               <h2 className="text-2xl font-bold text-white tracking-tight">Solicitud de contacto</h2>
               <div className="w-12 h-1 bg-[#AE1E24] mt-3" />
             </div>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                   <FormField
                     control={form.control}
                     name="firstName"
@@ -165,7 +165,7 @@ export default function ContactoPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                   <FormField
                     control={form.control}
                     name="email"
@@ -196,13 +196,13 @@ export default function ContactoPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-white font-bold text-[10px] uppercase tracking-widest">Mensaje / Consulta</FormLabel>
-                      <FormControl><Textarea {...field} className={`${inputStyles} h-32 resize-none`} /></FormControl>
+                      <FormControl><Textarea {...field} className={`${inputStyles} h-28 lg:h-32 resize-none`} /></FormControl>
                       <FormMessage className="text-red-400 text-[10px]" />
                     </FormItem>
                   )}
                 />
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <FormField
                     control={form.control}
                     name="privacyPolicy"
@@ -217,7 +217,7 @@ export default function ContactoPage() {
                       </FormItem>
                     )}
                   />
-                  <div className="overflow-hidden bg-white/10 p-1 border border-white/20 backdrop-blur-md">
+                  <div className="overflow-hidden bg-white/10 p-1 border border-white/20 backdrop-blur-md scale-90 origin-left">
                     <ReCAPTCHA 
                       sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
                       theme="dark"
@@ -226,7 +226,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none py-8 text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-lg hover:shadow-[#AE1E24]/20 active:scale-[0.98]">
+                <Button type="submit" className="w-full bg-[#AE1E24] hover:bg-[#AE1E24]/90 text-white rounded-none py-6 lg:py-7 text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-lg hover:shadow-[#AE1E24]/20 active:scale-[0.98]">
                   Enviar Solicitud <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </form>
