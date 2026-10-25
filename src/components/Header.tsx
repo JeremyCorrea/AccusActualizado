@@ -96,7 +96,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
               <img 
                 src={logoSrc} 
                 alt="Accus Logo" 
-                className={cn("h-full w-full object-contain object-left transition-all", useDarkTheme ? "brightness-100" : "brightness-0 invert")} 
+                className="h-full w-full object-contain object-left transition-all" 
               />
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function Header({ currentSlide, setCurrentSlide }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Menú móvil envuelto en isMounted para evitar errores de hidratación con Radix */}
+          {/* Menú móvil */}
           <div className="lg:hidden">
             {isMounted && (
               <DropdownMenu>
